@@ -1,0 +1,373 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from '@/lib/i18n';
+import { trackPageView } from '@/lib/analytics';
+
+// Import types for JSX namespace
+import type { JSX } from 'react';
+
+interface ComplianceItem {
+  id: string;
+  category: 'regulatory' | 'disclosure' | 'policy' | 'procedure';
+  title: string;
+  titleHi: string;
+  description: string;
+  descriptionHi: string;
+  requirement: string;
+  requirementHi: string;
+  status: 'compliant' | 'pending' | 'review';
+  lastUpdated: string;
+  effectiveDate: string;
+  documentUrl?: string;
+  documentText?: string;
+  documentTextHi?: string;
+}
+
+interface ComplianceDisplayProps {
+  locale: 'en' | 'hi';
+  className?: string;
+}
+
+const ComplianceDisplay: React.FC<ComplianceDisplayProps> = ({ locale, className = '' }) => {
+  const [complianceItems, setComplianceItems] = useState<ComplianceItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    trackPageView('Compliance Display', locale === 'hi' ? 'अनुपालन प्रदर्शन' : 'Compliance Display');
+    fetchComplianceItems();
+  }, [locale]);
+
+  const fetchComplianceItems = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/compliance?locale=${locale}`);
+      const result = await response.json();
+      
+      if (result.success) {
+        setComplianceItems(result.data.items);
+      }
+    } catch (error) {
+      console.error('Error fetching compliance items:', error);
+      // Fallback to static items
+      setComplianceItems(getStaticComplianceItems());
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getStaticComplianceItems = (): ComplianceItem[] => {
+    return [
+      {
+        id: '1',
+        category: 'regulatory',
+        title: 'RBI Banking Regulation Act, 1949',
+        titleHi: 'आरबीआई बैंकिंग विनियम अधिनियम, 1949',
+        description: 'Compliance with all provisions of the Banking Regulation Act ensuring customer protection and fair practices',
+        descriptionHi: 'ग्राहक सुरक्षा और निष्पाय अभ्यास सुनिश्चित करने के लिए बैंकिंग विनियम अधिनियम के सभी प्रावधानों का अनुपालन',
+        requirement: 'Section 4: Fair Practices Code',
+        requirementHi: 'अनुभाग 4: निष्पाय अभ्यास कोड',
+        status: 'compliant',
+        lastUpdated: '2024-01-15',
+        effectiveDate: '2024-01-01',
+        documentUrl: '/compliance/rbi-act',
+        documentText: 'Download Full Document',
+        documentTextHi: 'पूर्ण दस्तावेज़ डाउनलोड करें'
+      },
+      {
+        id: '2',
+        category: 'disclosure',
+        title: 'Key Facts Statement (KFS)',
+        titleHi: 'मुख्य तथ्य विवरण (KFS)',
+        description: 'Transparent disclosure of all terms and conditions, fees, and charges for banking products',
+        descriptionHi: 'बैंकिंग उत्पादों के लिए सभी नियम और शर्तों, शुल्क और शुल्कों का पारदर्श साझा',
+        requirement: 'RBI Master Direction on KFS',
+        requirementHi: 'KFS पर आरबीआई मुख्य निर्देशन',
+        status: 'compliant',
+        lastUpdated: '2024-02-01',
+        effectiveDate: '2024-01-01',
+        documentUrl: '/disclosure/kfs',
+        documentText: 'View KFS Templates',
+        documentTextHi: 'KFS टेम्प्लेट देखें'
+      },
+      {
+        id: '3',
+        category: 'policy',
+        title: 'Fair Lending Practices',
+        titleHi: 'निष्पाय ऋण देन प्रथाएं',
+        description: 'Adherence to fair lending practices including transparent interest rates and reasonable recovery procedures',
+        descriptionHi: 'पारदर्श ब्याज दरें और तर्कनीक वसूली पुनर्प्रावर्धन प्रक्रियाओं का पालन',
+        requirement: 'RBI Fair Practices Code',
+        requirementHi: 'आरबीआई निष्पाय अभ्यास कोड',
+        status: 'compliant',
+        lastUpdated: '2024-01-20',
+        effectiveDate: '2024-01-01',
+        documentUrl: '/policy/fair-lending',
+        documentText: 'Lending Policy',
+        documentTextHi: 'ऋण नीति'
+      },
+      {
+        id: '4',
+        category: 'procedure',
+        title: 'Grievance Redressal Mechanism',
+        titleHi: 'शिकायत निवारण प्रक्रिया',
+        description: 'Established grievance redressal mechanism with defined timelines and escalation procedures',
+        descriptionHi: 'परिभाषित समय सीमा और एस्केलेशन प्रक्रियाओं के साथ स्थापित शिकायत निवारण प्रक्रिया',
+        requirement: 'Banking Ombudsman Scheme',
+        requirementHi: 'बैंकिंग ओम्बड्समैन योजना',
+        status: 'compliant',
+        lastUpdated: '2024-01-10',
+        effectiveDate: '2024-01-01',
+        documentUrl: '/grievance',
+        documentText: 'File Grievance',
+        documentTextHi: 'शिकायत दर्ज करें'
+      },
+      {
+        id: '5',
+        category: 'disclosure',
+        title: 'Customer Service Standards',
+        titleHi: 'ग्राहक सेवा मानक',
+        description: 'Commitment to high-quality customer service with defined response times and service level agreements',
+        descriptionHi: 'परिभाषित प्रतिक्रिया समय और सेवा स्तर अनुबंधन के साथ उच्च गुणवत्वा ग्राहक सेवा के लिए प्रतिबद्धता',
+        requirement: 'RBI Customer Service Standards',
+        requirementHi: 'आरबीआई ग्राहक सेवा मानक',
+        status: 'compliant',
+        lastUpdated: '2024-01-05',
+        effectiveDate: '2024-01-01',
+        documentUrl: '/customer-service',
+        documentText: 'Service Charter',
+        documentTextHi: 'सेवा चार्टर'
+      },
+      {
+        id: '6',
+        category: 'policy',
+        title: 'Data Privacy and Protection',
+        titleHi: 'डेटा गोपनीयता और सुरक्षा',
+        description: 'Comprehensive data protection measures in compliance with privacy regulations and customer consent',
+        descriptionHi: 'गोपनीयता नियमों और ग्राहक सहमति के साथ व्यापक डेटा सुरक्षा उपाय',
+        requirement: 'Personal Data Protection Bill',
+        requirementHi: 'व्यक्तिगत डेटा सुरक्षा बिल',
+        status: 'compliant',
+        lastUpdated: '2024-02-15',
+        effectiveDate: '2024-01-01',
+        documentUrl: '/privacy-policy',
+        documentText: 'Privacy Policy',
+        documentTextHi: 'गोपनीयता नीति'
+      }
+    ];
+  };
+
+  const getCategoryColor = (category: string) => {
+    const colors: Record<string, { bg: string; text: string; border: string }> = {
+      regulatory: { bg: 'bg-red-50', text: 'text-red-800', border: 'border-red-200' },
+      disclosure: { bg: 'bg-blue-50', text: 'text-blue-800', border: 'border-blue-200' },
+      policy: { bg: 'bg-green-50', text: 'text-green-800', border: 'border-green-200' },
+      procedure: { bg: 'bg-purple-50', text: 'text-purple-800', border: 'border-purple-200' }
+    };
+    return colors[category] || colors.regulatory;
+  };
+
+  const getStatusIcon = (status: string) => {
+    const icons: Record<string, JSX.Element> = {
+      compliant: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+      ),
+      pending: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      ),
+      review: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002 2V9a2 2 0 002-2H7a2 2 0 00-2-2v-6a2 2 0 002 2z" />
+        </svg>
+      )
+    };
+    return icons[status] || icons.compliant;
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(locale === 'hi' ? 'en-IN' : 'en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className={`space-y-6 ${className}`}>
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="bg-white rounded-lg shadow-card border border-gray-200 p-6">
+            <div className="animate-pulse">
+              <div className="h-4 bg-gray-200 rounded mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`space-y-8 ${className}`}>
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          {locale === 'hi' ? 'अनुपालन प्रदर्शन' : 'Regulatory Compliance'}
+        </h2>
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          {locale === 'hi' 
+            ? 'हम भारतीय बैंकिंग नियमों के अनुपालन पूर्ण रूप से पालन करते हैं'
+            : 'We maintain full compliance with all Indian banking regulations and disclosure requirements.'
+          }
+        </p>
+      </div>
+
+      {/* Compliance Items */}
+      <div className="space-y-6">
+        {complianceItems.map((item) => {
+          const categoryColors = getCategoryColor(item.category);
+          
+          return (
+            <div
+              key={item.id}
+              className={`bg-white rounded-lg shadow-card border ${categoryColors.border} p-6 hover:shadow-lg transition-all duration-200`}
+            >
+              {/* Item Header */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center">
+                  <div className={`p-2 rounded-full ${categoryColors.bg} ${categoryColors.text} mr-3`}>
+                    {getStatusIcon(item.status)}
+                  </div>
+                  <div>
+                    <h3 className={`text-lg font-semibold ${categoryColors.text}`}>
+                      {locale === 'hi' ? item.titleHi : item.title}
+                    </h3>
+                    <span className={`ml-3 px-2 py-1 rounded-full text-xs font-medium ${categoryColors.bg} ${categoryColors.text}`}>
+                      {item.status.toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Category Badge */}
+                <span className={`px-3 py-1 rounded-full text-xs font-medium ${categoryColors.bg} ${categoryColors.text}`}>
+                  {locale === 'hi' ? item.titleHi : item.title}
+                </span>
+              </div>
+              </div>
+
+              {/* Requirement */}
+              <div className="mb-4">
+                <span className="text-sm font-medium text-gray-600">
+                  {locale === 'hi' ? 'आवश्यकता:' : 'Requirement:'}
+                </span>
+                <span className="ml-2 text-sm text-gray-900">
+                  {locale === 'hi' ? item.requirementHi : item.requirement}
+                </span>
+              </div>
+
+              {/* Description */}
+              <p className="text-gray-600 mb-4 line-clamp-3">
+                {locale === 'hi' ? item.descriptionHi : item.description}
+              </p>
+
+              {/* Dates */}
+              <div className="text-sm text-gray-500 space-y-1 mb-4">
+                <div>
+                  <span className="font-medium">{locale === 'hi' ? 'प्रभावित तिथि:' : 'Effective Date:'}</span> {formatDate(item.effectiveDate)}
+                </div>
+                <div>
+                  <span className="font-medium">{locale === 'hi' ? 'अंतिम अपडेट:' : 'Last Updated:'}</span> {formatDate(item.lastUpdated)}
+                </div>
+              </div>
+
+              {/* Document Link */}
+              {item.documentUrl && (
+                <div className="flex items-center justify-between">
+                  <div>
+                    <a
+                      href={item.documentUrl}
+                      className={`inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200 ${
+                        item.documentUrl.startsWith('http') ? 'inline-flex items-center justify-center' : ''
+                      }`}
+                    >
+                      {locale === 'hi' ? item.documentTextHi : item.documentText}
+                      {item.documentUrl.startsWith('http') && (
+                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002 2V8a2 2 0 002-2H6a2 2 0 00-2-2v-6a2 2 0 002 2z" />
+                        </svg>
+                      )}
+                    </a>
+                  </div>
+                  
+                  {/* Status-specific Actions */}
+                  {item.status === 'pending' && (
+                    <button className="btn-outline border-blue-600 text-blue-600 hover:bg-blue-50">
+                      {locale === 'hi' ? 'स्थिति जांचें' : 'Check Status'}
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  )}
+                  
+                  {item.status === 'review' && (
+                    <button className="btn-outline border-purple-600 text-purple-600 hover:bg-purple-50">
+                      {locale === 'hi' ? 'समीक्षण' : 'Under Review'}
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002 2V9a2 2 0 002-2H7a2 2 0 00-2-2v-6a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Additional Information */}
+      <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+        <div className="text-center">
+          <h3 className="text-lg font-semibold text-green-800 mb-4">
+            {locale === 'hi' ? 'अनुपालन सहायता' : 'Compliance Support'}
+          </h3>
+          <p className="text-green-700 mb-4">
+            {locale === 'hi' 
+              ? 'अनुपालन-संबंधित प्रश्नों और शिकायतों के लिए हमारी सहायता टीम उपलब्ध है।'
+              : 'Our compliance team is available to assist with any regulatory questions.'
+            }
+          </p>
+          <div className="flex justify-center space-x-4">
+            <a
+              href="/contact/compliance"
+              className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors duration-200"
+            >
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 001.79 2.79l6.5 6.5a2 2 0 002.79-2.79L12 5.26 8 8z" />
+              </svg>
+              {locale === 'hi' ? 'अनुपालन टीम से संपर्क करें' : 'Contact Compliance Team'}
+            </a>
+            <a
+              href="/compliance/reports"
+              className="inline-flex items-center px-4 py-2 border border-green-600 text-green-600 rounded-lg font-medium hover:bg-green-50 transition-colors duration-200"
+            >
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h12a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 00-2-2v-6a2 2 0 002 2z" />
+              </svg>
+              {locale === 'hi' ? 'अनुपालन रिपोर्ट देखें' : 'View Reports'}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ComplianceDisplay;

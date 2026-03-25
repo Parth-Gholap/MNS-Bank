@@ -1,0 +1,62 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    // Banking-specific rules
+    "no-console": "warn",
+    "no-alert": "error",
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "warn",
+    "no-script-url": "error",
+    "no-undef": "error",
+    "no-unused-vars": "warn",
+    
+    // React specific rules for banking
+    "react/no-unescaped-entities": "error",
+    "react/no-children-prop": "warn",
+    "react/no-danger-with-children": "error",
+    "react/no-direct-mutation-state": "warn",
+    "react/no-find-dom-node": "warn",
+    "react/no-is-mounted": "warn",
+    "react/no-render-return-value": "warn",
+    "react/no-string-refs": "warn",
+    "react/no-unstable-nested-components": "warn",
+    "react/no-unknown-property": "warn",
+    "react/no-unsafe": "warn",
+    "react/prop-types": "error",
+    
+    // Accessibility rules for banking
+    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/anchor-has-content": "error",
+    "jsx-a11y/anchor-is-valid": "error",
+    "jsx-a11y/aria-role": "error",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/img-redundant-alt": "error",
+    "jsx-a11y/interactive-supports-focus": "error",
+    "jsx-a11y/label-has-associated-control": "error",
+    "jsx-a11y/mouse-events-have-key-events": "warn",
+    "jsx-a11y/no-access-key": "error",
+    "jsx-a11y/no-autofocus": "warn",
+    "jsx-a11y/no-distracting-elements": "error",
+    "jsx-a11y/no-interactive-element-to-noninteractive-role": "error",
+    "jsx-a11y/no-noninteractive-element-interactions": "error",
+    "jsx-a11y/no-noninteractive-tabindex": "warn",
+    "jsx-a11y/no-redundant-roles": "warn",
+    "jsx-a11y/role-has-required-aria-props": "error",
+    "jsx-a11y/role-supports-aria-props": "error",
+    "jsx-a11y/tabindex-no-positive": "error"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.*", "**/*.spec.*"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}

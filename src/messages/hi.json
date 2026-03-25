@@ -1,0 +1,529 @@
+{
+  "navigation": {
+    "personal": "व्यक्तिग बैंकिंग",
+    "business": "व्यवसाय बैंकिंग",
+    "accounts": "खाते",
+    "deposits": "जमा",
+    "loans": "ऋण",
+    "services": "सेवाएं",
+    "aboutUs": "हमारे बारे में",
+    "compliance": "अनुपालन",
+    "contact": "संपर्क करें"
+  },
+  "products": {
+    "savingsAccount": "बचत खाता",
+    "currentAccount": "चालू खाता",
+    "fixedDeposit": "सावध जमा",
+    "recurringDeposit": "आवर्तित जमा",
+    "personalLoan": "व्यक्तिग ऋण",
+    "homeLoan": "होम लोन",
+    "carLoan": "कार लोन",
+    "educationLoan": "शिक्षा ऋण",
+    "businessLoan": "व्यवसाय ऋण",
+    "creditCard": "क्रेडिट कार्ड",
+    "debitCard": "डेबिट कार्ड",
+    "forexCard": "विदेशी मुद्रा कार्ड",
+    "netBanking": "नेट बैंकिंग",
+    "mobileBanking": "मोबाइल बैंकिंग",
+    "upiServices": "यूपीआई सेवाएं",
+    "billPayments": "बिल भुगतान",
+    "investmentServices": "निवेश सेवाएं",
+    "insuranceServices": "बीमा सेवाएं",
+    "lockerFacility": "लॉकर सुविधा",
+    "tradeFinance": "व्यापार वित्त",
+    "cashManagement": "नकदी प्रबंधन",
+    "merchantServices": "व्यापारी सेवाएं",
+    "agriBanking": "कृषि बैंकिंग",
+    "nriServices": "एनआरआई सेवाएं",
+    "wealthManagement": "संपत्ति प्रबंधन",
+    "taxServices": "कर सेवाएं"
+  },
+  "homepage": {
+    "title": "आपका विश्वसनीय बैंकिंग साथी",
+    "subtitle": "आधुनिक बैंकिंग समाधानों के साथ वित्तीय सफलता प्राप्त करें",
+    "heroTitle": "आपके सपनों को वित्तीय समर्थन देना",
+    "heroSubtitle": "व्यक्तिग और व्यवसाय बैंकिंग समाधानों की पूरी श्रृंखला",
+    "quickActions": "त्वरित कार्रवाई",
+    "featuredProducts": "विशेष उत्पाद",
+    "whatsNew": "नया क्या है",
+    "fraudAlert": "धोखाधाड़ी चेतावनी",
+    "trustIndicators": "विश्वास संकेतक",
+    "callToAction": "आज ही शुरू करें",
+    "exploreMore": "और अधिक जानें"
+  },
+  "carousel": {
+    "slide1": {
+      "title": "डिजिटल बैंकिंग क्रांति",
+      "subtitle": "24/7 बैंकिंग सेवाएं आपकी उंगलियों पर",
+      "cta": "अभी शुरू करें"
+    },
+    "slide2": {
+      "title": "व्यक्तिग ऋण",
+      "subtitle": "आपकी सभी जरूरतों के लिए त्वरित ऋण",
+      "cta": "अभी आवेदन करें"
+    },
+    "slide3": {
+      "title": "बचत खाता",
+      "subtitle": "बेहतर ब्याज दरें और सुविधाएं",
+      "cta": "खाता खोलें"
+    }
+  },
+  "quickLinks": {
+    "accountBalance": "खाता शेष",
+    "fundTransfer": "धन हस्तांतरण",
+    "billPayment": "बिल भुगतान",
+    "mobileRecharge": "मोबाइल रिचार्ज",
+    "loanApplication": "ऋण आवेदन",
+    "cardServices": "कार्ड सेवाएं",
+    "atmLocator": "एटीएम लोकेटर",
+    "branchLocator": "शाखा लोकेटर",
+    "customerCare": "ग्राहक सेवा",
+    "rateCalculator": "दर कैलकुलेटर",
+    "emiCalculator": "ईएमआई कैलकुलेटर"
+  },
+  "productCards": {
+    "savings": {
+      "title": "बचत खाता",
+      "subtitle": "बेहतर ब्याज दरें",
+      "features": ["जीरो शेष", "मुफ्त एटीएम", "ऑनलाइन बैंकिंग", "मोबाइल बैंकिंग"],
+      "interestRate": "3.25% प्रति वर्ष",
+      "cta": "अभी खोलें"
+    },
+    "loan": {
+      "title": "व्यक्तिग ऋण",
+      "subtitle": "त्वरित स्वीकृति",
+      "features": ["कम ब्याज दरें", "लचीली अवधि", "कम दस्तावेज़", "त्वरित प्रक्रिया"],
+      "interestRate": "12.5% प्रति वर्ष",
+      "cta": "अभी आवेदन करें"
+    },
+    "credit": {
+      "title": "क्रेडिट कार्ड",
+      "subtitle": "असीमित खरीदारी",
+      "features": ["कैशबैक", "रिवार्ड पॉइंट्स", "ईएमआई विकल्प", "वैश्विक स्वीकृति"],
+      "cta": "अभी प्राप्त करें"
+    }
+  },
+  "fraudBanner": {
+    "title": "धोखाधाड़ी चेतावनी",
+    "alert1": {
+      "title": "फिशिंग अलर्ट",
+      "description": "अज्ञात लिंक पर क्लिक न करें",
+      "severity": "उच्च"
+    },
+    "alert2": {
+      "title": "ओटीपी सुरक्षा",
+      "description": "किसी के साथ ओटीपी साझा न करें",
+      "severity": "मध्यम"
+    },
+    "dismiss": "खारिज करें",
+    "viewAll": "सभी देखें"
+  },
+  "trustBadges": {
+    "title": "विश्वास और प्रतिष्ठा",
+    "subtitle": "हमारी प्रतिष्ठा और विश्वास के प्रमाण",
+    "dicgc": "डीआईसीजीसी बीमा",
+    "rbi": "आरबीआई विनियमित",
+    "iso": "आईएसओ 27001 प्रमाणित",
+    "ssl": "एसएसएल सुरक्षित",
+    "privacy": "गोपनीयता सुरक्षित",
+    "verified": "सत्यापित"
+  },
+  "digitalServices": {
+    "title": "डिजिटल सेवाएं",
+    "subtitle": "बैंकिंग को अगले बनाने के लिए हमारे डिजिटल समाधान",
+    "categories": {
+      "all": "सभी सेवाएं",
+      "payments": "भुगतान",
+      "banking": "बैंकिंग",
+      "services": "सेवाएं",
+      "government": "सरकार योजनाएं"
+    },
+    "featured": "विशेष सेवाएं",
+    "allServices": "सभी सेवाएं",
+    "download": "डाउनलोड",
+    "guide": "गाइड",
+    "viewDetails": "विवरण देखें"
+  },
+  "upiQr": {
+    "title": "यूपीआई और क्यूआर सेवाएं",
+    "subtitle": "सभी प्रमुख यूपीआई ऐप्स और क्यूआर भुगतान सेवाएं",
+    "apps": {
+      "bhim": {
+        "name": "भीम",
+        "description": "भारत इंटरफेस फॉर मनी - सभी बैंकों के लिए एकीकृत भुगतान",
+        "features": ["पैसा भेजें", "पैसा प्राप्त", "शेष जांचें", "लेनदेन इतिहास"]
+      },
+      "phonepe": {
+        "name": "फोनपे",
+        "description": "डिजिटल भुगतान और वित्तीय सेवाएं ऐप",
+        "features": ["मोबाइल रिचार्ज", "बिल भुगतान", "निवेश", "बीमा"]
+      },
+      "paytm": {
+        "name": "पेटीएम",
+        "description": "पूर्ण डिजिटल भुगतान और वित्तीय सेवाएं प्लेटफॉर्म",
+        "features": ["वॉलेट", "यूपीआई भुगतान", "बिल भुगतान", "खरीदारी"]
+      },
+      "googlePay": {
+        "name": "गूगल पे",
+        "description": "सरल और सुरक्षित भुगतान ऐप",
+        "features": ["पैसा भेजें", "बिल भुगतान", "मोबाइल रिचार्ज", "ऑनलाइन खरीदारी"]
+      }
+    }
+  },
+  "bbps": {
+    "title": "बीबीपीएस बिल भुगतान",
+    "subtitle": "भारत बिल भुगतान प्रणाली के माध्यम से सभी बिल भुगतान",
+    "categories": {
+      "electricity": "बिजली बिल",
+      "water": "जल बिल",
+      "gas": "गैस बिल",
+      "telecom": "दूरसंचार बिल",
+      "dth": "डीटीएच रिचार्ज"
+    },
+    "payBill": "बिल भुगतान करें",
+    "available": "उपलब्ध",
+    "unavailable": "अनुपलब्ध"
+  },
+  "mobileBanking": {
+    "title": "मोबाइल बैंकिंग",
+    "subtitle": "बैंकिंग सेवाओं तक पहुंचें कहीं भी, कभी भी",
+    "benefits": {
+      "247Access": "24/7 पहुंच",
+      "secureTransactions": "सुरक्षित लेनदेन",
+      "instantServices": "त्वरित सेवाएं"
+    },
+    "features": {
+      "accountBalance": "खाता शेष जांच",
+      "fundTransfer": "धन हस्तांतरण",
+      "billPayments": "बिल भुगतान",
+      "mobileRecharge": "मोबाइल रिचार्ज",
+      "investmentServices": "निवेश सेवाएं"
+    }
+  },
+  "atmServices": {
+    "title": "एटीएम सेवाएं",
+    "subtitle": "निकटतम एटीएम खोजें और नकद निकासी सेवाओं का उपयोग करें",
+    "locator": "एटीएम लोकेटर",
+    "services": {
+      "cashWithdrawal": "नकद निकासी",
+      "balanceInquiry": "शेष जांच",
+      "miniStatement": "मिनी स्टेटमेंट",
+      "pinChange": "पिन बदलना"
+    },
+    "findAtm": "एटीएम खोजें",
+    "enterLocation": "अपना स्थान दर्ज करें"
+  },
+  "cardsServices": {
+    "title": "कार्ड सेवाएं",
+    "subtitle": "क्रेडिट और डेबिट कार्ड सेवाएं और प्रबंधन",
+    "creditCards": "क्रेडिट कार्ड",
+    "debitCards": "डेबिट कार्ड",
+    "learnMore": "और जानें"
+  },
+  "impsServices": {
+    "title": "आईएमपीएस सेवाएं",
+    "subtitle": "24/7 तत्काल पैसा ट्रांसफर सेवा",
+    "description": "किसी भी समय, किसी भी दिन तत्काल धन हस्तांतरण"
+  },
+  "smsBanking": {
+    "title": "एसएमएस बैंकिंग",
+    "subtitle": "एसएमएस के माध्यम से बैंकिंग सेवाएं",
+    "description": "बुनियादी बैंकिंग सेवाओं के लिए एसएमएस का उपयोग करें"
+  },
+  "panServices": {
+    "title": "पैन सेवाएं",
+    "subtitle": "स्थायी खाता संख्या सेवाएं",
+    "description": "कर अनुपालन के लिए पैन सेवाएं"
+  },
+  "lockerServices": {
+    "title": "लॉकर सेवाएं",
+    "subtitle": "सुरक्षित जमा लॉकर सेवाएं",
+    "description": "अपने मूल्यवान सामानों के लिए सुरक्षित लॉकर"
+  },
+  "neftRtgsServices": {
+    "title": "एनईएफटी/आरटीजीएस सेवाएं",
+    "subtitle": "राष्ट्रीय इलेक्ट्रॉनिक फंड ट्रांसफर और रियल टाइम ग्रॉस सेटलमेंट",
+    "description": "बड़ी राशि के धन हस्तांतरण के लिए सुरक्षित और तेज़ सेवाएं"
+  },
+  "pmSchemes": {
+    "title": "प्रधानमंत्री योजनाएं",
+    "subtitle": "प्रधानमंत्री सरकार योजनाएं और वित्तीय समावेशन",
+    "description": "वित्तीय समावेशन और सामाजिक कल्याण योजनाएं"
+  },
+  "forms": {
+    "firstName": "पहला नाम",
+    "lastName": "अंतिम नाम",
+    "email": "ईमेल",
+    "phone": "फोन",
+    "address": "पता",
+    "city": "शहर",
+    "state": "राज्य",
+    "pincode": "पिनकोड",
+    "submit": "जमा करें",
+    "cancel": "रद्द करें",
+    "required": "आवश्यक",
+    "optional": "वैकल्पिक"
+  },
+  "buttons": {
+    "applyNow": "अभी आवेदन करें",
+    "learnMore": "और जानें",
+    "viewDetails": "विवरण देखें",
+    "download": "डाउनलोड करें",
+    "upload": "अपलोड करें",
+    "save": "सहेज करें",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "close": "बंद करें",
+    "back": "पीछे",
+    "next": "अगला",
+    "previous": "पिछला",
+    "continue": "जारी रखें",
+    "finish": "समाप्त करें",
+    "search": "खोजें",
+    "filter": "फिल्टर",
+    "sort": "छांटें",
+    "refresh": "ताज़ा करें",
+    "reset": "रीसेट करें",
+    "clear": "साफ़ करें",
+    "select": "चुनें",
+    "selectAll": "सभी चुनें",
+    "deselectAll": "सभी अचयनित करें",
+    "verify": "सत्यापित करें",
+    "confirm": "पुष्टि करें",
+    "approve": "स्वीकृति करें",
+    "reject": "अस्वीकृति करें",
+    "login": "लॉग इन करें",
+    "logout": "लॉग आउट करें",
+    "signup": "साइन अप करें",
+    "register": "रजिस्टर करें"
+  },
+  "messages": {
+    "success": "सफलता!",
+    "error": "त्रुटि!",
+    "warning": "चेतावनी!",
+    "info": "जानकारी",
+    "loading": "लोड हो रहा है...",
+    "saving": "सहेज हो रहा है...",
+    "deleting": "हटाया जा रहा है...",
+    "uploading": "अपलोड हो रहा है...",
+    "downloading": "डाउनलोड हो रहा है...",
+    "processing": "प्रसंस्करण हो रहा है...",
+    "verifying": "सत्यापित हो रहा है...",
+    "noDataFound": "कोई डेटा नहीं मिला",
+    "noResultsFound": "कोई परिणाम नहीं मिले",
+    "somethingWentWrong": "कुछ गलत हो गया",
+    "pleaseTryAgain": "कृपया फिर से प्रयास करें",
+    "operationSuccessful": "ऑपरेशन सफल रहा",
+    "operationFailed": "ऑपरेशन विफल रहा",
+    "fileUploadedSuccessfully": "फाइल सफलतापूर्वक अपलोड हो गई",
+    "fileDeletedSuccessfully": "फाइल सफलतापूर्वक हटा दी गई",
+    "dataSavedSuccessfully": "डेटा सफलतापूर्वक सहेज गया",
+    "dataDeletedSuccessfully": "डेटा सफलतापूर्वक हटा गया",
+    "formSubmittedSuccessfully": "फॉर्म सफलतापूर्वक जमा किया गया",
+    "emailSentSuccessfully": "ईमेल सफलतापूर्वक भेजा गया",
+    "passwordChangedSuccessfully": "पासवर्ड सफलतापूर्वक बदला गया",
+    "loginSuccessful": "लॉगिन सफल",
+    "logoutSuccessful": "लॉगआउट सफल",
+    "registrationSuccessful": "रजिस्ट्रेशन सफल",
+    "profileUpdatedSuccessfully": "प्रोफाइल सफलतापूर्वक अपडेट किया गया"
+  },
+  "validation": {
+    "required": "यह फ़ील्ड आवश्यक है",
+    "email": "कृपया वैध ईमेल पता दर्ज करें",
+    "phone": "कृपया वैध फोन नंबर दर्ज करें",
+    "minLength": "कम से कम {{count}} अक्षर होने चाहिए",
+    "maxLength": "अधिकतम {{count}} अक्षर हो सकते हैं",
+    "passwordMismatch": "पासवर्ड मेल नहीं खाता",
+    "invalidEmail": "अमान्य ईमेल पता",
+    "invalidPhone": "अमान्य फोन नंबर",
+    "invalidPincode": "अमान्य पिनकोड",
+    "invalidDate": "अमान्य तिथि",
+    "invalidUrl": "अमान्य URL",
+    "fileTooBig": "फाइल बहुत बड़ी है",
+    "invalidFileType": "अमान्य फाइल प्रकार",
+    "selectOption": "कृपया एक विकल्प चुनें",
+    "acceptTerms": "कृपया नियम और शर्तों को स्वीकार करें",
+    "agreeToPrivacy": "कृपया गोपनीयता नीति से सहमत हों"
+  },
+  "accessibility": {
+    "skipToContent": "सामग्री पर जाएं",
+    "mainNavigation": "मुख्य नेविगेशन",
+    "search": "खोजें",
+    "menu": "मेनू",
+    "close": "बंद करें",
+    "open": "खोलें",
+    "expand": "विस्तार करें",
+    "collapse": "संकुचित करें",
+    "previous": "पिछला",
+    "next": "अगला",
+    "first": "पहला",
+    "last": "अंतिम",
+    "page": "पृष्ठ",
+    "of": "का",
+    "results": "परिणाम",
+    "showing": "दिखा रहे हैं",
+    "to": "से",
+    "items": "आइटम",
+    "selected": "चयनित",
+    "notSelected": "अचयनित नहीं",
+    "enabled": "सक्षम",
+    "disabled": "अक्षम",
+    "required": "आवश्यक",
+    "optional": "वैकल्पिक",
+    "loading": "लोड हो रहा है",
+    "error": "त्रुटि",
+    "warning": "चेतावनी",
+    "info": "जानकारी",
+    "success": "सफलता"
+  },
+  "footer": {
+    "aboutUs": "हमारे बारे में",
+    "products": "उत्पाद",
+    "services": "सेवाएं",
+    "resources": "संसाधन",
+    "support": "समर्थन",
+    "legal": "कानूनी",
+    "social": "सामाजिक",
+    "newsletter": "न्यूज़लेटर",
+    "subscribe": "सदस्यता लें",
+    "contactInfo": "संपर्क जानकारी",
+    "quickLinks": "त्वरित लिंक",
+    "importantLinks": "महत्वपूर्ण लिंक",
+    "customerService": "ग्राहक सेवा",
+    "privacyPolicy": "गोपनीयता नीति",
+    "termsOfService": "सेवा की शर्तें",
+    "cookiePolicy": "कुकी नीति",
+    "disclaimer": "अस्वीकरण",
+    "copyright": "कॉपीराइट",
+    "allRightsReserved": "सभी अधिकार सुरक्षित"
+  },
+  "errorPages": {
+    "404": {
+      "title": "पृष्ठ नहीं मिला",
+      "subtitle": "आप जिस पृष्ठ की तलाश कर रहे हैं वह मौजूद नहीं है",
+      "description": "हो सकता है कि आपने गलत URL दर्ज किया हो या पृष्ठ हटा दिया गया हो",
+      "actions": {
+        "goHome": "होम पेज पर जाएं",
+        "search": "खोजें",
+        "contact": "संपर्क करें"
+      }
+    },
+    "500": {
+      "title": "सर्वर त्रुटि",
+      "subtitle": "हमारे सर्वर पर कुछ गलत हो गया है",
+      "description": "हम इस मुद्दे को ठीक करने के लिए काम कर रहे हैं",
+      "actions": {
+        "refresh": "ताज़ा करें",
+        "goHome": "होम पेज पर जाएं",
+        "contact": "संपर्क करें"
+      }
+    },
+    "403": {
+      "title": "पहुंच निषेध",
+      "subtitle": "आपके पास इस पृष्ठ तक पहुंचने की अनुमति नहीं है",
+      "description": "कृपया अपने प्रशासक की जांच करें",
+      "actions": {
+        "login": "लॉग इन करें",
+        "goHome": "होम पेज पर जाएं",
+        "contact": "संपर्क करें"
+      }
+    }
+  },
+  "common": {
+    "welcome": "स्वागत है",
+    "hello": "नमस्ते",
+    "goodbye": "अलविदा",
+    "thankYou": "धन्यवाद",
+    "please": "कृपया",
+    "sorry": "क्षमा करें",
+    "yes": "हाँ",
+    "no": "नहीं",
+    "ok": "ठीक है",
+    "cancel": "रद्द करें",
+    "confirm": "पुष्टि करें",
+    "save": "सहेज करें",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "add": "जोड़ें",
+    "remove": "हटाएं",
+    "update": "अपडेट करें",
+    "create": "बनाएं",
+    "view": "देखें",
+    "show": "दिखाएं",
+    "hide": "छिपाएं",
+    "open": "खोलें",
+    "close": "बंद करें",
+    "search": "खोजें",
+    "filter": "फिल्टर",
+    "sort": "छांटें",
+    "export": "निर्यात करें",
+    "import": "आयात करें",
+    "print": "प्रिंट करें",
+    "share": "साझा करें",
+    "copy": "कॉपी करें",
+    "paste": "पेस्ट करें",
+    "cut": "काटें",
+    "undo": "पूर्ववत करें",
+    "redo": "दोहराएं",
+    "help": "सहायता",
+    "settings": "सेटिंग्स",
+    "profile": "प्रोफाइल",
+    "account": "खाता",
+    "logout": "लॉग आउट",
+    "login": "लॉग इन",
+    "signup": "साइन अप",
+    "register": "रजिस्टर",
+    "dashboard": "डैशबोर्ड",
+    "home": "होम",
+    "back": "पीछे",
+    "next": "अगला",
+    "previous": "पिछला",
+    "first": "पहला",
+    "last": "अंतिम",
+    "page": "पृष्ठ",
+    "of": "का",
+    "total": "कुल",
+    "selected": "चयनित",
+    "available": "उपलब्ध",
+    "unavailable": "अनुपलब्ध",
+    "active": "सक्रिय",
+    "inactive": "निष्क्रिय",
+    "online": "ऑनलाइन",
+    "offline": "ऑफलाइन",
+    "connected": "कनेक्टेड",
+    "disconnected": "डिस्कनेक्टेड",
+    "loading": "लोड हो रहा है",
+    "loaded": "लोड हो गया",
+    "processing": "प्रसंस्करण हो रहा है",
+    "processed": "प्रसंस्कृत",
+    "pending": "बाकी",
+    "completed": "पूर्ण",
+    "failed": "विफल",
+    "success": "सफल",
+    "error": "त्रुटि",
+    "warning": "चेतावनी",
+    "info": "जानकारी",
+    "today": "आज",
+    "yesterday": "कल",
+    "tomorrow": "कल",
+    "thisWeek": "इस सप्ताह",
+    "lastWeek": "पिछले सप्ताह",
+    "thisMonth": "इस महीने",
+    "lastMonth": "पिछले महीने",
+    "thisYear": "इस साल",
+    "lastYear": "पिछले साल",
+    "all": "सभी",
+    "none": "कोई नहीं",
+    "any": "कोई भी",
+    "other": "अन्य",
+    "custom": "कस्टम",
+    "default": "डिफ़ॉल्ट",
+    "new": "नया",
+    "old": "पुराना",
+    "recent": "हाल का",
+    "popular": "लोकप्रिय",
+    "featured": "विशेष",
+    "recommended": "अनुशंसित",
+    "trending": "ट्रेंडिंग"
+  }
+}

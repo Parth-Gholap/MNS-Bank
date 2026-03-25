@@ -1,0 +1,19 @@
+# Environment Configuration Template
+# Copy this to .env.local and update with actual values
+
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
+
+# Google Services (get from Google Console)
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your-recaptcha-site-key
+RECAPTCHA_SECRET_KEY=your-recaptcha-secret-key
+NEXT_PUBLIC_GA_MEASUREMENT_ID=your-ga-measurement-id
+
+# CMS Configuration (get from Strapi admin)
+STRAPI_API_TOKEN=your-strapi-api-token
+
+# Security
+NEXT_PUBLIC_NET_BANKING_URL=https://netbanking.mnsbankbhopal.com
+
+# Development
+NODE_ENV=development

@@ -1,0 +1,482 @@
+export interface RateLimitConfig {
+  windowMs: number; // Time window in milliseconds
+  maxRequests: number; // Maximum requests per window
+  message?: string;
+  skipSuccessfulRequests?: boolean;
+  skipFailedRequests?: boolean;
+  keyGenerator?: (req: any) => string;
+  onLimitReached?: (req: any, res: any) => void;
+  headers?: boolean;
+}
+
+export interface RateLimitResult {
+  allowed: boolean;
+  remaining: number;
+  resetTime: number;
+  totalHits: number;
+  retryAfter?: number;
+}
+
+export interface RateLimitEntry {
+  count: number;
+  resetTime: number;
+  firstRequest: number;
+}
+
+export interface RateLimitStats {
+  totalRequests: number;
+  blockedRequests: number;
+  currentActiveKeys: number;
+  averageRequestsPerKey: number;
+  topKeys: Array<{
+    key: string;
+    count: number;
+    lastSeen: number;
+  }>;
+}
+
+class RateLimiter {
+  private static instance: RateLimiter;
+  private limits: Map<string, RateLimitConfig> = new Map();
+  private requests: Map<string, RateLimitEntry> = new Map();
+  private stats: Map<string, RateLimitStats> = new Map();
+  private cleanupInterval: NodeJS.Timeout | null = null;
+
+  private constructor() {
+    this.startCleanup();
+  }
+
+  static getInstance(): RateLimiter {
+    if (!RateLimiter.instance) {
+      RateLimiter.instance = new RateLimiter();
+    }
+    return RateLimiter.instance;
+  }
+
+  private startCleanup(): void {
+    // Clean up expired entries every minute
+    this.cleanupInterval = setInterval(() => {
+      this.cleanup();
+    }, 60000);
+  }
+
+  private cleanup(): void {
+    const now = Date.now();
+    
+    this.requests.forEach((entry, key) => {
+      if (now > entry.resetTime) {
+        this.requests.delete(key);
+      }
+    });
+  }
+
+  addLimit(name: string, config: RateLimitConfig): void {
+    this.limits.set(name, {
+      windowMs: 15 * 60 * 1000, // 15 minutes default
+      maxRequests: 100, // 100 requests default
+      message: 'Too many requests, please try again later.',
+      skipSuccessfulRequests: false,
+      skipFailedRequests: false,
+      headers: true,
+      ...config
+    });
+
+    // Initialize stats for this limit
+    if (!this.stats.has(name)) {
+      this.stats.set(name, {
+        totalRequests: 0,
+        blockedRequests: 0,
+        currentActiveKeys: 0,
+        averageRequestsPerKey: 0,
+        topKeys: []
+      });
+    }
+  }
+
+  checkLimit(limitName: string, key: string, timestamp: number = Date.now()): RateLimitResult {
+    const config = this.limits.get(limitName);
+    if (!config) {
+      return {
+        allowed: true,
+        remaining: 0,
+        resetTime: 0,
+        totalHits: 0
+      };
+    }
+
+    const stats = this.stats.get(limitName)!;
+    stats.totalRequests++;
+
+    // Get or create entry for this key
+    let entry = this.requests.get(key);
+    if (!entry) {
+      entry = {
+        count: 0,
+        resetTime: timestamp + config.windowMs,
+        firstRequest: timestamp
+      };
+      this.requests.set(key, entry);
+      stats.currentActiveKeys++;
+    }
+
+    // Check if window has expired
+    if (timestamp > entry.resetTime) {
+      entry.count = 0;
+      entry.resetTime = timestamp + config.windowMs;
+      entry.firstRequest = timestamp;
+    }
+
+    // Increment count
+    entry.count++;
+
+    // Calculate remaining requests
+    const remaining = Math.max(0, config.maxRequests - entry.count);
+    const allowed = entry.count <= config.maxRequests;
+
+    // Update stats
+    if (!allowed) {
+      stats.blockedRequests++;
+    }
+
+    // Update top keys
+    const existingTopKey = stats.topKeys.find(k => k.key === key);
+    if (existingTopKey) {
+      existingTopKey.count = entry.count;
+      existingTopKey.lastSeen = timestamp;
+    } else {
+      stats.topKeys.push({
+        key,
+        count: entry.count,
+        lastSeen: timestamp
+      });
+    }
+
+    // Sort and keep only top 10
+    stats.topKeys.sort((a, b) => b.count - a.count);
+    stats.topKeys = stats.topKeys.slice(0, 10);
+
+    // Calculate average
+    stats.averageRequestsPerKey = stats.totalRequests / Math.max(1, stats.currentActiveKeys);
+
+    return {
+      allowed,
+      remaining,
+      resetTime: entry.resetTime,
+      totalHits: entry.count,
+      retryAfter: allowed ? undefined : Math.ceil((entry.resetTime - timestamp) / 1000)
+    };
+  }
+
+  middleware(limitName: string) {
+    return (req: any, res: any, next: any) => {
+      const config = this.limits.get(limitName);
+      if (!config) {
+        return next();
+      }
+
+      // Generate key for this request
+      const key = config.keyGenerator ? config.keyGenerator(req) : this.generateDefaultKey(req);
+      
+      // Check rate limit
+      const result = this.checkLimit(limitName, key);
+
+      // Add headers if enabled
+      if (config.headers) {
+        res.setHeader('X-RateLimit-Limit', config.maxRequests);
+        res.setHeader('X-RateLimit-Remaining', result.remaining);
+        res.setHeader('X-RateLimit-Reset', new Date(result.resetTime).toISOString());
+        
+        if (!result.allowed) {
+          res.setHeader('Retry-After', result.retryAfter);
+        }
+      }
+
+      // Handle rate limit exceeded
+      if (!result.allowed) {
+        if (config.onLimitReached) {
+          config.onLimitReached(req, res);
+        }
+        
+        return res.status(429).json({
+          error: 'Too Many Requests',
+          message: config.message,
+          retryAfter: result.retryAfter
+        });
+      }
+
+      next();
+    };
+  }
+
+  private generateDefaultKey(req: any): string {
+    // Use IP address as default key
+    const ip = req.ip || 
+               req.connection?.remoteAddress || 
+               req.socket?.remoteAddress || 
+               req.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 
+               'unknown';
+    
+    return ip;
+  }
+
+  // API rate limiting specific methods
+  createApiRateLimit(endpoint: string, options: Partial<RateLimitConfig> = {}): void {
+    const defaultConfig: Partial<RateLimitConfig> = {
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      maxRequests: 100, // 100 requests per 15 minutes
+      message: `API rate limit exceeded for ${endpoint}`,
+      keyGenerator: (req) => {
+        const ip = req.ip || req.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 'unknown';
+        return `api_${endpoint}_${ip}`;
+      }
+    };
+
+    this.addLimit(`api_${endpoint}`, { ...defaultConfig, ...options });
+  }
+
+  createAuthRateLimit(options: Partial<RateLimitConfig> = {}): void {
+    const defaultConfig: Partial<RateLimitConfig> = {
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      maxRequests: 5, // 5 login attempts per 15 minutes
+      message: 'Too many authentication attempts, please try again later.',
+      keyGenerator: (req) => {
+        const ip = req.ip || req.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 'unknown';
+        const email = req.body?.email || 'unknown';
+        return `auth_${email}_${ip}`;
+      }
+    };
+
+    this.addLimit('auth', { ...defaultConfig, ...options });
+  }
+
+  createPasswordResetRateLimit(options: Partial<RateLimitConfig> = {}): void {
+    const defaultConfig: Partial<RateLimitConfig> = {
+      windowMs: 60 * 60 * 1000, // 1 hour
+      maxRequests: 3, // 3 password resets per hour
+      message: 'Too many password reset attempts, please try again later.',
+      keyGenerator: (req) => {
+        const email = req.body?.email || req.query?.email || 'unknown';
+        return `password_reset_${email}`;
+      }
+    };
+
+    this.addLimit('password_reset', { ...defaultConfig, ...options });
+  }
+
+  createSearchRateLimit(options: Partial<RateLimitConfig> = {}): void {
+    const defaultConfig: Partial<RateLimitConfig> = {
+      windowMs: 60 * 1000, // 1 minute
+      maxRequests: 30, // 30 searches per minute
+      message: 'Too many search requests, please slow down.',
+      keyGenerator: (req) => {
+        const ip = req.ip || req.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 'unknown';
+        return `search_${ip}`;
+      }
+    };
+
+    this.addLimit('search', { ...defaultConfig, ...options });
+  }
+
+  createFileUploadRateLimit(options: Partial<RateLimitConfig> = {}): void {
+    const defaultConfig: Partial<RateLimitConfig> = {
+      windowMs: 60 * 60 * 1000, // 1 hour
+      maxRequests: 10, // 10 file uploads per hour
+      message: 'Too many file uploads, please try again later.',
+      keyGenerator: (req) => {
+        const ip = req.ip || req.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 'unknown';
+        return `upload_${ip}`;
+      }
+    };
+
+    this.addLimit('file_upload', { ...defaultConfig, ...options });
+  }
+
+  createContactRateLimit(options: Partial<RateLimitConfig> = {}): void {
+    const defaultConfig: Partial<RateLimitConfig> = {
+      windowMs: 60 * 60 * 1000, // 1 hour
+      maxRequests: 5, // 5 contact form submissions per hour
+      message: 'Too many contact form submissions, please try again later.',
+      keyGenerator: (req) => {
+        const ip = req.ip || req.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 'unknown';
+        return `contact_${ip}`;
+      }
+    };
+
+    this.addLimit('contact', { ...defaultConfig, ...options });
+  }
+
+  // Utility methods
+  isRateLimited(limitName: string, key: string): boolean {
+    const result = this.checkLimit(limitName, key);
+    return !result.allowed;
+  }
+
+  getRemainingRequests(limitName: string, key: string): number {
+    const result = this.checkLimit(limitName, key);
+    return result.remaining;
+  }
+
+  getResetTime(limitName: string, key: string): number {
+    const result = this.checkLimit(limitName, key);
+    return result.resetTime;
+  }
+
+  getStats(limitName: string): RateLimitStats | null {
+    return this.stats.get(limitName) || null;
+  }
+
+  getAllStats(): Map<string, RateLimitStats> {
+    return new Map(this.stats);
+  }
+
+  resetKey(limitName: string, key: string): void {
+    this.requests.delete(key);
+  }
+
+  resetLimit(limitName: string): void {
+    // Clear all requests for this limit
+    const keysToDelete: string[] = [];
+    this.requests.forEach((entry, key) => {
+      if (key.startsWith(limitName)) {
+        keysToDelete.push(key);
+      }
+    });
+    
+    keysToDelete.forEach(key => this.requests.delete(key));
+    
+    // Reset stats
+    const stats = this.stats.get(limitName);
+    if (stats) {
+      stats.totalRequests = 0;
+      stats.blockedRequests = 0;
+      stats.currentActiveKeys = 0;
+      stats.averageRequestsPerKey = 0;
+      stats.topKeys = [];
+    }
+  }
+
+  resetAll(): void {
+    this.requests.clear();
+    this.stats.forEach(stats => {
+      stats.totalRequests = 0;
+      stats.blockedRequests = 0;
+      stats.currentActiveKeys = 0;
+      stats.averageRequestsPerKey = 0;
+      stats.topKeys = [];
+    });
+  }
+
+  removeLimit(limitName: string): void {
+    this.limits.delete(limitName);
+    this.stats.delete(limitName);
+    this.resetLimit(limitName);
+  }
+
+  // Analysis methods
+  getTopOffenders(limitName: string, count: number = 10): Array<{
+    key: string;
+    count: number;
+    lastSeen: number;
+  }> {
+    const stats = this.stats.get(limitName);
+    if (!stats) {
+      return [];
+    }
+    
+    return stats.topKeys.slice(0, count);
+  }
+
+  getBlockRate(limitName: string): number {
+    const stats = this.stats.get(limitName);
+    if (!stats || stats.totalRequests === 0) {
+      return 0;
+    }
+    
+    return (stats.blockedRequests / stats.totalRequests) * 100;
+  }
+
+  getActiveKeyCount(limitName: string): number {
+    const stats = this.stats.get(limitName);
+    return stats ? stats.currentActiveKeys : 0;
+  }
+
+  exportData(): {
+    limits: Array<{ name: string; config: RateLimitConfig }>;
+    stats: Array<{ name: string; stats: RateLimitStats }>;
+    requests: Array<{ key: string; entry: RateLimitEntry }>;
+  } {
+    const limits = Array.from(this.limits.entries()).map(([name, config]) => ({ name, config }));
+    const stats = Array.from(this.stats.entries()).map(([name, stats]) => ({ name, stats }));
+    const requests = Array.from(this.requests.entries()).map(([key, entry]) => ({ key, entry }));
+    
+    return { limits, stats, requests };
+  }
+
+  importData(data: {
+    limits?: Array<{ name: string; config: RateLimitConfig }>;
+    stats?: Array<{ name: string; stats: RateLimitStats }>;
+    requests?: Array<{ key: string; entry: RateLimitEntry }>;
+  }): void {
+    if (data.limits) {
+      data.limits.forEach(({ name, config }) => {
+        this.limits.set(name, config);
+      });
+    }
+    
+    if (data.stats) {
+      data.stats.forEach(({ name, stats }) => {
+        this.stats.set(name, stats);
+      });
+    }
+    
+    if (data.requests) {
+      data.requests.forEach(({ key, entry }) => {
+        this.requests.set(key, entry);
+      });
+    }
+  }
+
+  destroy(): void {
+    if (this.cleanupInterval) {
+      clearInterval(this.cleanupInterval);
+    }
+    this.resetAll();
+  }
+}
+
+// React hook for rate limiting
+export function useRateLimit(limitName: string, key: string) {
+  const limiter = RateLimiter.getInstance();
+  const [remaining, setRemaining] = useState<number>(0);
+  const [resetTime, setResetTime] = useState<number>(0);
+  const [isLimited, setIsLimited] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkLimit = () => {
+      const result = limiter.checkLimit(limitName, key);
+      setRemaining(result.remaining);
+      setResetTime(result.resetTime);
+      setIsLimited(!result.allowed);
+    };
+
+    checkLimit();
+    const interval = setInterval(checkLimit, 1000); // Check every second
+
+    return () => clearInterval(interval);
+  }, [limitName, key, limiter]);
+
+  const checkLimit = useCallback(() => {
+    return limiter.checkLimit(limitName, key);
+  }, [limitName, key, limiter]);
+
+  return {
+    remaining,
+    resetTime,
+    isLimited,
+    checkLimit
+  };
+}
+
+// Export singleton
+export const rateLimiter = RateLimiter.getInstance();
+export default RateLimiter;
