@@ -5,10 +5,8 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   
-  // Disable Turbopack temporarily to fix panic issues
-  turbo: {
-    enabled: false,
-  },
+  // Disable Turbopack completely - use standard Next.js
+  turbo: false,
   
   // Image optimization
   images: {
