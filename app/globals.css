@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Design Tokens */
+:root {
+  --color-bank-blue-50: #eff6ff;
+  --color-bank-blue-100: #dbeafe;
+  --color-bank-blue-200: #bfdbfe;
+  --color-bank-blue-300: #93c5fd;
+  --color-bank-blue-400: #60a5fa;
+  --color-bank-blue-500: #3b82f6;
+  --color-bank-blue-600: #2563eb;
+  --color-bank-blue-700: #1d4ed8;
+  --color-bank-blue-800: #1e40af;
+  --color-bank-blue-900: #1e3a8a;
+  --color-bank-blue-950: #172554;
+}
+
+/* Component Classes */
+.btn-white {
+  background-color: white;
+  color: #2563eb;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-white:hover {
+  background-color: #f9fafb;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid currentColor;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.shadow-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
 /* Base Styles */
 html {
   scroll-behavior: smooth;

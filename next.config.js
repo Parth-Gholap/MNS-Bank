@@ -5,8 +5,7 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   
-  // Disable Turbopack completely - use standard Next.js
-  turbo: false,
+  // Turbopack configuration (removed deprecated turbo option)
   
   // Image optimization
   images: {
