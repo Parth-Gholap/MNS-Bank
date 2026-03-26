@@ -56,7 +56,7 @@ const GrievanceTracker: React.FC<GrievanceTrackerProps> = ({ locale, referenceNu
         ...(referenceNumber && { referenceNumber })
       });
 
-      const response = await fetch(`/api/grievances?${queryParams}`);
+      const response = await fetch(`/api/bank-data?type=grievances&${queryParams}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch grievances');

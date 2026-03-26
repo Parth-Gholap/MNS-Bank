@@ -23,22 +23,32 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
   const { t } = useTranslation(locale);
+  const [carouselItems, setCarouselItems] = useState<CarouselItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [carouselItems, setCarouselItems] = useState<CarouselItem[]>([]);
 
   useEffect(() => {
-    trackPageView('Homepage Carousel', locale === 'hi' ? 'होमपेज कैरोसेल' : 'Homepage Carousel');
+    setMounted(true);
+    trackPageView('Hero Carousel', locale === 'hi' ? 'हीरो कैरोसेल' : 'Hero Carousel');
     fetchCarouselItems();
   }, [locale]);
 
   const fetchCarouselItems = async () => {
     try {
-      const response = await fetch(`/api/carousel?locale=${locale}`);
+      const response = await fetch(`/api/bank-data?type=carousel&locale=${locale}`);
       const result = await response.json();
       
-      if (result.success) {
-        setCarouselItems(result.data.items);
+      // Debug: Log the actual response
+      console.log('Carousel API Response:', result);
+      
+      if (result.success && result.data && Array.isArray(result.data.carouselItems)) {
+        setCarouselItems(result.data.carouselItems);
+      } else {
+        console.log('Using fallback carousel items');
+        setCarouselItems(getStaticCarouselItems());
       }
     } catch (error) {
       console.error('Error fetching carousel items:', error);
@@ -96,14 +106,17 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
   };
 
   const nextSlide = () => {
+    if (!carouselItems || carouselItems.length === 0) return;
     setCurrentIndex((prev) => (prev + 1) % carouselItems.length);
   };
 
   const prevSlide = () => {
+    if (!carouselItems || carouselItems.length === 0) return;
     setCurrentIndex((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
   };
 
   const goToSlide = (index: number) => {
+    if (!carouselItems || carouselItems.length === 0) return;
     setCurrentIndex(index);
   };
 
@@ -119,9 +132,18 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, carouselItems.length]);
+  }, [isAutoPlaying, carouselItems?.length || 0]);
 
-  const currentItem = carouselItems[currentIndex];
+  // Don't render until mounted to prevent hydration issues
+  if (!mounted) {
+    return (
+      <div className={`relative overflow-hidden rounded-lg shadow-lg ${className || ''}`}>
+        <div className="relative h-96 md:h-[500px] bg-gray-200 animate-pulse"></div>
+      </div>
+    );
+  }
+
+  const currentItem = carouselItems && carouselItems.length > 0 ? carouselItems[currentIndex] : null;
 
   return (
     <div className={`relative overflow-hidden rounded-lg shadow-lg ${className || ''}`}>
@@ -196,7 +218,7 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
 
       {/* Slide Indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {carouselItems.map((_, index) => (
+        {carouselItems && carouselItems.length > 0 && carouselItems.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}

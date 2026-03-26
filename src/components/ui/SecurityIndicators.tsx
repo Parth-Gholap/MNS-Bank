@@ -38,7 +38,7 @@ const SecurityIndicators: React.FC<SecurityIndicatorsProps> = ({ locale, classNa
   const fetchSecurityIndicators = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/security-indicators?locale=${locale}`);
+      const response = await fetch(`/api/bank-data?type=trust&locale=${locale}`);
       const result = await response.json();
       
       if (result.success) {

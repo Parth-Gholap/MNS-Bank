@@ -60,8 +60,8 @@ const config: Config = {
       },
       // Typography
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Inter Display', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Consolas', 'monospace'],
         hindi: ['Noto Sans Devanagari', 'system-ui', 'sans-serif'],
       },

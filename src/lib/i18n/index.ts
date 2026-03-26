@@ -1,12 +1,14 @@
-import enMessages from '../../../messages/en.json';
-import hiMessages from '../../../messages/hi.json';
+import enMessages from '@/messages/en.json';
+import hiMessages from '@/messages/hi.json';
 
 export type Locale = 'en' | 'hi';
-export type Messages = typeof enMessages;
 
-export const messages: Record<Locale, Messages> = {
-  en: enMessages,
-  hi: hiMessages,
+// Use a more flexible type to handle differences between message files
+export type Messages = typeof enMessages & Partial<typeof hiMessages>;
+
+export const messages: Record<Locale, any> = {
+  en: enMessages as any,
+  hi: hiMessages as any,
 };
 
 export const defaultLocale: Locale = 'en';

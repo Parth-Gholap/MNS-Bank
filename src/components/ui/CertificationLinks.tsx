@@ -42,7 +42,7 @@ const CertificationLinks: React.FC<CertificationLinksProps> = ({ locale, classNa
   const fetchCertifications = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/trust?locale=${locale}&type=certification`);
+      const response = await fetch(`/api/bank-data?type=trust&locale=${locale}&type=certification`);
       const result = await response.json();
       
       if (result.success) {

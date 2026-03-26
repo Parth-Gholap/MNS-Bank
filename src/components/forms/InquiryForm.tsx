@@ -122,7 +122,7 @@ const InquiryForm: React.FC<InquiryFormProps> = ({
         });
       }
 
-      const response = await fetch('/api/inquiries', {
+      const response = await fetch('/api/bank-data?type=inquiries', {
         method: 'POST',
         body: formDataToSend
       });

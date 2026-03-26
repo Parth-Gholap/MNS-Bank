@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design Tokens */
+/* Design Tokens - Mahanagar Bank Website */
+
+/* CSS Custom Properties for Design System */
 :root {
+  /* Primary Colors */
   --color-bank-blue-50: #eff6ff;
   --color-bank-blue-100: #dbeafe;
   --color-bank-blue-200: #bfdbfe;
@@ -15,40 +18,422 @@
   --color-bank-blue-800: #1e40af;
   --color-bank-blue-900: #1e3a8a;
   --color-bank-blue-950: #172554;
+
+  /* Secondary Colors */
+  --color-bank-gold-50: #fffbeb;
+  --color-bank-gold-100: #fef3c7;
+  --color-bank-gold-200: #fde68a;
+  --color-bank-gold-300: #fcd34d;
+  --color-bank-gold-400: #fbbf24;
+  --color-bank-gold-500: #f59e0b;
+  --color-bank-gold-600: #d97706;
+  --color-bank-gold-700: #b45309;
+  --color-bank-gold-800: #92400e;
+  --color-bank-gold-900: #78350f;
+  --color-bank-gold-950: #451a03;
+
+  /* Neutral Colors */
+  --color-bank-gray-50: #f9fafb;
+  --color-bank-gray-100: #f3f4f6;
+  --color-bank-gray-200: #e5e7eb;
+  --color-bank-gray-300: #d1d5db;
+  --color-bank-gray-400: #9ca3af;
+  --color-bank-gray-500: #6b7280;
+  --color-bank-gray-600: #4b5563;
+  --color-bank-gray-700: #374151;
+  --color-bank-gray-800: #1f2937;
+  --color-bank-gray-900: #111827;
+  --color-bank-gray-950: #030712;
+
+  /* Semantic Colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Inter Display', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+  --font-hindi: 'Noto Sans Devanagari', system-ui, sans-serif;
+
+  /* Spacing */
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-128: 32rem;
+
+  /* Border Radius */
+  --radius-bank: 0.5rem;
+  --radius-card: 0.75rem;
+  --radius-button: 0.375rem;
+
+  /* Animation */
+  --duration-400: 400ms;
+  --duration-500: 500ms;
+
+  /* Shadows */
+  --shadow-bank: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+  /* Z-Index */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-modal: 1050;
+  --z-tooltip: 1070;
+}
+
+/* Typography Classes */
+.text-h1 {
+  @apply text-4xl font-bold text-gray-900 leading-tight;
+}
+
+.text-h2 {
+  @apply text-3xl font-bold text-gray-900 leading-tight;
+}
+
+.text-h3 {
+  @apply text-2xl font-semibold text-gray-900 leading-tight;
+}
+
+.text-h4 {
+  @apply text-xl font-semibold text-gray-900;
+}
+
+.text-body {
+  @apply text-base text-gray-600 leading-relaxed;
+}
+
+.text-caption {
+  @apply text-sm text-gray-500;
 }
 
 /* Component Classes */
-.btn-white {
-  background-color: white;
-  color: #2563eb;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
+.card {
+  @apply bg-white rounded-lg shadow-card border border-gray-200 p-6;
 }
 
-.btn-white:hover {
-  background-color: #f9fafb;
+.card-hover {
+  @apply card hover:shadow-bank transition-shadow duration-300;
+}
+
+.btn-primary {
+  @apply bg-bank-blue-600 text-white px-6 py-3 rounded-button font-medium hover:bg-bank-blue-700 focus:ring-2 focus:ring-bank-blue-500 focus:ring-offset-2 transition-colors duration-200;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-900 px-6 py-3 rounded-button font-medium hover:bg-gray-300 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200;
+}
+
+.btn-gold {
+  @apply bg-bank-gold-600 text-white px-6 py-3 rounded-button font-medium hover:bg-bank-gold-700 focus:ring-2 focus:ring-bank-gold-500 focus:ring-offset-2 transition-colors duration-200;
+}
+
+.btn-white {
+  @apply bg-white text-bank-blue-600 px-6 py-3 rounded-button font-medium hover:bg-gray-50 focus:ring-2 focus:ring-bank-blue-500 focus:ring-offset-2 transition-colors duration-200;
 }
 
 .btn-outline {
-  background-color: transparent;
-  border: 2px solid currentColor;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  @apply bg-transparent border-2 px-6 py-3 rounded-button font-medium transition-colors duration-200;
 }
 
-.shadow-card {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+.input-field {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-button focus:ring-2 focus:ring-bank-blue-500 focus:border-bank-blue-500 transition-colors duration-200;
 }
 
-/* Base Styles */
+.input-error {
+  @apply input-field border-red-500 focus:ring-red-500 focus:border-red-500;
+}
+
+/* Layout Classes */
+.container-bank {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.section-padding {
+  @apply py-16 px-4 sm:px-6 lg:px-8;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 640px) {
+  .mobile-hidden {
+    display: none;
+  }
+  .mobile-only {
+    @apply block;
+  }
+}
+
+@media (min-width: 641px) {
+  .mobile-hidden {
+    @apply block;
+  }
+  
+  .mobile-only {
+    @apply hidden;
+  }
+}
+
+body {
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Prevent layout shifts during navigation */
 html {
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+/* Prevent FOUC (Flash of Unstyled Content) */
+.no-js .no-js-fallback {
+  display: block;
+}
+
+/* Ensure consistent layout */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent layout disturbance during redirects */
+.layout-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, input, select, textarea {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Prevent content jump when scrollbars appear */
+html {
+  overflow-y: scroll;
+}
+
+/* Ensure consistent spacing */
+.container-bank {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-bank {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-bank {
+    padding: 0 2rem;
+  }
+}
+
+/* Fix for z-index stacking context */
+nav, header {
+  position: relative;
+  z-index: 50;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+footer {
+  position: relative;
+  z-index: 10;
+}
+
+/* Page transition improvements */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Navigation loading state */
+.nav-loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.nav-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  animation: loading-skeleton 1.5s infinite;
+}
+
+@keyframes loading-skeleton {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Prevent layout shifts during page transitions */
+.layout-stable {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-stable {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Smooth scroll behavior for internal links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+.fouc-prevent {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fouc-prevent.loaded {
+  opacity: 1;
+}
+
+/* Enhanced UI Components */
+.btn-primary {
+  @apply bg-bank-blue-600 text-white px-6 py-3 rounded-button font-medium hover:bg-bank-blue-700 focus:ring-2 focus:ring-bank-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-900 px-6 py-3 rounded-button font-medium hover:bg-gray-300 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg;
+}
+
+.btn-gold {
+  @apply bg-bank-gold-600 text-white px-6 py-3 rounded-button font-medium hover:bg-bank-gold-700 focus:ring-2 focus:ring-bank-gold-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+}
+
+.btn-white {
+  @apply bg-white text-bank-blue-600 px-6 py-3 rounded-button font-medium hover:bg-gray-50 focus:ring-2 focus:ring-bank-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg border border-gray-200;
+}
+
+.btn-outline {
+  @apply bg-transparent border-2 px-6 py-3 rounded-button font-medium transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg;
+}
+
+.card {
+  @apply bg-white rounded-card shadow-card border border-gray-200 p-6 hover:shadow-bank transition-all duration-300 transform hover:scale-105;
+}
+
+.card-hover {
+  @apply card hover:shadow-bank transition-all duration-300 transform hover:scale-105;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-button focus:ring-2 focus:ring-bank-blue-500 focus:border-bank-blue-500 transition-all duration-200 shadow-sm focus:shadow-md;
+}
+
+.input-error {
+  @apply input-field border-red-500 focus:ring-red-500 focus:border-red-500;
+}
+
+/* Enhanced animations */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Enhanced shadows */
+.shadow-enhanced {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Gradient backgrounds */
+.gradient-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.gradient-gray {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
 }

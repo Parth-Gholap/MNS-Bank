@@ -46,7 +46,7 @@ const ProductComparison: React.FC<ProductComparisonProps> = ({ locale, className
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/products?locale=${locale}&category=all`);
+      const response = await fetch(`/api/bank-data?type=products&locale=${locale}&category=all`);
       const result = await response.json();
       
       if (result.success) {

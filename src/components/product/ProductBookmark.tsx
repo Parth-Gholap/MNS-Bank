@@ -50,7 +50,7 @@ const ProductBookmark: React.FC<ProductBookmarkProps> = ({
 
   const fetchBookmarks = async () => {
     try {
-      const response = await fetch('/api/bookmarks');
+      const response = await fetch('/api/bank-data?type=bookmarks');
       const result = await response.json();
       
       if (result.success) {
@@ -90,7 +90,7 @@ const ProductBookmark: React.FC<ProductBookmarkProps> = ({
       setLoading(true);
       
       // Get product details
-      const productResponse = await fetch(`/api/products/${productId}?locale=${locale}`);
+      const productResponse = await fetch(`/api/bank-data?type=products&action=detail&productId=${productId}&locale=${locale}`);
       const productResult = await productResponse.json();
       
       if (productResult.success) {
@@ -112,7 +112,7 @@ const ProductBookmark: React.FC<ProductBookmarkProps> = ({
           notesHi: bookmarkNotes
         };
 
-        const response = await fetch('/api/bookmarks', {
+        const response = await fetch('/api/bank-data?type=bookmarks', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ const ProductBookmark: React.FC<ProductBookmarkProps> = ({
       const bookmarkToRemove = bookmarks.find(b => b.productId === productId);
       if (!bookmarkToRemove) return;
 
-      const response = await fetch(`/api/bookmarks/${bookmarkToRemove.id}`, {
+      const response = await fetch(`/api/bank-data?type=bookmarks&id=${bookmarkToRemove.id}`, {
         method: 'DELETE',
       });
 

@@ -48,7 +48,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({ locale, onFilterChange, c
   const fetchFilterOptions = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/products/filters?locale=${locale}`);
+      const response = await fetch(`/api/bank-data?type=products&action=filters&locale=${locale}`);
       const result = await response.json();
       
       if (result.success) {

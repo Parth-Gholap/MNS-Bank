@@ -26,55 +26,45 @@ const Navigation: React.FC<NavigationProps> = ({
 
   const navigationStructure = {
     personal: {
-      label: t('navigation.personal'),
-      labelHi: t('navigation.personal'),
+      label: locale === 'hi' ? 'व्यक्तिग बैंकिंग' : 'Personal Banking',
       href: `/${locale}/personal`,
       subItems: [
         {
-          label: t('products.accounts'),
-          labelHi: t('products.accounts'),
+          label: locale === 'hi' ? 'खाते' : 'Accounts',
           href: `/${locale}/personal/accounts`
         },
         {
-          label: t('products.deposits'),
-          labelHi: t('products.deposits'),
+          label: locale === 'hi' ? 'जमा' : 'Deposits',
           href: `/${locale}/personal/deposits`
         },
         {
-          label: t('products.loans'),
-          labelHi: t('products.loans'),
+          label: locale === 'hi' ? 'ऋण' : 'Loans',
           href: `/${locale}/personal/loans`
         },
         {
-          label: t('navigation.services'),
-          labelHi: t('navigation.services'),
+          label: locale === 'hi' ? 'सेवाएं' : 'Services',
           href: `/${locale}/personal/services`
         }
       ]
     },
     business: {
-      label: t('navigation.business'),
-      labelHi: t('navigation.business'),
+      label: locale === 'hi' ? 'व्यवसाय बैंकिंग' : 'Business Banking',
       href: `/${locale}/business`,
       subItems: [
         {
-          label: t('products.accounts'),
-          labelHi: t('products.accounts'),
+          label: locale === 'hi' ? 'खाते' : 'Accounts',
           href: `/${locale}/business/accounts`
         },
         {
-          label: t('products.deposits'),
-          labelHi: t('products.deposits'),
+          label: locale === 'hi' ? 'जमा' : 'Deposits',
           href: `/${locale}/business/deposits`
         },
         {
-          label: t('products.loans'),
-          labelHi: t('products.loans'),
+          label: locale === 'hi' ? 'ऋण' : 'Loans',
           href: `/${locale}/business/loans`
         },
         {
-          label: t('navigation.services'),
-          labelHi: t('navigation.services'),
+          label: locale === 'hi' ? 'सेवाएं' : 'Services',
           href: `/${locale}/business/services`
         }
       ]
@@ -181,98 +171,133 @@ const Navigation: React.FC<NavigationProps> = ({
   }
 
   return (
-    <nav className="hidden lg:flex lg:items-center lg:space-x-8">
-      {/* Desktop Navigation */}
-      <div className="flex items-center space-x-8">
-        {/* Personal Banking Dropdown */}
-        <div className="relative">
-          <button
-            onClick={() => handleDropdownToggle('personal')}
-            className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
-              isActive(navigationStructure.personal.href)
-                ? 'bg-bank-blue-600 text-white'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-            }`}
-          >
-            {navigationStructure.personal.label}
-            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-5-5 0 012-2h4a2 2 0 01-2z" />
-            </svg>
-          </button>
-          
-          {activeDropdown === 'personal' && (
-            <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-bank border border-gray-200 z-dropdown">
-              <div className="p-2">
-                {navigationStructure.personal.subItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`block px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
-                      isActive(item.href)
-                        ? 'bg-bank-blue-600 text-white'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+    <nav className={`${isMobile ? 'flex flex-col space-y-1' : 'flex items-center space-x-1'}`}>
+      {/* Personal Banking Dropdown */}
+      <div className={`${isMobile ? '' : 'relative'}`}>
+        <button
+          onClick={() => handleDropdownToggle('personal')}
+          className={`flex items-center justify-between w-full px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+            isActive(navigationStructure.personal.href)
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+          } ${isMobile ? 'mb-2' : ''}`}
+        >
+          <span>{navigationStructure.personal.label}</span>
+          {!isMobile && <span className="ml-1 text-xs">▼</span>}
+        </button>
+        
+        {activeDropdown === 'personal' && (
+          <div className={`${isMobile ? 'ml-4 mt-2 space-y-1' : 'absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 z-50'}`}>
+            {!isMobile && (
+              <div className="p-2 border-b border-gray-100">
+                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                  {locale === 'hi' ? 'व्यक्तिग सेवाएं' : 'Personal Services'}
+                </div>
               </div>
+            )}
+            <div className={`${isMobile ? 'space-y-1' : 'p-2'}`}>
+              {navigationStructure.personal.subItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`block px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                    isActive(item.href)
+                      ? 'bg-blue-50 text-blue-600'
+                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  }`}
+                  onClick={() => {
+                    if (isMobile && onClose) {
+                      onClose();
+                    }
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
-          )}
-        </div>
-
-        {/* Business Banking Dropdown */}
-        <div className="relative">
-          <button
-            onClick={() => handleDropdownToggle('business')}
-            className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
-              isActive(navigationStructure.business.href)
-                ? 'bg-bank-blue-600 text-white'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-            }`}
-          >
-            {navigationStructure.business.label}
-            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-5-5 0 012-2h4a2 2 0 01-2z" />
-            </svg>
-          </button>
-          
-          {activeDropdown === 'business' && (
-            <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-bank border border-gray-200 z-dropdown">
-              <div className="p-2">
-                {navigationStructure.business.subItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`block px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
-                      isActive(item.href)
-                        ? 'bg-bank-blue-600 text-white'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Shared Navigation */}
-        {sharedNavigation.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
-              isActive(item.href)
-                ? 'bg-bank-blue-600 text-white'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-            }`}
-          >
-            {item.label}
-          </Link>
-        ))}
+          </div>
+        )}
       </div>
+
+      {/* Business Banking Dropdown */}
+      <div className={`${isMobile ? '' : 'relative'}`}>
+        <button
+          onClick={() => handleDropdownToggle('business')}
+          className={`flex items-center justify-between w-full px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+            isActive(navigationStructure.business.href)
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+          } ${isMobile ? 'mb-2' : ''}`}
+        >
+          <span>{navigationStructure.business.label}</span>
+          {!isMobile && <span className="ml-1 text-xs">▼</span>}
+        </button>
+        
+        {activeDropdown === 'business' && (
+          <div className={`${isMobile ? 'ml-4 mt-2 space-y-1' : 'absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 z-50'}`}>
+            {!isMobile && (
+              <div className="p-2 border-b border-gray-100">
+                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                  {locale === 'hi' ? 'व्यवसाय सेवाएं' : 'Business Services'}
+                </div>
+              </div>
+            )}
+            <div className={`${isMobile ? 'space-y-1' : 'p-2'}`}>
+              {navigationStructure.business.subItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`block px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                    isActive(item.href)
+                      ? 'bg-blue-50 text-blue-600'
+                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  }`}
+                  onClick={() => {
+                    if (isMobile && onClose) {
+                      onClose();
+                    }
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Other Links */}
+      <Link
+        href={`/${locale}/digital-banking`}
+        className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+          isActive(`/${locale}/digital-banking`)
+            ? 'bg-blue-600 text-white shadow-md'
+            : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+        } ${isMobile ? 'mb-2' : ''}`}
+        onClick={() => {
+          if (isMobile && onClose) {
+            onClose();
+          }
+        }}
+      >
+        {locale === 'hi' ? 'डिजिटल बैंकिंग' : 'Digital Banking'}
+      </Link>
+
+      <Link
+        href={`/${locale}/contact`}
+        className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+          isActive(`/${locale}/contact`)
+            ? 'bg-blue-600 text-white shadow-md'
+            : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+        } ${isMobile ? 'mb-2' : ''}`}
+        onClick={() => {
+          if (isMobile && onClose) {
+            onClose();
+          }
+        }}
+      >
+        {locale === 'hi' ? 'संपर्क करें' : 'Contact'}
+      </Link>
     </nav>
   );
 };

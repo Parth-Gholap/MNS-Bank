@@ -36,11 +36,11 @@ const WhatsNew: React.FC<WhatsNewProps> = ({ locale, className = '' }) => {
   const fetchNewsItems = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/news?locale=${locale}&category=${selectedCategory}`);
+      const response = await fetch(`/api/bank-data?type=news&locale=${locale}&category=${selectedCategory}`);
       const result = await response.json();
       
       if (result.success) {
-        setNewsItems(result.data.items);
+        setNewsItems(result.data.newsItems || []);
       }
     } catch (error) {
       console.error('Error fetching news items:', error);

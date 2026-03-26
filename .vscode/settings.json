@@ -1,0 +1,31 @@
+{
+  "css.validate": true,
+  "tailwindCSS.includeLanguages": {
+    "css": "tailwindcss",
+    "scss": "tailwindcss",
+    "typescript": "tailwindcss",
+    "typescriptreact": "tailwindcss",
+    "javascript": "tailwindcss",
+    "javascriptreact": "tailwindcss"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "'([^']*)'"],
+    ["cn\\(([^)]*)\\)", "'([^']*)'"],
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.suggestAutoComplete": true,
+  "tailwindCSS.validate": true,
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}

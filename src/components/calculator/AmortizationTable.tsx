@@ -18,7 +18,7 @@ const AmortizationTable: React.FC<AmortizationTableProps> = ({
 }) => {
   const { t } = useTranslation(locale);
   const [currentPage, setCurrentPage] = useState(1);
-  const [showYearly, setShowYearly] = useState(false);
+  const [showYearly, setShowYearly] = useState(false);                                             
   const itemsPerPage = 12;
 
   React.useEffect(() => {

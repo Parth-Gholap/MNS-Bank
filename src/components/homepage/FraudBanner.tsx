@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from '@/lib/i18n';
-import { trackPageView } from '@/lib/analytics';
 
 interface FraudAlert {
   id: string;
@@ -21,71 +19,67 @@ interface FraudBannerProps {
   className?: string;
 }
 
+const getStaticAlerts = (): FraudAlert[] => {
+  return [
+    {
+      id: '1',
+      type: 'phishing',
+      title: 'Beware of Phishing Attempts',
+      titleHi: 'फिशिंग के प्रयास से बचें',
+      description: 'Fraudsters may impersonate bank officials via email or SMS asking for account details',
+      descriptionHi: 'धोखाधारी ईमेल या एसएमएस के माध्यम से बैंक अधिकारी खाता विवरण मांग सकते हैं',
+      severity: 'high',
+      date: '2024-03-15',
+      link: '/security/phishing-awareness'
+    },
+    {
+      id: '2',
+      type: 'scam',
+      title: 'Fake Loan Offers',
+      titleHi: 'नकली लोन ऑफर',
+      description: 'Be cautious of unsolicited loan offers with guaranteed approval and advance fees',
+      descriptionHi: 'गारंटीड स्वीकृति और अग्रिम शुल्क के साथ अवांछनिक लोन ऑफर से बचें',
+      severity: 'medium',
+      date: '2024-03-12',
+      link: '/security/loan-scam-awareness'
+    },
+    {
+      id: '3',
+      type: 'fraud',
+      title: 'UPI Payment Scams',
+      titleHi: 'यूपीआई भुगतान स्कैम',
+      description: 'Never share UPI PIN or OTP with anyone. Bank never asks for these details',
+      descriptionHi: 'किसी के साथ भी यूपीआई पिन या ओटीपी साझा न करें। बैंक कभी यह जानकारी नहीं मांगता है',
+      severity: 'critical',
+      date: '2024-03-10',
+      link: '/security/upi-safety'
+    }
+  ];
+};
+
 const FraudBanner: React.FC<FraudBannerProps> = ({ locale, className = '' }) => {
-  const { t } = useTranslation(locale);
-  const [alerts, setAlerts] = useState<FraudAlert[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [alerts, setAlerts] = useState<FraudAlert[]>(getStaticAlerts());
+  const [loading, setLoading] = useState(false);
   const [dismissed, setDismissed] = useState<string[]>([]);
 
   useEffect(() => {
-    trackPageView('Fraud Awareness Banner', locale === 'hi' ? 'धोखाधारत बैनर' : 'Fraud Awareness Banner');
     fetchFraudAlerts();
   }, [locale]);
 
   const fetchFraudAlerts = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/fraud-alerts?locale=${locale}`);
+      const response = await fetch(`/api/bank-data?type=alerts&locale=${locale}`);
       const result = await response.json();
       
-      if (result.success) {
+      if (result.success && result.data && result.data.alerts && Array.isArray(result.data.alerts)) {
         setAlerts(result.data.alerts);
       }
     } catch (error) {
       console.error('Error fetching fraud alerts:', error);
-      // Fallback to static alerts
-      setAlerts(getStaticAlerts());
     } finally {
       setLoading(false);
     }
-  };
-
-  const getStaticAlerts = (): FraudAlert[] => {
-    return [
-      {
-        id: '1',
-        type: 'phishing',
-        title: 'Beware of Phishing Attempts',
-        titleHi: 'फिशिंग के प्रयास से बचें',
-        description: 'Fraudsters may impersonate bank officials via email or SMS asking for account details',
-        descriptionHi: 'धोखाधारी ईमेल या एसएमएस के माध्यम से बैंक अधिकारी खाता विवरण मांग सकते हैं',
-        severity: 'high',
-        date: '2024-03-15',
-        link: '/security/phishing-awareness'
-      },
-      {
-        id: '2',
-        type: 'scam',
-        title: 'Fake Loan Offers',
-        titleHi: 'नकली लोन ऑफर',
-        description: 'Be cautious of unsolicited loan offers with guaranteed approval and advance fees',
-        descriptionHi: 'गारंटीड स्वीकृति और अग्रिम शुल्क के साथ अवांछनिक लोन ऑफर से बचें',
-        severity: 'medium',
-        date: '2024-03-12',
-        link: '/security/loan-scam-awareness'
-      },
-      {
-        id: '3',
-        type: 'fraud',
-        title: 'UPI Payment Scams',
-        titleHi: 'यूपीआई भुगतान स्कैम',
-        description: 'Never share UPI PIN or OTP with anyone. Bank never asks for these details',
-        descriptionHi: 'किसी के साथ भी यूपीआई पिन या ओटीपी साझा न करें। बैंक कभी यह जानकारी नहीं मांगता है',
-        severity: 'critical',
-        date: '2024-03-10',
-        link: '/security/upi-safety'
-      }
-    ];
   };
 
   const getSeverityColor = (severity: string) => {
@@ -99,27 +93,11 @@ const FraudBanner: React.FC<FraudBannerProps> = ({ locale, className = '' }) => 
   };
 
   const getTypeIcon = (type: string) => {
-    const icons: Record<string, React.ReactElement> = {
-      phishing: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M9 16h6m-6 4h6a2 2 0 002 2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z" />
-        </svg>
-      ),
-      scam: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M5 19h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v9a2 2 0 002 2z" />
-        </svg>
-      ),
-      fraud: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-      ),
-      security: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
+    const icons: Record<string, string> = {
+      phishing: '🎣',
+      scam: '⚠️',
+      fraud: '🛡️',
+      security: '🔒'
     };
     return icons[type] || icons.security;
   };
@@ -139,7 +117,7 @@ const FraudBanner: React.FC<FraudBannerProps> = ({ locale, className = '' }) => 
     });
   };
 
-  const activeAlerts = alerts.filter(alert => !isDismissed(alert.id));
+  const activeAlerts = alerts.filter(alert => alert.id && !isDismissed(alert.id));
 
   // Loading state
   if (loading) {
@@ -160,9 +138,7 @@ const FraudBanner: React.FC<FraudBannerProps> = ({ locale, className = '' }) => 
       <div className={`bg-green-50 border border-green-200 rounded-lg p-6 ${className}`}>
         <div className="flex items-center">
           <div className="flex-shrink-0">
-            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+            <span className="text-3xl">✅</span>
           </div>
           <div>
             <h3 className="text-lg font-semibold text-green-800 mb-2">
@@ -189,7 +165,7 @@ const FraudBanner: React.FC<FraudBannerProps> = ({ locale, className = '' }) => 
         </h2>
         <a
           href="/security"
-          className="text-bank-blue-600 hover:text-bank-blue-700 font-medium text-sm"
+          className="text-blue-600 hover:text-blue-700 font-medium text-sm"
         >
           {locale === 'hi' ? 'सभी सुरक्षा युक्तियां' : 'View All Security Tips'}
         </a>
@@ -197,7 +173,7 @@ const FraudBanner: React.FC<FraudBannerProps> = ({ locale, className = '' }) => 
 
       {/* Alert Items */}
       {activeAlerts.map((alert) => {
-        const severityColors = getSeverityColor(alert.severity);
+        const severityColors = getSeverityColor(alert.severity || 'low');
         
         return (
           <div
@@ -208,43 +184,41 @@ const FraudBanner: React.FC<FraudBannerProps> = ({ locale, className = '' }) => 
               <div className="flex items-start flex-1">
                 {/* Alert Icon */}
                 <div className={`p-2 rounded-full ${severityColors.text} mr-3`}>
-                  {getTypeIcon(alert.type)}
+                  <span className="text-lg">{getTypeIcon(alert.type)}</span>
                 </div>
                 
                 {/* Alert Content */}
                 <div className="flex-1">
                   <div className="flex items-center mb-2">
                     <h3 className={`text-lg font-semibold ${severityColors.text}`}>
-                      {locale === 'hi' ? alert.titleHi : alert.title}
+                      {locale === 'hi' ? (alert.titleHi || alert.title) : (alert.title || 'Security Alert')}
                     </h3>
                     <span className={`ml-3 px-2 py-1 rounded-full text-xs font-medium ${severityColors.bg} ${severityColors.text}`}>
-                      {alert.severity.toUpperCase()}
+                      {(alert.severity || 'low').toUpperCase()}
                     </span>
                   </div>
                   
                   <p className={`${severityColors.text} mb-3`}>
-                    {locale === 'hi' ? alert.descriptionHi : alert.description}
+                    {locale === 'hi' ? (alert.descriptionHi || alert.description) : (alert.description || 'Security alert description')}
                   </p>
                   
                   <div className="flex items-center text-sm opacity-75">
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m2 0v4m0 4h2M5 7h14a2 2 0 012 2v6a2 2 0 01-2-2H5a2 2 0 00-2-2v-6a2 2 0 00-2-2h8a2 2 0 002 2z" />
-                    </svg>
-                    {formatDate(alert.date)}
+                    <span className="text-lg mr-2">📅</span>
+                    {formatDate(alert.date || new Date().toISOString())}
                   </div>
                 </div>
               </div>
               
               {/* Dismiss Button */}
-              <button
-                onClick={() => dismissAlert(alert.id)}
-                className={`p-2 rounded-full ${severityColors.text} hover:bg-white hover:bg-opacity-20 transition-colors duration-200`}
-                aria-label={locale === 'hi' ? 'अलर्ट खारिज करें' : 'Dismiss alert'}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+              {alert.id && (
+                <button
+                  onClick={() => dismissAlert(alert.id)}
+                  className={`p-2 rounded-full ${severityColors.text} hover:bg-white hover:bg-opacity-20 transition-colors duration-200`}
+                  aria-label={locale === 'hi' ? 'अलर्ट खारिज करें' : 'Dismiss alert'}
+                >
+                  <span className="text-lg">✕</span>
+                </button>
+              )}
             </div>
           </div>
         );
@@ -254,9 +228,7 @@ const FraudBanner: React.FC<FraudBannerProps> = ({ locale, className = '' }) => 
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
         <div className="flex items-center">
           <div className="flex-shrink-0">
-            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 00-2-2v-6a2 2 0 002 2z" />
-            </svg>
+            <span className="text-2xl">🔒</span>
           </div>
           <div>
             <h4 className="text-lg font-semibold text-blue-800 mb-2">
@@ -273,9 +245,7 @@ const FraudBanner: React.FC<FraudBannerProps> = ({ locale, className = '' }) => 
               className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
             >
               {locale === 'hi' ? 'युक्तियां देखें' : 'View Tips'}
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+              <span className="ml-2">→</span>
             </a>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from '@/lib/i18n';
-import { api } from '@/lib/api/client';
+import { api } from '@/lib/http-client/client';
 import { GrievanceOfficer } from '@/types';
 import { trackPageView, trackFormSubmission } from '@/lib/analytics';
 

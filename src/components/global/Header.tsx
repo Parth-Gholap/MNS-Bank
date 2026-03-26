@@ -26,76 +26,83 @@ const Header: React.FC<HeaderProps> = ({ locale }) => {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-sticky bg-white shadow-bank border-b border-gray-200">
-      <div className="container-bank px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 left-0 right-0 z-50 bg-white shadow-lg border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href={`/${locale}/`} className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-bank-gold-600 rounded-lg flex items-center justify-center">
+          <Link href={`/${locale}/`} className="flex items-center space-x-3 group">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-200">
               <span className="text-white font-bold text-xl">MNS</span>
             </div>
             <div className="hidden sm:block">
-              <span className="text-xl font-bold text-bank-gray-900">
-                {config.bankName}
-              </span>
-              <span className="text-sm text-bank-gray-600 ml-2">
-                {t('navigation.aboutUs')}
-              </span>
+              <div className="flex flex-col">
+                <span className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
+                  {config.bankName}
+                </span>
+                <span className="text-xs text-gray-500">
+                  {locale === 'hi' ? 'विश्वास के लिए बैंकिंग' : 'Banking with Trust'}
+                </span>
+              </div>
             </div>
           </Link>
 
-          {/* Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-8">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-1">
             <Navigation currentPath={pathname} locale={locale} />
-          </div>
+          </nav>
 
           {/* Right Section */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             {/* Language Toggle */}
-            <LanguageToggle 
-              currentLocale={locale}
-              onToggle={(newLocale) => {
-                const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
-                router.push(newPath);
-              }}
-            />
+            <div className="relative">
+              <button
+                onClick={() => {
+                  const newLocale = locale === 'en' ? 'hi' : 'en';
+                  const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
+                  router.push(newPath);
+                }}
+                className="flex items-center space-x-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-200"
+              >
+                <span className="text-lg">
+                  {locale === 'en' ? '🇺🇸' : '🇮🇳'}
+                </span>
+                <span className="text-sm font-medium text-gray-700 hidden sm:block">
+                  {locale === 'en' ? 'EN' : 'हिं'}
+                </span>
+                <span className="text-xs text-gray-500 sm:hidden">
+                  {locale === 'en' ? 'English' : 'हिंदी'}
+                </span>
+              </button>
+            </div>
 
             {/* Net Banking Button */}
             <NetBankingButton href={config.netBankingUrl} />
 
-            {/* Accessibility Toolbar */}
-            <AccessibilityToolbar />
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200"
+              aria-label="Toggle menu"
+            >
+              <span className="text-2xl">☰</span>
+            </button>
           </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-            aria-label={t('accessibility.openMenu')}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 6v4a2 2 0 012-2h16a2 2 0 01-2V6a2 2 0 01-2z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6l6-6 6z" />
-            </svg>
-          </button>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-modal bg-black bg-opacity-50">
+        <div className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50">
           <div className="flex justify-end p-4">
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-              aria-label={t('accessibility.closeMenu')}
+              className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-white transition-colors duration-200"
+              aria-label="Close menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6l6-6 6z" />
-              </svg>
+              <span className="text-2xl">✕</span>
             </button>
           </div>
-          <div className="fixed inset-0 z-modal bg-white p-4 pt-16">
+          <div className="fixed inset-0 z-50 bg-white p-4 pt-16 overflow-y-auto">
             <Navigation 
               currentPath={pathname} 
               locale={locale} 

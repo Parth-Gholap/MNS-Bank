@@ -39,7 +39,7 @@ const RateComparison: React.FC<RateComparisonProps> = ({ locale, className = '' 
   const fetchComparisonData = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/rates?locale=${locale}`);
+      const response = await fetch(`/api/bank-data?type=rates&locale=${locale}`);
       const result = await response.json();
       
       if (result.success) {
