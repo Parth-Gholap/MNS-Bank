@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from '@/lib/i18n';
 import { config } from '@/lib/config';
@@ -11,6 +11,28 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ locale }) => {
   const { t } = useTranslation(locale);
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      // Handle newsletter subscription
+      console.log('Newsletter subscription:', email);
+      setSubscribed(true);
+      setEmail('');
+      setTimeout(() => setSubscribed(false), 3000);
+      
+      // Show success message
+      alert(locale === 'hi' ? 'सफलतापूर्वक सदस्यता ली गई!' : 'Successfully subscribed!');
+    }
+  };
+
+  const handleSocialClick = (platform: string) => {
+    console.log(`Social media clicked: ${platform}`);
+    // Handle social media navigation
+    alert(`${locale === 'hi' ? `${platform} पर जा रहे हैं` : `Navigating to ${platform}`}`);
+  };
 
   const footerStructure = {
     column1: {
@@ -164,39 +186,132 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
           </div>
         </div>
 
-        {/* Bottom Section */}
+        {/* Newsletter Section */}
         <div className="border-t border-gray-700 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            {/* Trust Indicators */}
-            <div className="mb-4 md:mb-0">
-              <h4 className="text-sm font-semibold mb-2 text-gray-400">
-                {t('common.trust')}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            {/* Newsletter */}
+            <div>
+              <h4 className="text-lg font-semibold text-white mb-4">
+                {locale === 'hi' ? 'न्यूज़लेटर की सदस्यता लें' : 'Subscribe to Newsletter'}
               </h4>
-              <div className="flex space-x-4">
-                <a
-                  href={config.dicgcUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+              <p className="text-gray-400 mb-4">
+                {locale === 'hi' 
+                  ? 'नवीनतम बैंकिंग अपडेट और प्रस्ताव प्राप्त करें'
+                  : 'Get latest banking updates and offers'
+                }
+              </p>
+              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={locale === 'hi' ? 'आपका ईमेल' : 'Your email'}
+                  className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors duration-200"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
                 >
-                  <span className="text-xs">DICGC Insured</span>
-                </a>
-                <a
-                  href={config.rbiOmbudsmanUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
-                >
-                  <span className="text-xs">RBI</span>
-                </a>
-              </div>
+                  {locale === 'hi' ? 'सदस्यता लें' : 'Subscribe'}
+                </button>
+              </form>
+              {subscribed && (
+                <p className="mt-2 text-green-400 text-sm">
+                  {locale === 'hi' ? 'सफलतापूर्वक सदस्यता ली गई!' : 'Successfully subscribed!'}
+                </p>
+              )}
             </div>
 
-            {/* Copyright */}
-            <div className="text-center md:text-right">
-              <p className="text-sm text-gray-400">
-                © {currentYear} {config.bankName}. {t('common.allRightsReserved')}
-              </p>
+            {/* Social Links */}
+            <div>
+              <h4 className="text-lg font-semibold text-white mb-4">
+                {locale === 'hi' ? 'हमसे जुड़ें' : 'Connect With Us'}
+              </h4>
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => handleSocialClick('Facebook')}
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-110"
+                  aria-label="Facebook"
+                >
+                  <span className="text-sm font-bold">f</span>
+                </button>
+                <button
+                  onClick={() => handleSocialClick('Twitter')}
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:bg-blue-400 hover:text-white transition-all duration-300 transform hover:scale-110"
+                  aria-label="Twitter"
+                >
+                  <span className="text-sm font-bold">𝕏</span>
+                </button>
+                <button
+                  onClick={() => handleSocialClick('Instagram')}
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:bg-pink-600 hover:text-white transition-all duration-300 transform hover:scale-110"
+                  aria-label="Instagram"
+                >
+                  <span className="text-lg">📷</span>
+                </button>
+                <button
+                  onClick={() => handleSocialClick('LinkedIn')}
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:bg-blue-700 hover:text-white transition-all duration-300 transform hover:scale-110"
+                  aria-label="LinkedIn"
+                >
+                  <span className="text-sm font-bold">in</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Section */}
+          <div className="border-t border-gray-700 pt-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+              {/* Trust Indicators */}
+              <div className="mb-4 md:mb-0">
+                <h4 className="text-sm font-semibold mb-2 text-gray-400">
+                  {t('common.trust')}
+                </h4>
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href={config.dicgcUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+                  >
+                    <span className="text-xs">🛡️ DICGC Insured</span>
+                  </a>
+                  <a
+                    href={config.rbiOmbudsmanUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+                  >
+                    <span className="text-xs">🏦 RBI Regulated</span>
+                  </a>
+                  <a
+                    href="#"
+                    className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+                  >
+                    <span className="text-xs">🔒 Secure Banking</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Copyright */}
+              <div className="text-center md:text-right">
+                <p className="text-sm text-gray-400">
+                  © {currentYear} {config.bankName}. {t('common.allRightsReserved')}
+                </p>
+                <div className="flex flex-wrap gap-4 mt-2 justify-center md:justify-end">
+                  <Link href={`/${locale}/privacy-policy`} className="text-xs text-gray-400 hover:text-white transition-colors duration-200">
+                    {locale === 'hi' ? 'गोपनीयता नीति' : 'Privacy Policy'}
+                  </Link>
+                  <Link href={`/${locale}/terms-of-service`} className="text-xs text-gray-400 hover:text-white transition-colors duration-200">
+                    {locale === 'hi' ? 'सेवा की शर्तें' : 'Terms of Service'}
+                  </Link>
+                  <Link href={`/${locale}/sitemap`} className="text-xs text-gray-400 hover:text-white transition-colors duration-200">
+                    {locale === 'hi' ? 'साइटमैप' : 'Sitemap'}
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
