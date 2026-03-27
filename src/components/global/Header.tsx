@@ -6,7 +6,8 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useTranslation } from '@/lib/i18n';
 import LanguageToggle from '@/components/ui/LanguageToggle';
 import Navigation from '@/components/global/Navigation';
-import NetBankingButton from '@/components/ui/NetBankingButton';
+import HomeButton from '@/components/ui/HomeButton';
+import EMICalculatorButton from '@/components/ui/EMICalculatorButton';
 import AccessibilityToolbar from '@/components/ui/AccessibilityToolbar';
 import { config } from '@/lib/config';
 
@@ -48,6 +49,7 @@ const Header: React.FC<HeaderProps> = ({ locale }) => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
+            <HomeButton locale={locale} />
             <Navigation currentPath={pathname} locale={locale} />
           </nav>
 
@@ -75,8 +77,8 @@ const Header: React.FC<HeaderProps> = ({ locale }) => {
               </button>
             </div>
 
-            {/* Net Banking Button */}
-            <NetBankingButton href={config.netBankingUrl} />
+            {/* EMI Calculator Button */}
+            <EMICalculatorButton locale={locale} />
 
             {/* Mobile Menu Toggle */}
             <button
@@ -103,12 +105,24 @@ const Header: React.FC<HeaderProps> = ({ locale }) => {
             </button>
           </div>
           <div className="fixed inset-0 z-50 bg-white p-4 pt-16 overflow-y-auto">
+            <div className="mb-4">
+              <HomeButton 
+                locale={locale} 
+                className="w-full justify-center"
+              />
+            </div>
             <Navigation 
               currentPath={pathname} 
               locale={locale} 
               isMobile={true}
               onClose={() => setIsMenuOpen(false)}
             />
+            <div className="mt-4">
+              <EMICalculatorButton 
+                locale={locale} 
+                className="w-full"
+              />
+            </div>
           </div>
         </div>
       )}
