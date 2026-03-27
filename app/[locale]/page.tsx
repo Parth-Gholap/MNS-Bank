@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from '@/lib/i18n';
 import { trackPageView } from '@/lib/analytics';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface HomePageProps {
   params: Promise<{
@@ -13,15 +13,14 @@ interface HomePageProps {
 }
 
 export default function HomePage({ params }: HomePageProps) {
-  const { locale } = React.use(params);
-  const localeTyped = locale as 'en' | 'hi';
+  const router = useRouter();
+  const pathname = usePathname();
+  const localeTyped = (pathname.split('/')[1] || 'en') as 'en' | 'hi';
   const { t } = useTranslation(localeTyped);
 
   React.useEffect(() => {
     trackPageView('Homepage', localeTyped === 'hi' ? 'मुख्य पृष्ठ' : 'Homepage');
   }, [localeTyped]);
-
-  const router = useRouter();
 
   const handleAccountOpen = () => {
     router.push(`/${localeTyped}/apply/account`);

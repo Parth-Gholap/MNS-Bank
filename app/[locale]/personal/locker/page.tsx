@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Metadata } from 'next';
+import { usePathname } from 'next/navigation';
 
 interface LockerPageProps {
   params: Promise<{
@@ -7,22 +9,9 @@ interface LockerPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: LockerPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  
-  return {
-    title: locale === 'hi'
-      ? 'लॉकर सुविधा - महानगर नागरिक सहकारी बैंक'
-      : 'Locker Facility - Mahanager Nagrik Sahakari Bank',
-    description: locale === 'hi'
-      ? 'सुरक्षित बैंक लॉकर सुविधा - अपनी कीमती चीजें सुरक्षित रखें'
-      : 'Secure Bank Locker Facility - Keep your valuables safe',
-  };
-}
-
-export default async function LockerPage({ params }: LockerPageProps) {
-  const { locale } = await params;
-  const localeTyped = locale as 'en' | 'hi';
+export default function LockerPage({ params }: LockerPageProps) {
+  const pathname = usePathname();
+  const locale = (pathname.split('/')[1] || 'en') as 'en' | 'hi';
   
   return (
     <div className="min-h-screen bg-gray-50">

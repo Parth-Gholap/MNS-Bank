@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Metadata } from 'next';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface BusinessLoansPageProps {
   params: Promise<{
@@ -7,22 +9,10 @@ interface BusinessLoansPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: BusinessLoansPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  
-  return {
-    title: locale === 'hi'
-      ? 'व्यवसाय ऋण - महानगर नागरिक सहकारी बैंक'
-      : 'Business Loans - Mahanager Nagrik Sahakari Bank',
-    description: locale === 'hi'
-      ? 'व्यवसाय ऋण, कार्यशील पूंजी, मशीनरी ऋण'
-      : 'Business Loans, Working Capital, Machinery Loans',
-  };
-}
-
-export default async function BusinessLoansPage({ params }: BusinessLoansPageProps) {
-  const { locale } = await params;
-  const localeTyped = locale as 'en' | 'hi';
+export default function BusinessLoansPage({ params }: BusinessLoansPageProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'en';
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,7 +47,10 @@ export default async function BusinessLoansPage({ params }: BusinessLoansPagePro
               <li>• {locale === 'hi' ? '₹1 लाख - ₹5 करोड़' : '₹1 Lakh - ₹5 Crores'}</li>
               <li>• {locale === 'hi' ? '1 वर्ष से 5 वर्ष' : '1 year to 5 years'}</li>
             </ul>
-            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/loan?type=working-capital`)}
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी आवेदन करें' : 'Apply Now'}
             </button>
           </div>
@@ -80,7 +73,10 @@ export default async function BusinessLoansPage({ params }: BusinessLoansPagePro
               <li>• {locale === 'hi' ? '₹5 लाख - ₹20 करोड़' : '₹5 Lakhs - ₹20 Crores'}</li>
               <li>• {locale === 'hi' ? '5 वर्ष से 15 वर्ष' : '5 years to 15 years'}</li>
             </ul>
-            <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/loan?type=term-loan`)}
+              className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी आवेदन करें' : 'Apply Now'}
             </button>
           </div>
@@ -104,7 +100,10 @@ export default async function BusinessLoansPage({ params }: BusinessLoansPagePro
               <li>• {locale === 'hi' ? '₹2 लाख - ₹10 करोड़' : '₹2 Lakhs - ₹10 Crores'}</li>
               <li>• {locale === 'hi' ? '3 वर्ष से 10 वर्ष' : '3 years to 10 years'}</li>
             </ul>
-            <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/loan?type=machinery-loan`)}
+              className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी आवेदन करें' : 'Apply Now'}
             </button>
           </div>
@@ -127,7 +126,10 @@ export default async function BusinessLoansPage({ params }: BusinessLoansPagePro
               <li>• {locale === 'hi' ? '₹10 लाख - ₹15 करोड़' : '₹10 Lakhs - ₹15 Crores'}</li>
               <li>• {locale === 'hi' ? '5 वर्ष से 20 वर्ष' : '5 years to 20 years'}</li>
             </ul>
-            <button className="w-full bg-orange-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/loan?type=property-loan`)}
+              className="w-full bg-orange-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-orange-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी आवेदन करें' : 'Apply Now'}
             </button>
           </div>
@@ -150,7 +152,10 @@ export default async function BusinessLoansPage({ params }: BusinessLoansPagePro
               <li>• {locale === 'hi' ? '₹2 लाख - ₹50 लाख' : '₹2 Lakhs - ₹50 Lakhs'}</li>
               <li>• {locale === 'hi' ? '3 वर्ष से 7 वर्ष' : '3 years to 7 years'}</li>
             </ul>
-            <button className="w-full bg-red-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/loan?type=vehicle-loan`)}
+              className="w-full bg-red-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी आवेदन करें' : 'Apply Now'}
             </button>
           </div>
@@ -173,7 +178,10 @@ export default async function BusinessLoansPage({ params }: BusinessLoansPagePro
               <li>• {locale === 'hi' ? '₹50,000 - ₹2 करोड़' : '₹50,000 - ₹2 Crores'}</li>
               <li>• {locale === 'hi' ? '1 वर्ष से 7 वर्ष' : '1 year to 7 years'}</li>
             </ul>
-            <button className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/loan?type=msme-loan`)}
+              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी आवेदन करें' : 'Apply Now'}
             </button>
           </div>

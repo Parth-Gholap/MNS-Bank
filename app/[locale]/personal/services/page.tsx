@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Metadata } from 'next';
+import { usePathname } from 'next/navigation';
 import ServiceCard from '@/components/digital/ServiceCard';
 import HowToGuide from '@/components/digital/HowToGuide';
 
@@ -9,22 +11,9 @@ interface PersonalServicesPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: PersonalServicesPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  
-  return {
-    title: locale === 'hi'
-      ? 'व्यक्तिगत सेवाएं - महानगर नागरिक सहकारी बैंक'
-      : 'Personal Services - Mahanager Nagrik Sahakari Bank',
-    description: locale === 'hi'
-      ? 'डिजिटल बैंकिंग, भुगतान सेवाएं, और अन्य सेवाएं'
-      : 'Digital Banking, Payment Services, and Other Services',
-  };
-}
-
-export default async function PersonalServicesPage({ params }: PersonalServicesPageProps) {
-  const { locale } = await params;
-  const localeTyped = locale as 'en' | 'hi';
+export default function PersonalServicesPage({ params }: PersonalServicesPageProps) {
+  const pathname = usePathname();
+  const locale = (pathname.split('/')[1] || 'en') as 'en' | 'hi';
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -54,7 +43,7 @@ export default async function PersonalServicesPage({ params }: PersonalServicesP
               downloadAvailable: true,
               guideAvailable: true
             }}
-            locale={localeTyped}
+            locale={locale}
           />
           
           <ServiceCard
@@ -69,7 +58,7 @@ export default async function PersonalServicesPage({ params }: PersonalServicesP
               downloadAvailable: false,
               guideAvailable: true
             }}
-            locale={localeTyped}
+            locale={locale}
           />
           
           <ServiceCard
@@ -84,7 +73,7 @@ export default async function PersonalServicesPage({ params }: PersonalServicesP
               downloadAvailable: false,
               guideAvailable: true
             }}
-            locale={localeTyped}
+            locale={locale}
           />
           
           <ServiceCard
@@ -99,7 +88,7 @@ export default async function PersonalServicesPage({ params }: PersonalServicesP
               downloadAvailable: false,
               guideAvailable: true
             }}
-            locale={localeTyped}
+            locale={locale}
           />
           
           <ServiceCard
@@ -114,7 +103,7 @@ export default async function PersonalServicesPage({ params }: PersonalServicesP
               downloadAvailable: false,
               guideAvailable: true
             }}
-            locale={localeTyped}
+            locale={locale}
           />
           
           <ServiceCard
@@ -129,7 +118,7 @@ export default async function PersonalServicesPage({ params }: PersonalServicesP
               downloadAvailable: false,
               guideAvailable: true
             }}
-            locale={localeTyped}
+            locale={locale}
           />
         </div>
 
@@ -167,7 +156,7 @@ export default async function PersonalServicesPage({ params }: PersonalServicesP
                   descriptionHi: 'अपने लॉगिन क्रेडेंशियल प्राप्त करें'
                 }
               ]}
-              locale={localeTyped}
+              locale={locale}
             />
             
             <HowToGuide
@@ -198,7 +187,7 @@ export default async function PersonalServicesPage({ params }: PersonalServicesP
                   descriptionHi: 'अपना बैंक खाता यूपीआई से जोड़ें'
                 }
               ]}
-              locale={localeTyped}
+              locale={locale}
             />
           </div>
         </div>

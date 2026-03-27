@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Metadata } from 'next';
+import { useSearchParams } from 'next/navigation';
 import InquiryForm from '@/components/forms/InquiryForm';
 
 interface ApplyLoanPageProps {
@@ -8,22 +10,17 @@ interface ApplyLoanPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: ApplyLoanPageProps): Promise<Metadata> {
-  const { locale } = await params;
+export default function ApplyLoanPage({ params }: ApplyLoanPageProps) {
+  const searchParams = useSearchParams();
+  const loanType = searchParams.get('type') || 'personal-loan';
+  const [locale, setLocale] = React.useState<'en' | 'hi'>('en');
   
-  return {
-    title: locale === 'hi'
-      ? 'ऋण आवेदन - महानगर नागरिक सहकारी बैंक'
-      : 'Apply for Loan - Mahanager Nagrik Sahakari Bank',
-    description: locale === 'hi'
-      ? 'व्यक्तिगत ऋण, होम लोन, कार लोन, व्यवसाय ऋण आवेदन'
-      : 'Personal Loan, Home Loan, Car Loan, Business Loan Application',
-  };
-}
-
-export default async function ApplyLoanPage({ params }: ApplyLoanPageProps) {
-  const { locale } = await params;
-  const localeTyped = locale as 'en' | 'hi';
+  React.useEffect(() => {
+    params.then((resolvedParams) => {
+      const localeValue = resolvedParams.locale;
+      setLocale(localeValue as 'en' | 'hi');
+    });
+  }, [params]);
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -32,11 +29,26 @@ export default async function ApplyLoanPage({ params }: ApplyLoanPageProps) {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {locale === 'hi' ? 'ऋण आवेदन करें' : 'Apply for Loan'}
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
             {locale === 'hi'
               ? 'अपनी वित्तीय जरूरतों के लिए त्वरित ऋण'
               : 'Quick loans for your financial needs'}
           </p>
+          <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg inline-block">
+            {locale === 'hi' ? 'ऋण प्रकार: ' : 'Loan Type: '}
+            <span className="font-semibold">
+              {loanType === 'working-capital' ? (locale === 'hi' ? 'कार्यशील पूंजी ऋण' : 'Working Capital Loan') :
+               loanType === 'term-loan' ? (locale === 'hi' ? 'अवधि ऋण' : 'Term Loan') :
+               loanType === 'machinery-loan' ? (locale === 'hi' ? 'मशीनरी ऋण' : 'Machinery Loan') :
+               loanType === 'property-loan' ? (locale === 'hi' ? 'संपत्ति ऋण' : 'Property Loan') :
+               loanType === 'vehicle-loan' ? (locale === 'hi' ? 'वाहन ऋण' : 'Vehicle Loan') :
+               loanType === 'msme-loan' ? (locale === 'hi' ? 'एमएसएमई ऋण' : 'MSME Loan') :
+               loanType === 'personal-loan' ? (locale === 'hi' ? 'व्यक्तिगत ऋण' : 'Personal Loan') :
+               loanType === 'home-loan' ? (locale === 'hi' ? 'होम लोन' : 'Home Loan') :
+               loanType === 'car-loan' ? (locale === 'hi' ? 'कार लोन' : 'Car Loan') :
+               loanType}
+            </span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -109,7 +121,7 @@ export default async function ApplyLoanPage({ params }: ApplyLoanPageProps) {
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
               {locale === 'hi' ? 'ऋण आवेदन पत्र' : 'Loan Application Form'}
             </h2>
-            <InquiryForm locale={localeTyped} />
+            <InquiryForm locale={locale} />
           </div>
         </div>
 

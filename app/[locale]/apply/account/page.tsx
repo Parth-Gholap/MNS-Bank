@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Metadata } from 'next';
 import { useRouter } from 'next/navigation';
@@ -9,18 +11,6 @@ interface ApplyAccountPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: ApplyAccountPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  
-  return {
-    title: locale === 'hi'
-      ? 'खाता खोलें - महानगर नागरिक सहकारी बैंक'
-      : 'Open Account - Mahanager Nagrik Sahakari Bank',
-    description: locale === 'hi'
-      ? 'ऑनलाइन बचत खाता, चालू खाता खोलें'
-      : 'Open Savings Account, Current Account Online',
-  };
-}
 
 export default async function ApplyAccountPage({ params }: ApplyAccountPageProps) {
   const { locale } = await params;

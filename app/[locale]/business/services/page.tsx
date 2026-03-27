@@ -1,5 +1,6 @@
+'use client';
+
 import React from 'react';
-import { Metadata } from 'next';
 
 interface BusinessServicesPageProps {
   params: Promise<{
@@ -7,22 +8,15 @@ interface BusinessServicesPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: BusinessServicesPageProps): Promise<Metadata> {
-  const { locale } = await params;
+export default function BusinessServicesPage({ params }: BusinessServicesPageProps) {
+  const [locale, setLocale] = React.useState<'en' | 'hi'>('en');
   
-  return {
-    title: locale === 'hi'
-      ? 'व्यवसाय सेवाएं - महानगर नागरिक सहकारी बैंक'
-      : 'Business Services - Mahanager Nagrik Sahakari Bank',
-    description: locale === 'hi'
-      ? 'व्यापार वित्त, नकदी प्रबंधन, व्यापार ऋण'
-      : 'Business Finance, Cash Management, Trade Finance',
-  };
-}
-
-export default async function BusinessServicesPage({ params }: BusinessServicesPageProps) {
-  const { locale } = await params;
-  const localeTyped = locale as 'en' | 'hi';
+  React.useEffect(() => {
+    params.then((resolvedParams) => {
+      const localeValue = resolvedParams.locale;
+      setLocale(localeValue as 'en' | 'hi');
+    });
+  }, [params]);
   
   return (
     <div className="min-h-screen bg-gray-50">

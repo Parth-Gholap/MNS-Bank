@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Metadata } from 'next';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface PersonalLoansPageProps {
   params: Promise<{
@@ -7,22 +9,10 @@ interface PersonalLoansPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: PersonalLoansPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  
-  return {
-    title: locale === 'hi'
-      ? 'व्यक्तिगत ऋण - महानगर नागरिक सहकारी बैंक'
-      : 'Personal Loans - Mahanager Nagrik Sahakari Bank',
-    description: locale === 'hi'
-      ? 'व्यक्तिगत ऋण, होम लोन, कार लोन, शिक्षा ऋण'
-      : 'Personal Loans, Home Loans, Car Loans, Education Loans',
-  };
-}
-
-export default async function PersonalLoansPage({ params }: PersonalLoansPageProps) {
-  const { locale } = await params;
-  const localeTyped = locale as 'en' | 'hi';
+export default function PersonalLoansPage({ params }: PersonalLoansPageProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'en';
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,7 +47,10 @@ export default async function PersonalLoansPage({ params }: PersonalLoansPagePro
               <li>• {locale === 'hi' ? '₹50,000 - ₹20 लाख' : '₹50,000 - ₹20 Lakhs'}</li>
               <li>• {locale === 'hi' ? '12 महीने से 5 वर्ष' : '12 months to 5 years'}</li>
             </ul>
-            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/loan?type=personal-loan`)}
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी आवेदन करें' : 'Apply Now'}
             </button>
           </div>
@@ -80,7 +73,10 @@ export default async function PersonalLoansPage({ params }: PersonalLoansPagePro
               <li>• {locale === 'hi' ? '₹5 लाख - ₹2 करोड़' : '₹5 Lakhs - ₹2 Crores'}</li>
               <li>• {locale === 'hi' ? '5 वर्ष से 30 वर्ष' : '5 years to 30 years'}</li>
             </ul>
-            <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/loan?type=home-loan`)}
+              className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी आवेदन करें' : 'Apply Now'}
             </button>
           </div>
@@ -103,7 +99,10 @@ export default async function PersonalLoansPage({ params }: PersonalLoansPagePro
               <li>• {locale === 'hi' ? '₹1 लाख - ₹25 लाख' : '₹1 Lakh - ₹25 Lakhs'}</li>
               <li>• {locale === 'hi' ? '1 वर्ष से 7 वर्ष' : '1 year to 7 years'}</li>
             </ul>
-            <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/loan?type=car-loan`)}
+              className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी आवेदन करें' : 'Apply Now'}
             </button>
           </div>

@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Metadata } from 'next';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface PersonalDepositsPageProps {
   params: Promise<{
@@ -7,22 +9,10 @@ interface PersonalDepositsPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: PersonalDepositsPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  
-  return {
-    title: locale === 'hi'
-      ? 'जमा योजनाएं - महानगर नागरिक सहकारी बैंक'
-      : 'Deposit Schemes - Mahanager Nagrik Sahakari Bank',
-    description: locale === 'hi'
-      ? 'सावधि जमा, आवर्तित जमा, डबल जमा योजनाएं'
-      : 'Fixed Deposits, Recurring Deposits, Double Deposit Schemes',
-  };
-}
-
-export default async function PersonalDepositsPage({ params }: PersonalDepositsPageProps) {
-  const { locale } = await params;
-  const localeTyped = locale as 'en' | 'hi';
+export default function PersonalDepositsPage({ params }: PersonalDepositsPageProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'en';
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,7 +47,10 @@ export default async function PersonalDepositsPage({ params }: PersonalDepositsP
               <li>• {locale === 'hi' ? 'अधिकतम 10 वर्ष' : 'Maximum 10 years'}</li>
               <li>• {locale === 'hi' ? 'क्वार्टरली ब्याज भुगतान' : 'Quarterly interest payment'}</li>
             </ul>
-            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/account/application?type=fixed-deposit`)}
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी खोलें' : 'Open Now'}
             </button>
           </div>
@@ -80,7 +73,10 @@ export default async function PersonalDepositsPage({ params }: PersonalDepositsP
               <li>• {locale === 'hi' ? '12 महीने से 10 वर्ष' : '12 months to 10 years'}</li>
               <li>• {locale === 'hi' ? 'मासिक जमा सुविधा' : 'Monthly deposit facility'}</li>
             </ul>
-            <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/account/application?type=recurring-deposit`)}
+              className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी शुरू करें' : 'Start Now'}
             </button>
           </div>
@@ -103,7 +99,10 @@ export default async function PersonalDepositsPage({ params }: PersonalDepositsP
               <li>• {locale === 'hi' ? 'न्यूनतम ₹10,000' : 'Minimum ₹10,000'}</li>
               <li>• {locale === 'hi' ? 'लचीला जमा विकल्प' : 'Flexible deposit options'}</li>
             </ul>
-            <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/account/application?type=double-deposit`)}
+              className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी निवेश करें' : 'Invest Now'}
             </button>
           </div>

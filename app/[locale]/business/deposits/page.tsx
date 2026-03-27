@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Metadata } from 'next';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface BusinessDepositsPageProps {
   params: Promise<{
@@ -7,22 +9,10 @@ interface BusinessDepositsPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: BusinessDepositsPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  
-  return {
-    title: locale === 'hi'
-      ? 'व्यवसाय जमा - महानगर नागरिक सहकारी बैंक'
-      : 'Business Deposits - Mahanager Nagrik Sahakari Bank',
-    description: locale === 'hi'
-      ? 'व्यवसाय सावधि जमा, करेंट जमा, व्यापार जमा योजनाएं'
-      : 'Business Fixed Deposits, Current Deposits, Commercial Deposit Schemes',
-  };
-}
-
-export default async function BusinessDepositsPage({ params }: BusinessDepositsPageProps) {
-  const { locale } = await params;
-  const localeTyped = locale as 'en' | 'hi';
+export default function BusinessDepositsPage({ params }: BusinessDepositsPageProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'en';
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,7 +47,10 @@ export default async function BusinessDepositsPage({ params }: BusinessDepositsP
               <li>• {locale === 'hi' ? 'न्यूनतम ₹10,000' : 'Minimum ₹10,000'}</li>
               <li>• {locale === 'hi' ? 'क्वार्टरली ब्याज भुगतान' : 'Quarterly interest payment'}</li>
             </ul>
-            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/account/application?type=business-fixed-deposit`)}
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी खोलें' : 'Open Now'}
             </button>
           </div>
@@ -80,7 +73,10 @@ export default async function BusinessDepositsPage({ params }: BusinessDepositsP
               <li>• {locale === 'hi' ? 'ओवरड्राफ्ट सुविधा' : 'Overdraft facility'}</li>
               <li>• {locale === 'hi' ? 'न्यूनतम शेष छूट' : 'Minimum balance waiver'}</li>
             </ul>
-            <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/account/application?type=business-current-deposit`)}
+              className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी खोलें' : 'Open Now'}
             </button>
           </div>
@@ -103,7 +99,10 @@ export default async function BusinessDepositsPage({ params }: BusinessDepositsP
               <li>• {locale === 'hi' ? '24 घंटे निकासी' : '24-hour withdrawal'}</li>
               <li>• {locale === 'hi' ? 'न्यूनतम ₹25,000' : 'Minimum ₹25,000'}</li>
             </ul>
-            <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+            <button 
+              onClick={() => router.push(`/${locale}/apply/account/application?type=business-call-deposit`)}
+              className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+            >
               {locale === 'hi' ? 'अभी खोलें' : 'Open Now'}
             </button>
           </div>
