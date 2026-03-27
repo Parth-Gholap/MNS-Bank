@@ -51,7 +51,7 @@ export default async function DigitalBankingPage({ params }: DigitalBankingPageP
               description: 'Manage your accounts with our mobile app',
               descriptionHi: 'हमारे मोबाइल ऐप के साथ अपने खाते प्रबंधित करें',
               icon: 'mobile',
-              link: `/${locale}/digital-banking/mobile`,
+              link: `/${localeTyped}/digital-banking/mobile`,
               downloadAvailable: true,
               guideAvailable: true
             }}
@@ -66,7 +66,7 @@ export default async function DigitalBankingPage({ params }: DigitalBankingPageP
               description: 'Secure banking through our web portal',
               descriptionHi: 'वेब पोर्टल के माध्यम से सुरक्षित बैंकिंग',
               icon: 'web',
-              link: `/${locale}/digital-banking/internet`,
+              link: `/${localeTyped}/digital-banking/internet`,
               downloadAvailable: false,
               guideAvailable: true
             }}
@@ -81,7 +81,7 @@ export default async function DigitalBankingPage({ params }: DigitalBankingPageP
               description: 'Instant payments and money transfers',
               descriptionHi: 'त्वरित भुगतान और पैसा ट्रांसफर',
               icon: 'upi',
-              link: `/${locale}/digital-banking/upi`,
+              link: `/${localeTyped}/digital-banking/upi`,
               downloadAvailable: false,
               guideAvailable: true
             }}
