@@ -31,12 +31,12 @@ const Header: React.FC<HeaderProps> = ({ locale }) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href={`/${locale}/`} className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-200">
+            <div className="w-10 h-10 bg-gradient-to-br from-bank-blue-600 to-bank-blue-800 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-200">
               <span className="text-white font-bold text-xl">MNS</span>
             </div>
             <div className="hidden sm:block">
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
+                <span className="text-lg font-bold text-gray-900 group-hover:text-bank-blue-600 transition-colors duration-200">
                   {config.bankName}
                 </span>
                 <span className="text-xs text-gray-500">

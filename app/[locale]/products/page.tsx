@@ -24,8 +24,8 @@ export default function ProductsPage({ params }: ProductsPageProps) {
       description: localeTyped === 'hi' ? 'बचत, चालू, वरिष्ठ नागरिक खाते' : 'Savings, Current, Senior Citizen Accounts',
       descriptionHi: localeTyped === 'hi' ? 'बचत, चालू, वरिष्ठ नागरिक खाते' : 'Savings, Current, Senior Citizen Accounts',
       icon: '💳',
-      color: 'from-blue-500 to-blue-600',
-      bgColor: 'bg-blue-50',
+      color: 'from-teal-600 to-purple-600',
+      bgColor: 'bg-gradient-card',
       href: `/${localeTyped}/personal/accounts`,
       features: ['High Interest Rates', 'Zero Balance', 'Online Banking']
     },
@@ -36,8 +36,8 @@ export default function ProductsPage({ params }: ProductsPageProps) {
       description: localeTyped === 'hi' ? 'व्यक्तिग, होम, कार ऋण' : 'Personal, Home, Car Loans',
       descriptionHi: localeTyped === 'hi' ? 'व्यक्तिग, होम, कार ऋण' : 'Personal, Home, Car Loans',
       icon: '🏠',
-      color: 'from-green-500 to-green-600',
-      bgColor: 'bg-green-50',
+      color: 'from-emerald-500 to-teal-600',
+      bgColor: 'bg-gradient-card',
       href: `/${localeTyped}/personal/loans`,
       features: ['Quick Approval', 'Flexible Terms', 'Low Interest']
     },
@@ -48,8 +48,8 @@ export default function ProductsPage({ params }: ProductsPageProps) {
       description: localeTyped === 'hi' ? 'सावधि, आवर्तित जमा' : 'Fixed, Recurring, Double Deposits',
       descriptionHi: localeTyped === 'hi' ? 'सावधि, आवर्तित जमा' : 'Fixed, Recurring, Double Deposits',
       icon: '💰',
-      color: 'from-purple-500 to-purple-600',
-      bgColor: 'bg-purple-50',
+      color: 'from-purple-500 to-pink-600',
+      bgColor: 'bg-gradient-card',
       href: `/${localeTyped}/personal/deposits`,
       features: ['Guaranteed Returns', 'Flexible Tenure', 'High Security']
     },
@@ -60,8 +60,8 @@ export default function ProductsPage({ params }: ProductsPageProps) {
       description: localeTyped === 'hi' ? 'डेबिट, क्रेडिट, एटीएम कार्ड' : 'Debit, Credit, ATM Cards',
       descriptionHi: localeTyped === 'hi' ? 'डेबिट, क्रेडिट, एटीएम कार्ड' : 'Debit, Credit, ATM Cards',
       icon: '💳',
-      color: 'from-orange-500 to-orange-600',
-      bgColor: 'bg-orange-50',
+      color: 'from-orange-500 to-red-500',
+      bgColor: 'bg-gradient-card',
       href: `/${localeTyped}/personal/cards`,
       features: ['Contactless Payment', 'Global Acceptance', 'Reward Points']
     },
@@ -72,17 +72,17 @@ export default function ProductsPage({ params }: ProductsPageProps) {
       description: localeTyped === 'hi' ? 'इंटरनेट, मोबाइल, यूपीआई' : 'Internet, Mobile, UPI Services',
       descriptionHi: localeTyped === 'hi' ? 'इंटरनेट, मोबाइल, यूपीआई' : 'Internet, Mobile, UPI Services',
       icon: '📱',
-      color: 'from-red-500 to-red-600',
-      bgColor: 'bg-red-50',
+      color: 'from-cyan-500 to-blue-600',
+      bgColor: 'bg-gradient-card',
       href: `/${localeTyped}/digital-banking`,
       features: ['24/7 Access', 'Secure Transactions', 'Instant Transfers']
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-teal-50">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white">
+      <div className="relative overflow-hidden bg-gradient-hero text-white">
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">

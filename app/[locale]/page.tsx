@@ -63,7 +63,7 @@ export default function HomePage({ params }: HomePageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-teal-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-hero text-white overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-10"></div>
@@ -77,7 +77,7 @@ export default function HomePage({ params }: HomePageProps) {
                 }
               </span>
             </h1>
-            <p className="text-2xl md:text-3xl mb-12 text-blue-100 max-w-4xl mx-auto animate-slide-up leading-relaxed">
+            <p className="text-2xl md:text-3xl mb-12 text-bank-blue-100 max-w-4xl mx-auto animate-slide-up leading-relaxed">
               {localeTyped === 'hi' 
                 ? 'डिजिटल बैंकिंग, ऋण, और निवेशन समाधान सेवाएं'
                 : 'Digital Banking, Loans, and Investment Solutions'
@@ -86,19 +86,19 @@ export default function HomePage({ params }: HomePageProps) {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button
                 onClick={handleAccountOpen}
-                className="btn-gradient px-8 py-4 text-white font-bold text-lg rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+                className="bg-gradient-button px-8 py-4 text-white font-bold text-lg rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
               >
                 {localeTyped === 'hi' ? 'खाता खोलें' : 'Open Account'}
               </button>
               <button
                 onClick={handleLoanApply}
-                className="btn-glass px-8 py-4 text-white font-bold text-lg rounded-xl border-2 border-white hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:-translate-y-1"
+                className="bg-transparent px-8 py-4 text-white font-bold text-lg rounded-xl border-2 border-white hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
                 {localeTyped === 'hi' ? 'ऋण आवेदन करें' : 'Apply for Loan'}
               </button>
               <button
                 onClick={handleDigitalBanking}
-                className="btn-glass px-8 py-4 text-white font-bold text-lg rounded-xl border-2 border-white hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:-translate-y-1"
+                className="bg-transparent px-8 py-4 text-white font-bold text-lg rounded-xl border-2 border-white hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
                 {localeTyped === 'hi' ? 'डिजिटल बैंकिंग शुरू करें' : 'Start Digital Banking'}
               </button>
@@ -113,16 +113,16 @@ export default function HomePage({ params }: HomePageProps) {
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             <button
               onClick={() => handleQuickAction('account')}
-              className="card-glass flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">👤</span>
-              <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600">
+              <span className="text-sm font-medium text-gray-700 group-hover:text-bank-blue-600">
                 {localeTyped === 'hi' ? 'खाता खोलें' : 'Open Account'}
               </span>
             </button>
             <button
               onClick={() => handleQuickAction('loan')}
-              className="card-glass flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">💰</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-green-600">
@@ -131,7 +131,7 @@ export default function HomePage({ params }: HomePageProps) {
             </button>
             <button
               onClick={() => handleQuickAction('digital')}
-              className="card-glass flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">📱</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-purple-600">
@@ -140,7 +140,7 @@ export default function HomePage({ params }: HomePageProps) {
             </button>
             <button
               onClick={() => handleQuickAction('products')}
-              className="card-glass flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">💳</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-orange-600">
@@ -149,7 +149,7 @@ export default function HomePage({ params }: HomePageProps) {
             </button>
             <button
               onClick={() => handleQuickAction('locate')}
-              className="card-glass flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">📍</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-red-600">
@@ -158,7 +158,7 @@ export default function HomePage({ params }: HomePageProps) {
             </button>
             <button
               onClick={() => handleQuickAction('support')}
-              className="card-glass flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">🎧</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-teal-600">
@@ -186,7 +186,7 @@ export default function HomePage({ params }: HomePageProps) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <div className="feature-card text-center group">
-              <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-blue-200 transition-all duration-300 group-hover:scale-105">
+              <div className="w-24 h-24 bg-bank-blue-100 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-blue-200 transition-all duration-300 group-hover:scale-105">
                 <span className="text-4xl group-hover:scale-110 transition-transform duration-300">🏦</span>
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-gray-900">
@@ -258,7 +258,7 @@ export default function HomePage({ params }: HomePageProps) {
               </p>
             </div>
             <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+              <div className="w-20 h-20 bg-bank-blue-100 rounded-full flex items-center justify-center mb-6">
                 <span className="text-3xl">🔒</span>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
@@ -304,7 +304,7 @@ export default function HomePage({ params }: HomePageProps) {
                 : 'Get Started Today'
               }
             </h2>
-            <p className="text-2xl mb-12 text-blue-100 leading-relaxed">
+            <p className="text-2xl mb-12 text-bank-blue-100 leading-relaxed">
               {localeTyped === 'hi' 
                 ? 'हमारी विशेष बैंकिंग सेवाओं का अनुभव करें और अपने वित्त लक्ष्यों को प्राप्त करें'
                 : 'Experience our comprehensive banking services and achieve your financial goals'
@@ -313,19 +313,19 @@ export default function HomePage({ params }: HomePageProps) {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link 
                 href={`/${localeTyped}/products`}
-                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-bold text-lg rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="inline-flex items-center px-8 py-4 bg-white text-bank-blue-600 font-bold text-lg rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 {localeTyped === 'hi' ? 'सभी सेवाएं देखें' : 'View All Services'}
               </Link>
               <Link 
                 href={`/${localeTyped}/locate-us`}
-                className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:-translate-y-1"
+                className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
                 {localeTyped === 'hi' ? 'शाखा ढूंढें' : 'Find Branch'}
               </Link>
               <Link 
                 href={`/${localeTyped}/contact`}
-                className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:-translate-y-1"
+                className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
                 {localeTyped === 'hi' ? 'ग्राहक सहायता प्राप्त करें' : 'Get Support'}
               </Link>
@@ -350,7 +350,7 @@ export default function HomePage({ params }: HomePageProps) {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             <div className="stat-card text-center">
-              <div className="text-5xl font-bold text-blue-600 mb-4">50K+</div>
+              <div className="text-5xl font-bold text-bank-blue-600 mb-4">50K+</div>
               <div className="text-xl text-gray-700 font-medium">
                 {localeTyped === 'hi' ? 'ग्राहक' : 'Customers'}
               </div>

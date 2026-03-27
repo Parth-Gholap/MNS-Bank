@@ -63,31 +63,51 @@
 
 /* CSS Custom Properties for Design System */
 :root {
-  /* Primary Colors */
-  --color-bank-blue-50: #eff6ff;
-  --color-bank-blue-100: #dbeafe;
-  --color-bank-blue-200: #bfdbfe;
-  --color-bank-blue-300: #93c5fd;
-  --color-bank-blue-400: #60a5fa;
-  --color-bank-blue-500: #3b82f6;
-  --color-bank-blue-600: #2563eb;
-  --color-bank-blue-700: #1d4ed8;
-  --color-bank-blue-800: #1e40af;
-  --color-bank-blue-900: #1e3a8a;
-  --color-bank-blue-950: #172554;
+  /* Primary Colors - Modern Teal Gradient */
+  --color-bank-blue-50: #f0fdfa;
+  --color-bank-blue-100: #ccfbf1;
+  --color-bank-blue-200: #99f6e4;
+  --color-bank-blue-300: #5eead4;
+  --color-bank-blue-400: #2dd4bf;
+  --color-bank-blue-500: #14b8a6;
+  --color-bank-blue-600: #0d9488;
+  --color-bank-blue-700: #0f766e;
+  --color-bank-blue-800: #115e59;
+  --color-bank-blue-900: #134e4a;
+  --color-bank-blue-950: #042f2e;
 
-  /* Secondary Colors */
-  --color-bank-gold-50: #fffbeb;
-  --color-bank-gold-100: #fef3c7;
-  --color-bank-gold-200: #fde68a;
-  --color-bank-gold-300: #fcd34d;
-  --color-bank-gold-400: #fbbf24;
-  --color-bank-gold-500: #f59e0b;
-  --color-bank-gold-600: #d97706;
-  --color-bank-gold-700: #b45309;
-  --color-bank-gold-800: #92400e;
-  --color-bank-gold-900: #78350f;
-  --color-bank-gold-950: #451a03;
+  /* Success Colors - Modern Emerald */
+  --color-bank-success-50: #ecfdf5;
+  --color-bank-success-100: #d1fae5;
+  --color-bank-success-200: #a7f3d0;
+  --color-bank-success-300: #6ee7b7;
+  --color-bank-success-400: #34d399;
+  --color-bank-success-500: #10b981;
+  --color-bank-success-600: #059669;
+  --color-bank-success-700: #047857;
+  --color-bank-success-800: #065f46;
+  --color-bank-success-900: #064e3b;
+  --color-bank-success-950: #022c22;
+
+  /* Modern Gradients */
+  --gradient-primary: linear-gradient(135deg, #0d9488 0%, #7c3aed 100%);
+  --gradient-secondary: linear-gradient(135deg, #14b8a6 0%, #a855f7 100%);
+  --gradient-hero: linear-gradient(135deg, #0f766e 0%, #6b21a8 50%, #134e4a 100%);
+  --gradient-card: linear-gradient(135deg, #f0fdfa 0%, #faf5ff 100%);
+  --gradient-button: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+
+  /* Secondary Colors - Modern Purple Accents */
+  --color-bank-gold-50: #faf5ff;
+  --color-bank-gold-100: #f3e8ff;
+  --color-bank-gold-200: #e9d5ff;
+  --color-bank-gold-300: #d8b4fe;
+  --color-bank-gold-400: #c084fc;
+  --color-bank-gold-500: #a855f7;
+  --color-bank-gold-600: #9333ea;
+  --color-bank-gold-700: #7c3aed;
+  --color-bank-gold-800: #6b21a8;
+  --color-bank-gold-900: #581c87;
+  --color-bank-gold-950: #3b0764;
 
   /* Neutral Colors */
   --color-bank-gray-50: #f9fafb;
@@ -383,9 +403,37 @@ html {
   opacity: 1;
 }
 
+/* Modern Gradient Utilities */
+.bg-gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.bg-gradient-secondary {
+  background: var(--gradient-secondary);
+}
+
+.bg-gradient-hero {
+  background: var(--gradient-hero);
+}
+
+.bg-gradient-card {
+  background: var(--gradient-card);
+}
+
+.bg-gradient-button {
+  background: var(--gradient-button);
+}
+
+.text-gradient-bank {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Enhanced UI Components */
 .btn-primary {
-  @apply bg-bank-blue-600 text-white px-6 py-3 rounded-button font-medium hover:bg-bank-blue-700 focus:ring-2 focus:ring-bank-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+  @apply bg-gradient-button text-white px-6 py-3 rounded-button font-medium hover:opacity-90 focus:ring-2 focus:ring-bank-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
 }
 
 .btn-secondary {

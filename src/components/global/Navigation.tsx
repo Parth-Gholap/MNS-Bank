@@ -136,10 +136,10 @@ const Navigation: React.FC<NavigationProps> = ({
       <div className="bg-white/95 backdrop-blur-xl border-t border-gray-100">
         <div className="px-4 py-4 space-y-4">
           {/* Personal Banking */}
-          <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4">
+          <div className="bg-gradient-to-r from-bank-blue-50 to-bank-blue-100 rounded-xl p-4">
             <div className="flex items-center space-x-3 mb-4">
               <span className="text-2xl">{navigationStructure.personal.icon}</span>
-              <h3 className="text-lg font-bold text-blue-900">
+              <h3 className="text-lg font-bold text-bank-blue-900">
                 {navigationStructure.personal.label}
               </h3>
             </div>
@@ -151,8 +151,8 @@ const Navigation: React.FC<NavigationProps> = ({
                   onClick={onClose}
                   className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200 ${
                     isActive(item.href)
-                      ? 'bg-blue-600 text-white shadow-md'
-                      : 'text-gray-700 hover:bg-white hover:text-blue-600 hover:shadow-sm'
+                      ? 'bg-bank-blue-600 text-white shadow-md'
+                      : 'text-gray-700 hover:bg-white hover:text-bank-blue-600 hover:shadow-sm'
                   }`}
                 >
                   <span className="text-lg">{item.icon}</span>
@@ -277,21 +277,21 @@ const Navigation: React.FC<NavigationProps> = ({
                   href={item.href}
                   className={`group flex items-start space-x-3 p-3 rounded-xl transition-all duration-200 ${
                     isActive(item.href)
-                      ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600'
+                      ? 'bg-bank-blue-50 text-bank-blue-700 border-l-4 border-bank-blue-600'
                       : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900 hover:translate-x-1'
                   }`}
                   onClick={() => setActiveDropdown(null)}
                 >
                   <span className="text-xl group-hover:scale-110 transition-transform duration-200">{item.icon}</span>
                   <div className="flex-1">
-                    <div className="font-semibold text-sm group-hover:text-blue-600 transition-colors duration-200">
+                    <div className="font-semibold text-sm group-hover:text-bank-blue-600 transition-colors duration-200">
                       {item.label}
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
                       {item.description}
                     </div>
                   </div>
-                  <svg className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-gray-400 group-hover:text-bank-blue-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
