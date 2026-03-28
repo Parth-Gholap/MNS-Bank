@@ -89,7 +89,7 @@ export default function HomePage({ params }: HomePageProps) {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button
                 onClick={handleAccountOpen}
-                className="bg-gradient-button px-8 py-4 text-white font-bold text-lg rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+                className="bg-transparent px-8 py-4 text-white font-bold text-lg rounded-xl border-2 border-white hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
                 {localeTyped === 'hi' ? 'खाता खोलें' : 'Open Account'}
               </button>
