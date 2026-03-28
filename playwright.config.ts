@@ -19,13 +19,6 @@ export default defineConfig({
     
     // Browser configurations
     ...devices['Desktop Chrome'],
-    ...devices['Desktop Safari'],
-    ...devices['Desktop Firefox'],
-    
-    // Mobile configurations
-    ...devices['Pixel 5'],
-    ...devices['iPhone 13'],
-    ...devices['iPad Pro'],
     
     // Viewport sizes
     viewport: {
@@ -39,14 +32,7 @@ export default defineConfig({
     // Action and navigation timeouts
     actionTimeout: 10000,
     navigationTimeout: 30000,
-    
-    // Global timeout
-    timeout: 60000,
   },
-  
-  // Global setup and teardown
-  globalSetup: require('./global-setup'),
-  globalTeardown: require('./global-teardown'),
   
   // Project-specific configurations
   projects: [
@@ -54,6 +40,9 @@ export default defineConfig({
       name: 'e2e',
       testMatch: '**/*.spec.ts',
       testIgnore: '**/*.unit.spec.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
     },
     {
       name: 'accessibility',
@@ -62,7 +51,6 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         // Accessibility-specific options
         colorScheme: 'dark',
-        reducedMotion: 'reduce',
       },
     },
     {
@@ -78,6 +66,20 @@ export default defineConfig({
             '--disable-blink-features=IdleDetection',
           ],
         },
+      },
+    },
+    {
+      name: 'firefox',
+      testMatch: '**/*.spec.ts',
+      use: {
+        ...devices['Desktop Firefox'],
+      },
+    },
+    {
+      name: 'webkit',
+      testMatch: '**/*.spec.ts',
+      use: {
+        ...devices['Desktop Safari'],
       },
     },
   ],

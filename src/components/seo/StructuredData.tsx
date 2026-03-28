@@ -14,19 +14,19 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data, locale }) =
 
   switch (type) {
     case 'localBusiness':
-      structuredData = generateLocalBusinessStructuredData(data, locale);
+      structuredData = generateLocalBusinessStructuredData(data);
       break;
     case 'financialService':
-      structuredData = generateFinancialServiceStructuredData(data, locale);
+      structuredData = generateFinancialServiceStructuredData(data.name, data.description, data.provider);
       break;
     case 'breadcrumb':
-      structuredData = generateBreadcrumbStructuredData(data, locale);
+      structuredData = generateBreadcrumbStructuredData(data);
       break;
     case 'website':
-      structuredData = generateWebsiteStructuredData(locale);
+      structuredData = generateWebsiteStructuredData(data.name, data.url, data.description);
       break;
     case 'organization':
-      structuredData = generateOrganizationStructuredData(locale);
+      structuredData = generateOrganizationStructuredData(data);
       break;
   }
 
