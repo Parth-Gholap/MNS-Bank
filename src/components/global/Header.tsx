@@ -7,7 +7,7 @@ import { useTranslation } from '@/lib/i18n';
 import LanguageToggle from '@/components/ui/LanguageToggle';
 import Navigation from '@/components/global/Navigation';
 import HomeButton from '@/components/ui/HomeButton';
-import EMICalculatorButton from '@/components/ui/EMICalculatorButton';
+import EMICalculatorButtonWrapper from '@/components/ui/EMICalculatorButtonWrapper';
 import AccessibilityToolbar from '@/components/ui/AccessibilityToolbar';
 import { config } from '@/lib/config';
 
@@ -78,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({ locale }) => {
             </div>
 
             {/* EMI Calculator Button */}
-            <EMICalculatorButton locale={locale} />
+            <EMICalculatorButtonWrapper locale={locale} />
 
             {/* Mobile Menu Toggle */}
             <button
@@ -118,7 +118,7 @@ const Header: React.FC<HeaderProps> = ({ locale }) => {
               onClose={() => setIsMenuOpen(false)}
             />
             <div className="mt-4">
-              <EMICalculatorButton 
+              <EMICalculatorButtonWrapper 
                 locale={locale} 
                 className="w-full"
               />

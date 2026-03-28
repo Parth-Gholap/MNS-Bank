@@ -5,6 +5,9 @@ import { useTranslation } from '@/lib/i18n';
 import { trackPageView } from '@/lib/analytics';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
+import Carousel from '@/components/homepage/Carousel';
+import WhatsNew from '@/components/homepage/WhatsNew';
+import ProductCards from '@/components/homepage/ProductCards';
 
 interface HomePageProps {
   params: Promise<{
@@ -104,6 +107,13 @@ export default function HomePage({ params }: HomePageProps) {
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Carousel Section */}
+      <section className="py-12 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Carousel locale={localeTyped} />
         </div>
       </section>
 
@@ -230,6 +240,16 @@ export default function HomePage({ params }: HomePageProps) {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* What's New Section */}
+        <div className="mb-32">
+          <WhatsNew locale={localeTyped} />
+        </div>
+
+        {/* Product Cards Section */}
+        <div className="mb-32">
+          <ProductCards locale={localeTyped} />
         </div>
 
         {/* Trust Indicators */}
