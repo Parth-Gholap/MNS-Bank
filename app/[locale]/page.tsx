@@ -18,47 +18,53 @@ interface HomePageProps {
 export default function HomePage({ params }: HomePageProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const localeTyped = (pathname.split('/')[1] || 'en') as 'en' | 'hi';
-  const { t } = useTranslation(localeTyped);
+  const [locale, setLocale] = React.useState<'en' | 'hi'>('en');
+  const { t } = useTranslation(locale);
 
   React.useEffect(() => {
-    trackPageView('Homepage', localeTyped === 'hi' ? 'मुख्य पृष्ठ' : 'Homepage');
-  }, [localeTyped]);
+    const initLocale = async () => {
+      const { locale: localeParam } = await params;
+      const localeTyped = localeParam as 'en' | 'hi';
+      setLocale(localeTyped);
+      trackPageView('Homepage', localeTyped === 'hi' ? 'मुख्य पृष्ठ' : 'Homepage');
+    };
+    initLocale();
+  }, [params]);
 
   const handleAccountOpen = () => {
-    router.push(`/${localeTyped}/apply/account`);
+    router.push(`/${locale}/apply/account`);
   };
 
   const handleLoanApply = () => {
-    router.push(`/${localeTyped}/apply/loan`);
+    router.push(`/${locale}/apply/loan`);
   };
 
   const handleDigitalBanking = () => {
-    router.push(`/${localeTyped}/digital-banking`);
+    router.push(`/${locale}/digital-banking`);
   };
 
   const handleQuickAction = (action: string) => {
     switch(action) {
       case 'account':
-        router.push(`/${localeTyped}/apply/account`);
+        router.push(`/${locale}/apply/account`);
         break;
       case 'loan':
-        router.push(`/${localeTyped}/apply/loan`);
+        router.push(`/${locale}/apply/loan`);
         break;
       case 'digital':
-        router.push(`/${localeTyped}/digital-banking`);
+        router.push(`/${locale}/digital-banking`);
         break;
       case 'products':
-        router.push(`/${localeTyped}/products`);
+        router.push(`/${locale}/products`);
         break;
       case 'locate':
-        router.push(`/${localeTyped}/locate-us`);
+        router.push(`/${locale}/locate-us`);
         break;
       case 'contact':
-        router.push(`/${localeTyped}/contact`);
+        router.push(`/${locale}/contact`);
         break;
       case 'support':
-        router.push(`/${localeTyped}/contact`);
+        router.push(`/${locale}/contact`);
         break;
       default:
         console.log('Unknown action:', action);
@@ -74,14 +80,14 @@ export default function HomePage({ params }: HomePageProps) {
           <div className="text-center max-w-5xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-8 animate-fade-in leading-tight">
               <span className="text-gradient-bank">
-                {localeTyped === 'hi' 
+                {locale === 'hi' 
                   ? 'आपके वित्त विश्वास के लिए भारत का प्रमुख बैंक' 
                   : 'India\'s Premier Bank for Your Financial Vision'
                 }
               </span>
             </h1>
             <p className="text-2xl md:text-3xl mb-12 text-bank-blue-100 max-w-4xl mx-auto animate-slide-up leading-relaxed">
-              {localeTyped === 'hi' 
+              {locale === 'hi' 
                 ? 'डिजिटल बैंकिंग, ऋण, और निवेशन समाधान सेवाएं'
                 : 'Digital Banking, Loans, and Investment Solutions'
               }
@@ -91,19 +97,19 @@ export default function HomePage({ params }: HomePageProps) {
                 onClick={handleAccountOpen}
                 className="bg-transparent px-8 py-4 text-white font-bold text-lg rounded-xl border-2 border-white hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
-                {localeTyped === 'hi' ? 'खाता खोलें' : 'Open Account'}
+                {locale === 'hi' ? 'खाता खोलें' : 'Open Account'}
               </button>
               <button
                 onClick={handleLoanApply}
                 className="bg-transparent px-8 py-4 text-white font-bold text-lg rounded-xl border-2 border-white hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
-                {localeTyped === 'hi' ? 'ऋण आवेदन करें' : 'Apply for Loan'}
+                {locale === 'hi' ? 'ऋण आवेदन करें' : 'Apply for Loan'}
               </button>
               <button
                 onClick={handleDigitalBanking}
                 className="bg-transparent px-8 py-4 text-white font-bold text-lg rounded-xl border-2 border-white hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
-                {localeTyped === 'hi' ? 'डिजिटल बैंकिंग शुरू करें' : 'Start Digital Banking'}
+                {locale === 'hi' ? 'डिजिटल बैंकिंग शुरू करें' : 'Start Digital Banking'}
               </button>
             </div>
           </div>
@@ -113,7 +119,7 @@ export default function HomePage({ params }: HomePageProps) {
       {/* Carousel Section */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Carousel locale={localeTyped} />
+          <Carousel locale={locale} />
         </div>
       </section>
 
@@ -127,7 +133,7 @@ export default function HomePage({ params }: HomePageProps) {
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">👤</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-bank-blue-600">
-                {localeTyped === 'hi' ? 'खाता खोलें' : 'Open Account'}
+                {locale === 'hi' ? 'खाता खोलें' : 'Open Account'}
               </span>
             </button>
             <button
@@ -136,7 +142,7 @@ export default function HomePage({ params }: HomePageProps) {
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">💰</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-green-600">
-                {localeTyped === 'hi' ? 'ऋण आवेदन' : 'Apply Loan'}
+                {locale === 'hi' ? 'ऋण आवेदन' : 'Apply Loan'}
               </span>
             </button>
             <button
@@ -145,7 +151,7 @@ export default function HomePage({ params }: HomePageProps) {
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">📱</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-purple-600">
-                {localeTyped === 'hi' ? 'डिजिटल बैंकिंग' : 'Digital Banking'}
+                {locale === 'hi' ? 'डिजिटल बैंकिंग' : 'Digital Banking'}
               </span>
             </button>
             <button
@@ -154,7 +160,7 @@ export default function HomePage({ params }: HomePageProps) {
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">💳</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-orange-600">
-                {localeTyped === 'hi' ? 'कार्ड' : 'Cards'}
+                {locale === 'hi' ? 'कार्ड' : 'Cards'}
               </span>
             </button>
             <button
@@ -163,7 +169,7 @@ export default function HomePage({ params }: HomePageProps) {
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">📍</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-red-600">
-                {localeTyped === 'hi' ? 'शाखा ढूंढें' : 'Find Branch'}
+                {locale === 'hi' ? 'शाखा ढूंढें' : 'Find Branch'}
               </span>
             </button>
             <button
@@ -172,7 +178,7 @@ export default function HomePage({ params }: HomePageProps) {
             >
               <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">🎧</span>
               <span className="text-sm font-medium text-gray-700 group-hover:text-teal-600">
-                {localeTyped === 'hi' ? 'सहायता' : 'Support'}
+                {locale === 'hi' ? 'सहायता' : 'Support'}
               </span>
             </button>
           </div>
@@ -185,10 +191,10 @@ export default function HomePage({ params }: HomePageProps) {
         <div className="mb-32">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-900 mb-6">
-              {localeTyped === 'hi' ? 'हमारी विशेष सेवाएं' : 'Our Premium Services'}
+              {locale === 'hi' ? 'हमारी विशेष सेवाएं' : 'Our Premium Services'}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              {localeTyped === 'hi' 
+              {locale === 'hi' 
                 ? 'आपकी सभी बैंकिंग आवश्यकताओं के लिए व्यापक समाधान'
                 : 'Comprehensive solutions for all your banking needs'
               }
@@ -200,10 +206,10 @@ export default function HomePage({ params }: HomePageProps) {
                 <span className="text-4xl group-hover:scale-110 transition-transform duration-300">🏦</span>
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-gray-900">
-                {localeTyped === 'hi' ? 'बैंकिंग' : 'Banking'}
+                {locale === 'hi' ? 'बैंकिंग' : 'Banking'}
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed">
-                {localeTyped === 'hi' ? '24/7 बैंकिंग सेवाएं' : '24/7 Banking Services'}
+                {locale === 'hi' ? '24/7 बैंकिंग सेवाएं' : '24/7 Banking Services'}
               </p>
             </div>
             <div className="feature-card text-center group">
@@ -211,10 +217,10 @@ export default function HomePage({ params }: HomePageProps) {
                 <span className="text-4xl group-hover:scale-110 transition-transform duration-300">💸</span>
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-gray-900">
-                {localeTyped === 'hi' ? 'ऋण' : 'Loans'}
+                {locale === 'hi' ? 'ऋण' : 'Loans'}
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed">
-                {localeTyped === 'hi' ? 'तेज ऋण स्वीकृति' : 'Quick Loan Approval'}
+                {locale === 'hi' ? 'तेज ऋण स्वीकृति' : 'Quick Loan Approval'}
               </p>
             </div>
             <div className="feature-card text-center group">
@@ -222,10 +228,10 @@ export default function HomePage({ params }: HomePageProps) {
                 <span className="text-4xl group-hover:scale-110 transition-transform duration-300">📊</span>
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-gray-900">
-                {localeTyped === 'hi' ? 'निवेश' : 'Investments'}
+                {locale === 'hi' ? 'निवेश' : 'Investments'}
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed">
-                {localeTyped === 'hi' ? 'सुरक्षित निवेश विकल्प' : 'Secure Investment Options'}
+                {locale === 'hi' ? 'सुरक्षित निवेश विकल्प' : 'Secure Investment Options'}
               </p>
             </div>
             <div className="feature-card text-center group">
@@ -233,10 +239,10 @@ export default function HomePage({ params }: HomePageProps) {
                 <span className="text-4xl group-hover:scale-110 transition-transform duration-300">📱</span>
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-gray-900">
-                {localeTyped === 'hi' ? 'डिजिटल' : 'Digital'}
+                {locale === 'hi' ? 'डिजिटल' : 'Digital'}
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed">
-                {localeTyped === 'hi' ? 'ऑनलाइन बैंकिंग' : 'Online Banking'}
+                {locale === 'hi' ? 'ऑनलाइन बैंकिंग' : 'Online Banking'}
               </p>
             </div>
           </div>
@@ -244,22 +250,22 @@ export default function HomePage({ params }: HomePageProps) {
 
         {/* What's New Section */}
         <div className="mb-32">
-          <WhatsNew locale={localeTyped} />
+          <WhatsNew locale={locale} />
         </div>
 
         {/* Product Cards Section */}
         <div className="mb-32">
-          <ProductCards locale={localeTyped} />
+          <ProductCards locale={locale} />
         </div>
 
         {/* Trust Indicators */}
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-12 mb-32">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              {localeTyped === 'hi' ? 'विश्वास और सुरक्षा' : 'Trust & Security'}
+              {locale === 'hi' ? 'विश्वास और सुरक्षा' : 'Trust & Security'}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              {localeTyped === 'hi' 
+              {locale === 'hi' 
                 ? 'हम आपके वित्त की सुरक्षा के लिए प्रतिबद्ध हैं'
                 : 'We are committed to securing your financial future'
               }
@@ -271,10 +277,10 @@ export default function HomePage({ params }: HomePageProps) {
                 <span className="text-3xl">✅</span>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                {localeTyped === 'hi' ? 'आरबीआई विनियमित' : 'RBI Regulated'}
+                {locale === 'hi' ? 'आरबीआई विनियमित' : 'RBI Regulated'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                {localeTyped === 'hi' ? 'पूरी तरह से विनियमित' : 'Fully Regulated'}
+                {locale === 'hi' ? 'पूरी तरह से विनियमित' : 'Fully Regulated'}
               </p>
             </div>
             <div className="flex flex-col items-center text-center">
@@ -282,10 +288,10 @@ export default function HomePage({ params }: HomePageProps) {
                 <span className="text-3xl">🔒</span>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                {localeTyped === 'hi' ? '100% सुरक्षित' : '100% Secure'}
+                {locale === 'hi' ? '100% सुरक्षित' : '100% Secure'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                {localeTyped === 'hi' ? 'बैंकिंग सुरक्षा' : 'Banking Security'}
+                {locale === 'hi' ? 'बैंकिंग सुरक्षा' : 'Banking Security'}
               </p>
             </div>
             <div className="flex flex-col items-center text-center">
@@ -293,10 +299,10 @@ export default function HomePage({ params }: HomePageProps) {
                 <span className="text-3xl">📞</span>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                {localeTyped === 'hi' ? '24/7 समर्थन' : '24/7 Support'}
+                {locale === 'hi' ? '24/7 समर्थन' : '24/7 Support'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                {localeTyped === 'hi' ? 'हमेशा उपलब्ध' : 'Always Available'}
+                {locale === 'hi' ? 'हमेशा उपलब्ध' : 'Always Available'}
               </p>
             </div>
             <div className="flex flex-col items-center text-center">
@@ -304,10 +310,10 @@ export default function HomePage({ params }: HomePageProps) {
                 <span className="text-3xl">🏆</span>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                {localeTyped === 'hi' ? 'पुरस्कार विजेता' : 'Award Winning'}
+                {locale === 'hi' ? 'पुरस्कार विजेता' : 'Award Winning'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                {localeTyped === 'hi' ? 'सर्वश्रेष्ठ सेवा' : 'Best Service'}
+                {locale === 'hi' ? 'सर्वश्रेष्ठ सेवा' : 'Best Service'}
               </p>
             </div>
           </div>
@@ -319,35 +325,35 @@ export default function HomePage({ params }: HomePageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-5xl font-bold mb-8">
-              {localeTyped === 'hi' 
+              {locale === 'hi' 
                 ? 'आज ही शुरू करें' 
                 : 'Get Started Today'
               }
             </h2>
             <p className="text-2xl mb-12 text-bank-blue-100 leading-relaxed">
-              {localeTyped === 'hi' 
+              {locale === 'hi' 
                 ? 'हमारी विशेष बैंकिंग सेवाओं का अनुभव करें और अपने वित्त लक्ष्यों को प्राप्त करें'
                 : 'Experience our comprehensive banking services and achieve your financial goals'
               }
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link 
-                href={`/${localeTyped}/products`}
+                href={`/${locale}/products`}
                 className="inline-flex items-center px-8 py-4 bg-white text-bank-blue-600 font-bold text-lg rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
-                {localeTyped === 'hi' ? 'सभी सेवाएं देखें' : 'View All Services'}
+                {locale === 'hi' ? 'सभी सेवाएं देखें' : 'View All Services'}
               </Link>
               <Link 
-                href={`/${localeTyped}/locate-us`}
+                href={`/${locale}/locate-us`}
                 className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
-                {localeTyped === 'hi' ? 'शाखा ढूंढें' : 'Find Branch'}
+                {locale === 'hi' ? 'शाखा ढूंढें' : 'Find Branch'}
               </Link>
               <Link 
-                href={`/${localeTyped}/contact`}
+                href={`/${locale}/contact`}
                 className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-bank-blue-600 transition-all duration-300 transform hover:-translate-y-1"
               >
-                {localeTyped === 'hi' ? 'ग्राहक सहायता प्राप्त करें' : 'Get Support'}
+                {locale === 'hi' ? 'ग्राहक सहायता प्राप्त करें' : 'Get Support'}
               </Link>
             </div>
           </div>
@@ -359,10 +365,10 @@ export default function HomePage({ params }: HomePageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              {localeTyped === 'hi' ? 'हमारी उपलब्धियां' : 'Our Achievements'}
+              {locale === 'hi' ? 'हमारी उपलब्धियां' : 'Our Achievements'}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              {localeTyped === 'hi' 
+              {locale === 'hi' 
                 ? 'वर्षों के विश्वसनीय सेवाओं का परिणाम'
                 : 'Result of years of trusted service'
               }
@@ -372,25 +378,25 @@ export default function HomePage({ params }: HomePageProps) {
             <div className="stat-card text-center">
               <div className="text-5xl font-bold text-bank-blue-600 mb-4">50K+</div>
               <div className="text-xl text-gray-700 font-medium">
-                {localeTyped === 'hi' ? 'ग्राहक' : 'Customers'}
+                {locale === 'hi' ? 'ग्राहक' : 'Customers'}
               </div>
             </div>
             <div className="stat-card text-center">
               <div className="text-5xl font-bold text-green-600 mb-4">100+</div>
               <div className="text-xl text-gray-700 font-medium">
-                {localeTyped === 'hi' ? 'शाखाएं' : 'Branches'}
+                {locale === 'hi' ? 'शाखाएं' : 'Branches'}
               </div>
             </div>
             <div className="stat-card text-center">
               <div className="text-5xl font-bold text-purple-600 mb-4">₹500Cr+</div>
               <div className="text-xl text-gray-700 font-medium">
-                {localeTyped === 'hi' ? 'जमा' : 'Deposits'}
+                {locale === 'hi' ? 'जमा' : 'Deposits'}
               </div>
             </div>
             <div className="stat-card text-center">
               <div className="text-5xl font-bold text-orange-600 mb-4">25+</div>
               <div className="text-xl text-gray-700 font-medium">
-                {localeTyped === 'hi' ? 'वर्ष' : 'Years'}
+                {locale === 'hi' ? 'वर्ष' : 'Years'}
               </div>
             </div>
           </div>

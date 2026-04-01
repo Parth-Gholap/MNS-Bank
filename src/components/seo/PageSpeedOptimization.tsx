@@ -17,7 +17,6 @@ const PageSpeedOptimization: React.FC<PageSpeedOptimizationProps> = ({ locale })
       
       {/* Resource hints */}
       <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-      <link rel="preload" href="/images/hero-bg.webp" as="image" />
       
       {/* Critical CSS */}
       <style dangerouslySetInnerHTML={{

@@ -29,6 +29,11 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
   const [mounted, setMounted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+
+  const handleImageError = (imageSrc: string) => {
+    setImageErrors(prev => new Set(prev).add(imageSrc));
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -152,11 +157,23 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
         {currentItem && (
           <div className="relative w-full h-full">
             {/* Background Image */}
-            <img
-              src={currentItem.image}
-              alt={locale === 'hi' ? currentItem.titleHi : currentItem.title}
-              className="w-full h-full object-cover"
-            />
+            {imageErrors.has(currentItem.image) ? (
+              <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                <div className="text-white text-center p-8">
+                  <div className="text-6xl mb-4">🏦</div>
+                  <h4 className="text-2xl font-bold">
+                    {locale === 'hi' ? currentItem.titleHi : currentItem.title}
+                  </h4>
+                </div>
+              </div>
+            ) : (
+              <img
+                src={currentItem.image}
+                alt={locale === 'hi' ? currentItem.titleHi : currentItem.title}
+                className="w-full h-full object-cover"
+                onError={() => handleImageError(currentItem.image)}
+              />
+            )}
             
             {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent">
@@ -270,11 +287,18 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
             aria-label={locale === 'hi' ? item.titleHi : item.title}
             aria-current={index === currentIndex}
           >
-            <img
-              src={item.image}
-              alt={locale === 'hi' ? item.titleHi : item.title}
-              className="w-full h-20 object-cover"
-            />
+            {imageErrors.has(item.image) ? (
+              <div className="w-full h-20 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                <div className="text-white text-2xl">🏦</div>
+              </div>
+            ) : (
+              <img
+                src={item.image}
+                alt={locale === 'hi' ? item.titleHi : item.title}
+                className="w-full h-20 object-cover"
+                onError={() => handleImageError(item.image)}
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-2">
               <span className="text-white text-xs font-medium truncate">
                 {locale === 'hi' ? item.titleHi : item.title}
