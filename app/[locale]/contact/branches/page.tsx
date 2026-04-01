@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslation } from '@/lib/i18n';
 import { trackPageView } from '@/lib/analytics';
+import { LocationIcon, PhoneIcon, EmailIcon, TimeIcon } from '@/components/icons';
 
 interface BranchesPageProps {
   params: Promise<{
@@ -81,24 +82,24 @@ export default function BranchesPage({ params }: BranchesPageProps) {
               
               <div className="space-y-3">
                 <div className="flex items-start">
-                  <span className="text-gray-500 mr-2">📍</span>
+                  <LocationIcon className="text-gray-500 mr-2" size={16} />
                   <span className="text-gray-700">
                     {locale === 'hi' ? branch.addressHi : branch.address}
                   </span>
                 </div>
                 
                 <div className="flex items-center">
-                  <span className="text-gray-500 mr-2">📞</span>
+                  <PhoneIcon className="text-gray-500 mr-2" size={16} />
                   <span className="text-gray-700">{branch.phone}</span>
                 </div>
                 
                 <div className="flex items-center">
-                  <span className="text-gray-500 mr-2">✉️</span>
+                  <EmailIcon className="text-gray-500 mr-2" size={16} />
                   <span className="text-gray-700 text-sm">{branch.email}</span>
                 </div>
                 
                 <div className="flex items-center">
-                  <span className="text-gray-500 mr-2">🕐</span>
+                  <TimeIcon className="text-gray-500 mr-2" size={16} />
                   <span className="text-gray-700">
                     {locale === 'hi' ? branch.timingsHi : branch.timings}
                   </span>

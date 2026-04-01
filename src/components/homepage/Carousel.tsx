@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from '@/lib/i18n';
 import { trackPageView } from '@/lib/analytics';
+import { BankIcon } from '@/components/icons';
 
 interface CarouselItem {
   id: string;
@@ -160,7 +161,7 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
             {imageErrors.has(currentItem.image) ? (
               <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
                 <div className="text-white text-center p-8">
-                  <div className="text-6xl mb-4">🏦</div>
+                  <BankIcon className="text-white mb-4 mx-auto" size={64} />
                   <h4 className="text-2xl font-bold">
                     {locale === 'hi' ? currentItem.titleHi : currentItem.title}
                   </h4>
@@ -289,7 +290,7 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
           >
             {imageErrors.has(item.image) ? (
               <div className="w-full h-20 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                <div className="text-white text-2xl">🏦</div>
+                <BankIcon className="text-white" size={24} />
               </div>
             ) : (
               <img

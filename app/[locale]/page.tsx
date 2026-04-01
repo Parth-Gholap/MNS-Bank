@@ -8,6 +8,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import Carousel from '@/components/homepage/Carousel';
 import WhatsNew from '@/components/homepage/WhatsNew';
 import ProductCards from '@/components/homepage/ProductCards';
+import { AccountIcon, LoanIcon, DigitalBankingIcon, CardIcon, LocationIcon, SupportIcon, BankIcon, InvestmentIcon, SecureIcon, AwardIcon } from '@/components/icons';
 
 interface HomePageProps {
   params: Promise<{
@@ -131,7 +132,7 @@ export default function HomePage({ params }: HomePageProps) {
               onClick={() => handleQuickAction('account')}
               className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
-              <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">👤</span>
+              <AccountIcon className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300" size={40} />
               <span className="text-sm font-medium text-gray-700 group-hover:text-bank-blue-600">
                 {locale === 'hi' ? 'खाता खोलें' : 'Open Account'}
               </span>
@@ -140,7 +141,7 @@ export default function HomePage({ params }: HomePageProps) {
               onClick={() => handleQuickAction('loan')}
               className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
-              <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">💰</span>
+              <LoanIcon className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300" size={40} />
               <span className="text-sm font-medium text-gray-700 group-hover:text-green-600">
                 {locale === 'hi' ? 'ऋण आवेदन' : 'Apply Loan'}
               </span>
@@ -149,7 +150,7 @@ export default function HomePage({ params }: HomePageProps) {
               onClick={() => handleQuickAction('digital')}
               className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
-              <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">📱</span>
+              <DigitalBankingIcon className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300" size={40} />
               <span className="text-sm font-medium text-gray-700 group-hover:text-purple-600">
                 {locale === 'hi' ? 'डिजिटल बैंकिंग' : 'Digital Banking'}
               </span>
@@ -158,7 +159,7 @@ export default function HomePage({ params }: HomePageProps) {
               onClick={() => handleQuickAction('products')}
               className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
-              <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">💳</span>
+              <CardIcon className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300" size={40} />
               <span className="text-sm font-medium text-gray-700 group-hover:text-orange-600">
                 {locale === 'hi' ? 'कार्ड' : 'Cards'}
               </span>
@@ -167,7 +168,7 @@ export default function HomePage({ params }: HomePageProps) {
               onClick={() => handleQuickAction('locate')}
               className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
-              <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">📍</span>
+              <LocationIcon className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300" size={40} />
               <span className="text-sm font-medium text-gray-700 group-hover:text-red-600">
                 {locale === 'hi' ? 'शाखा ढूंढें' : 'Find Branch'}
               </span>
@@ -176,7 +177,7 @@ export default function HomePage({ params }: HomePageProps) {
               onClick={() => handleQuickAction('support')}
               className="bg-gradient-card flex flex-col items-center p-6 rounded-2xl hover:scale-105 transition-all duration-300 group shadow-lg"
             >
-              <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300 animate-float">🎧</span>
+              <SupportIcon className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300" size={40} />
               <span className="text-sm font-medium text-gray-700 group-hover:text-teal-600">
                 {locale === 'hi' ? 'सहायता' : 'Support'}
               </span>
@@ -203,7 +204,7 @@ export default function HomePage({ params }: HomePageProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <div className="feature-card text-center group">
               <div className="w-24 h-24 bg-bank-blue-100 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-blue-200 transition-all duration-300 group-hover:scale-105">
-                <span className="text-4xl group-hover:scale-110 transition-transform duration-300">🏦</span>
+                <BankIcon className="text-4xl group-hover:scale-110 transition-transform duration-300" size={32} />
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-gray-900">
                 {locale === 'hi' ? 'बैंकिंग' : 'Banking'}
@@ -214,7 +215,7 @@ export default function HomePage({ params }: HomePageProps) {
             </div>
             <div className="feature-card text-center group">
               <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-green-200 transition-all duration-300 group-hover:scale-105">
-                <span className="text-4xl group-hover:scale-110 transition-transform duration-300">💸</span>
+                <LoanIcon className="text-4xl group-hover:scale-110 transition-transform duration-300" size={32} />
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-gray-900">
                 {locale === 'hi' ? 'ऋण' : 'Loans'}
@@ -225,7 +226,7 @@ export default function HomePage({ params }: HomePageProps) {
             </div>
             <div className="feature-card text-center group">
               <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-purple-200 transition-all duration-300 group-hover:scale-105">
-                <span className="text-4xl group-hover:scale-110 transition-transform duration-300">📊</span>
+                <InvestmentIcon className="text-4xl group-hover:scale-110 transition-transform duration-300" size={32} />
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-gray-900">
                 {locale === 'hi' ? 'निवेश' : 'Investments'}
@@ -236,7 +237,7 @@ export default function HomePage({ params }: HomePageProps) {
             </div>
             <div className="feature-card text-center group">
               <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-orange-200 transition-all duration-300 group-hover:scale-105">
-                <span className="text-4xl group-hover:scale-110 transition-transform duration-300">📱</span>
+                <DigitalBankingIcon className="text-4xl group-hover:scale-110 transition-transform duration-300" size={32} />
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-gray-900">
                 {locale === 'hi' ? 'डिजिटल' : 'Digital'}
@@ -274,7 +275,7 @@ export default function HomePage({ params }: HomePageProps) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             <div className="flex flex-col items-center text-center">
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                <span className="text-3xl">✅</span>
+                <SecureIcon className="text-3xl" size={24} />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 {locale === 'hi' ? 'आरबीआई विनियमित' : 'RBI Regulated'}
@@ -285,7 +286,7 @@ export default function HomePage({ params }: HomePageProps) {
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="w-20 h-20 bg-bank-blue-100 rounded-full flex items-center justify-center mb-6">
-                <span className="text-3xl">🔒</span>
+                <SecureIcon className="text-3xl" size={24} />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 {locale === 'hi' ? '100% सुरक्षित' : '100% Secure'}
@@ -296,7 +297,7 @@ export default function HomePage({ params }: HomePageProps) {
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mb-6">
-                <span className="text-3xl">📞</span>
+                <SupportIcon className="text-3xl" size={24} />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 {locale === 'hi' ? '24/7 समर्थन' : '24/7 Support'}
@@ -307,7 +308,7 @@ export default function HomePage({ params }: HomePageProps) {
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
-                <span className="text-3xl">🏆</span>
+                <AwardIcon className="text-3xl" size={24} />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 {locale === 'hi' ? 'पुरस्कार विजेता' : 'Award Winning'}

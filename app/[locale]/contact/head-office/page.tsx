@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslation } from '@/lib/i18n';
 import { trackPageView } from '@/lib/analytics';
+import { LocationIcon, PhoneIcon, EmailIcon, TimeIcon } from '@/components/icons';
 
 interface HeadOfficePageProps {
   params: Promise<{
@@ -39,7 +40,7 @@ export default function HeadOfficePage({ params }: HeadOfficePageProps) {
             
             <div className="space-y-4">
               <div className="flex items-start">
-                <span className="text-gray-500 mr-3 mt-1">📍</span>
+                <LocationIcon className="text-gray-500 mr-3 mt-1" size={20} />
                 <div>
                   <h3 className="font-semibold mb-1">
                     {locale === 'hi' ? 'पता' : 'Address'}
@@ -52,7 +53,7 @@ export default function HeadOfficePage({ params }: HeadOfficePageProps) {
               </div>
               
               <div className="flex items-center">
-                <span className="text-gray-500 mr-3">📞</span>
+                <PhoneIcon className="text-gray-500 mr-3" size={20} />
                 <div>
                   <h3 className="font-semibold mb-1">
                     {locale === 'hi' ? 'फोन' : 'Phone'}
@@ -62,7 +63,7 @@ export default function HeadOfficePage({ params }: HeadOfficePageProps) {
               </div>
               
               <div className="flex items-center">
-                <span className="text-gray-500 mr-3">📠</span>
+                <PhoneIcon className="text-gray-500 mr-3" size={20} />
                 <div>
                   <h3 className="font-semibold mb-1">
                     {locale === 'hi' ? 'फैक्स' : 'Fax'}
@@ -72,7 +73,7 @@ export default function HeadOfficePage({ params }: HeadOfficePageProps) {
               </div>
               
               <div className="flex items-center">
-                <span className="text-gray-500 mr-3">✉️</span>
+                <EmailIcon className="text-gray-500 mr-3" size={20} />
                 <div>
                   <h3 className="font-semibold mb-1">
                     {locale === 'hi' ? 'ईमेल' : 'Email'}
@@ -82,7 +83,7 @@ export default function HeadOfficePage({ params }: HeadOfficePageProps) {
               </div>
               
               <div className="flex items-center">
-                <span className="text-gray-500 mr-3">🕐</span>
+                <TimeIcon className="text-gray-500 mr-3" size={20} />
                 <div>
                   <h3 className="font-semibold mb-1">
                     {locale === 'hi' ? 'कार्य समय' : 'Working Hours'}

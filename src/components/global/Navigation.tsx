@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useTranslation, type Locale } from '@/lib/i18n';
 import { config, apiEndpoints } from '@/lib/config';
+import { AccountIcon, CardIcon, DepositIcon, HomeIcon, LoanIcon, DigitalBankingIcon, PhoneIcon, BusinessIcon, BriefcaseIcon, ChartIcon, FactoryIcon, SettingsIcon } from '@/components/icons';
 
 interface NavigationProps {
   currentPath: string;
@@ -42,30 +43,30 @@ const Navigation: React.FC<NavigationProps> = ({
   const navigationStructure = {
     personal: {
       label: locale === 'hi' ? 'व्यक्तिग बैंकिंग' : 'Personal Banking',
-      icon: '👤',
+      icon: <AccountIcon size={20} />,
       href: `/${locale}/personal`,
       subItems: [
         {
           label: locale === 'hi' ? 'खाते' : 'Accounts',
-          icon: '💳',
+          icon: <CardIcon size={18} />,
           href: `/${locale}/personal/accounts`,
           description: locale === 'hi' ? 'बचत, चालू खाते' : 'Savings, Current Accounts'
         },
         {
           label: locale === 'hi' ? 'जमा' : 'Deposits',
-          icon: '💰',
+          icon: <DepositIcon size={18} />,
           href: `/${locale}/personal/deposits`,
           description: locale === 'hi' ? 'सावधि, आवर्तित जमा' : 'Fixed, Recurring Deposits'
         },
         {
           label: locale === 'hi' ? 'ऋण' : 'Loans',
-          icon: '🏠',
+          icon: <HomeIcon size={18} />,
           href: `/${locale}/personal/loans`,
           description: locale === 'hi' ? 'व्यक्तिग, होम, कार ऋण' : 'Personal, Home, Car Loans'
         },
         {
           label: locale === 'hi' ? 'सेवाएं' : 'Services',
-          icon: '📱',
+          icon: <DigitalBankingIcon size={18} />,
           href: `/${locale}/personal/services`,
           description: locale === 'hi' ? 'डिजिटल, बैंकिंग सेवाएं' : 'Digital, Banking Services'
         }
@@ -73,30 +74,30 @@ const Navigation: React.FC<NavigationProps> = ({
     },
     business: {
       label: locale === 'hi' ? 'व्यवसाय बैंकिंग' : 'Business Banking',
-      icon: '🏢',
+      icon: <BusinessIcon size={20} />,
       href: `/${locale}/business`,
       subItems: [
         {
           label: locale === 'hi' ? 'खाते' : 'Accounts',
-          icon: '💼',
+          icon: <BriefcaseIcon size={18} />,
           href: `/${locale}/business/accounts`,
           description: locale === 'hi' ? 'व्यवसाय, करेंट खाते' : 'Business, Current Accounts'
         },
         {
           label: locale === 'hi' ? 'जमा' : 'Deposits',
-          icon: '📈',
+          icon: <ChartIcon size={18} />,
           href: `/${locale}/business/deposits`,
           description: locale === 'hi' ? 'कार्यशील पूंजी, सावधि जमा' : 'Working Capital, Fixed Deposits'
         },
         {
           label: locale === 'hi' ? 'ऋण' : 'Loans',
-          icon: '🏭',
+          icon: <FactoryIcon size={18} />,
           href: `/${locale}/business/loans`,
           description: locale === 'hi' ? 'व्यवसाय, मशीनरी ऋण' : 'Business, Machinery Loans'
         },
         {
           label: locale === 'hi' ? 'सेवाएं' : 'Services',
-          icon: '⚙️',
+          icon: <SettingsIcon size={18} />,
           href: `/${locale}/business/services`,
           description: locale === 'hi' ? 'व्यापार वित्त सेवाएं' : 'Trade Finance Services'
         }
@@ -138,7 +139,7 @@ const Navigation: React.FC<NavigationProps> = ({
           {/* Personal Banking */}
           <div className="bg-gradient-to-r from-bank-blue-50 to-bank-blue-100 rounded-xl p-4">
             <div className="flex items-center space-x-3 mb-4">
-              <span className="text-2xl">{navigationStructure.personal.icon}</span>
+              <div className="text-2xl text-blue-600">{navigationStructure.personal.icon}</div>
               <h3 className="text-lg font-bold text-bank-blue-900">
                 {navigationStructure.personal.label}
               </h3>
@@ -155,7 +156,7 @@ const Navigation: React.FC<NavigationProps> = ({
                       : 'text-gray-700 hover:bg-white hover:text-bank-blue-600 hover:shadow-sm'
                   }`}
                 >
-                  <span className="text-lg">{item.icon}</span>
+                  <div className="text-lg text-blue-600">{item.icon}</div>
                   <div className="flex-1">
                     <div className="font-semibold text-sm">{item.label}</div>
                     <div className="text-xs opacity-75">{item.description}</div>
@@ -168,7 +169,7 @@ const Navigation: React.FC<NavigationProps> = ({
           {/* Business Banking */}
           <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-4">
             <div className="flex items-center space-x-3 mb-4">
-              <span className="text-2xl">{navigationStructure.business.icon}</span>
+              <div className="text-2xl text-green-600">{navigationStructure.business.icon}</div>
               <h3 className="text-lg font-bold text-green-900">
                 {navigationStructure.business.label}
               </h3>
@@ -185,7 +186,7 @@ const Navigation: React.FC<NavigationProps> = ({
                       : 'text-gray-700 hover:bg-white hover:text-green-600 hover:shadow-sm'
                   }`}
                 >
-                  <span className="text-lg">{item.icon}</span>
+                  <div className="text-lg text-green-600">{item.icon}</div>
                   <div className="flex-1">
                     <div className="font-semibold text-sm">{item.label}</div>
                     <div className="text-xs opacity-75">{item.description}</div>
@@ -206,7 +207,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   : 'bg-gray-100 text-gray-700 hover:bg-purple-100 hover:text-purple-700'
               }`}
             >
-              <span className="text-lg">📱</span>
+              <DigitalBankingIcon className="text-lg text-purple-600" size={20} />
               <span className="font-semibold">{locale === 'hi' ? 'डिजिटल बैंकिंग' : 'Digital Banking'}</span>
             </Link>
 
@@ -219,7 +220,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   : 'bg-gray-100 text-gray-700 hover:bg-orange-100 hover:text-orange-700'
               }`}
             >
-              <span className="text-lg">📞</span>
+              <PhoneIcon className="text-lg text-orange-600" size={20} />
               <span className="font-semibold">{locale === 'hi' ? 'संपर्क करें' : 'Contact'}</span>
             </Link>
           </div>
@@ -243,7 +244,7 @@ const Navigation: React.FC<NavigationProps> = ({
               : 'text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-700'
           } ${isMobile ? 'mb-3 w-full justify-start' : ''}`}
         >
-          <span className="text-lg">{navigationStructure.personal.icon}</span>
+          <div className="text-lg text-blue-600">{navigationStructure.personal.icon}</div>
           <span>{navigationStructure.personal.label}</span>
           {!isMobile && (
             <svg 
@@ -261,7 +262,7 @@ const Navigation: React.FC<NavigationProps> = ({
           <div className="absolute top-full left-0 mt-3 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100/50 overflow-hidden z-50 animate-fadeIn">
             <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4">
               <div className="flex items-center space-x-3">
-                <span className="text-2xl">{navigationStructure.personal.icon}</span>
+                <div className="text-2xl text-white">{navigationStructure.personal.icon}</div>
                 <div>
                   <h3 className="font-bold text-lg">{navigationStructure.personal.label}</h3>
                   <p className="text-blue-100 text-sm">
@@ -282,7 +283,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   }`}
                   onClick={() => setActiveDropdown(null)}
                 >
-                  <span className="text-xl group-hover:scale-110 transition-transform duration-200">{item.icon}</span>
+                  <div className="text-xl text-blue-600 group-hover:scale-110 transition-transform duration-200">{item.icon}</div>
                   <div className="flex-1">
                     <div className="font-semibold text-sm group-hover:text-bank-blue-600 transition-colors duration-200">
                       {item.label}
@@ -314,7 +315,7 @@ const Navigation: React.FC<NavigationProps> = ({
               : 'text-gray-700 hover:bg-gradient-to-r hover:from-green-50 hover:to-green-100 hover:text-green-700'
           } ${isMobile ? 'mb-3 w-full justify-start' : ''}`}
         >
-          <span className="text-lg">{navigationStructure.business.icon}</span>
+          <div className="text-lg text-green-600">{navigationStructure.business.icon}</div>
           <span>{navigationStructure.business.label}</span>
           {!isMobile && (
             <svg 
@@ -332,7 +333,7 @@ const Navigation: React.FC<NavigationProps> = ({
           <div className="absolute top-full left-0 mt-3 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100/50 overflow-hidden z-50 animate-fadeIn">
             <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-4">
               <div className="flex items-center space-x-3">
-                <span className="text-2xl">{navigationStructure.business.icon}</span>
+                <div className="text-2xl text-white">{navigationStructure.business.icon}</div>
                 <div>
                   <h3 className="font-bold text-lg">{navigationStructure.business.label}</h3>
                   <p className="text-green-100 text-sm">
@@ -353,7 +354,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   }`}
                   onClick={() => setActiveDropdown(null)}
                 >
-                  <span className="text-xl group-hover:scale-110 transition-transform duration-200">{item.icon}</span>
+                  <div className="text-xl text-green-600 group-hover:scale-110 transition-transform duration-200">{item.icon}</div>
                   <div className="flex-1">
                     <div className="font-semibold text-sm group-hover:text-green-600 transition-colors duration-200">
                       {item.label}
@@ -386,7 +387,7 @@ const Navigation: React.FC<NavigationProps> = ({
           }
         }}
       >
-        <span className="text-lg">📱</span>
+        <DigitalBankingIcon className="text-lg text-purple-600" size={20} />
         <span>{locale === 'hi' ? 'डिजिटल बैंकिंग' : 'Digital Banking'}</span>
       </Link>
 
@@ -403,7 +404,7 @@ const Navigation: React.FC<NavigationProps> = ({
           }
         }}
       >
-        <span className="text-lg">📞</span>
+        <PhoneIcon className="text-lg text-orange-600" size={20} />
         <span>{locale === 'hi' ? 'संपर्क करें' : 'Contact'}</span>
       </Link>
     </nav>
