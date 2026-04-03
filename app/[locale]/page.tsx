@@ -5,7 +5,7 @@ import { useTranslation } from '@/lib/i18n';
 import { trackPageView } from '@/lib/analytics';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import Carousel from '@/components/homepage/Carousel';
+import Carousel from '@/components/ui/elegant-carousel-fixed';
 import WhatsNew from '@/components/homepage/WhatsNew';
 import ProductCards from '@/components/homepage/ProductCards';
 import { AccountIcon, LoanIcon, DigitalBankingIcon, CardIcon, LocationIcon, SupportIcon, BankIcon, InvestmentIcon, SecureIcon, AwardIcon } from '@/components/icons';

@@ -11,15 +11,17 @@ interface ApplyAccountPageProps {
   }>;
 }
 
-
 export default async function ApplyAccountPage({ params }: ApplyAccountPageProps) {
   const { locale } = await params;
   const localeTyped = locale as 'en' | 'hi';
-  
-  return <ApplyAccountPageClient locale={localeTyped} />;
+  const searchParams = useSearchParams();
+  const success = searchParams.get('success');
+  const router = useRouter();
+
+  return <ApplyAccountPageClient locale={localeTyped} success={success} />;
 }
 
-function ApplyAccountPageClient({ locale }: { locale: 'en' | 'hi' }) {
+function ApplyAccountPageClient({ locale, success }: { locale: 'en' | 'hi', success?: string }) {
   const router = useRouter();
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
 
@@ -36,11 +38,29 @@ function ApplyAccountPageClient({ locale }: { locale: 'en' | 'hi' }) {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {locale === 'hi' ? 'खाता खोलें' : 'Open Account'}
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {locale === 'hi'
-              ? 'कुछ ही क्षणों में अपना बैंक खाता खोलें'
-              : 'Open your bank account in minutes'}
-          </p>
+          {success && (
+            <div className="bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-lg mb-8">
+              <h2 className="text-2xl font-bold text-green-800 mb-2">
+                {locale === 'hi' ? 'आवेदन सफल!' : 'Application Submitted Successfully!'}
+              </h2>
+              <p className="text-green-700">
+                {locale === 'hi' ? 'आपका आवेदन हम र्प कर लिए हैं और जल्दी में संपर्क करेंगे.' : 'Your application has been received and we will contact you shortly.'}
+              </p>
+              <button
+                onClick={() => router.push(`/${locale}`)}
+                className="mt-4 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+              >
+                {locale === 'hi' ? 'मुख्य पृष्ठ पर जाएं' : 'Go to Homepage'}
+              </button>
+            </div>
+          )}
+          {!success && (
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+              {locale === 'hi'
+                ? 'कुछ ही क्षणों में अपना बैंक खाता खोलें'
+                : 'Open your bank account in minutes'}
+            </p>
+          )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

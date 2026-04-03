@@ -13,6 +13,7 @@ interface ApplyLoanPageProps {
 export default function ApplyLoanPage({ params }: ApplyLoanPageProps) {
   const searchParams = useSearchParams();
   const loanType = searchParams.get('type') || 'personal-loan';
+  const success = searchParams.get('success');
   const [locale, setLocale] = React.useState<'en' | 'hi'>('en');
   
   React.useEffect(() => {
@@ -29,26 +30,29 @@ export default function ApplyLoanPage({ params }: ApplyLoanPageProps) {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {locale === 'hi' ? 'ऋण आवेदन करें' : 'Apply for Loan'}
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
-            {locale === 'hi'
-              ? 'अपनी वित्तीय जरूरतों के लिए त्वरित ऋण'
-              : 'Quick loans for your financial needs'}
-          </p>
-          <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg inline-block">
-            {locale === 'hi' ? 'ऋण प्रकार: ' : 'Loan Type: '}
-            <span className="font-semibold">
-              {loanType === 'working-capital' ? (locale === 'hi' ? 'कार्यशील पूंजी ऋण' : 'Working Capital Loan') :
-               loanType === 'term-loan' ? (locale === 'hi' ? 'अवधि ऋण' : 'Term Loan') :
-               loanType === 'machinery-loan' ? (locale === 'hi' ? 'मशीनरी ऋण' : 'Machinery Loan') :
-               loanType === 'property-loan' ? (locale === 'hi' ? 'संपत्ति ऋण' : 'Property Loan') :
-               loanType === 'vehicle-loan' ? (locale === 'hi' ? 'वाहन ऋण' : 'Vehicle Loan') :
-               loanType === 'msme-loan' ? (locale === 'hi' ? 'एमएसएमई ऋण' : 'MSME Loan') :
-               loanType === 'personal-loan' ? (locale === 'hi' ? 'व्यक्तिगत ऋण' : 'Personal Loan') :
-               loanType === 'home-loan' ? (locale === 'hi' ? 'होम लोन' : 'Home Loan') :
-               loanType === 'car-loan' ? (locale === 'hi' ? 'कार लोन' : 'Car Loan') :
-               loanType}
-            </span>
-          </div>
+          {success && (
+            <div className="bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-lg mb-8">
+              <h2 className="text-2xl font-bold text-green-800 mb-2">
+                {locale === 'hi' ? 'आवेदन सफल!' : 'Application Submitted Successfully!'}
+              </h2>
+              <p className="text-green-700">
+                {locale === 'hi' ? 'आपका ऋण आवेदन हम र्प कर लिया है। हम जल्दी में आपसे संपर्क करेंगे.' : 'Your loan application has been received and we will contact you shortly.'}
+              </p>
+              <button
+                onClick={() => router.push(`/${locale}`)}
+                className="mt-4 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+              >
+                {locale === 'hi' ? 'मुख्य पृष्ठ पर जाएं' : 'Go to Homepage'}
+              </button>
+            </div>
+          )}
+          {!success && (
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+              {locale === 'hi'
+                ? 'अपनी वित्तीय जरूरतों के लिए त्वरित ऋण'
+                : 'Quick loans for your financial needs'}
+            </p>
+          )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

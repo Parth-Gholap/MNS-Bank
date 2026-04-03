@@ -1,0 +1,157 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ea580c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#ea580c;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#grad1)"/>
+  <rect width="1200" height="600" fill="url(#grad2)"/>
+  
+  <!-- Office Building -->
+  <g transform="translate(700, 150)">
+    <!-- Building Base -->
+    <rect x="0" y="0" width="180" height="300" fill="#6b7280" stroke="#4b5563" stroke-width="2"/>
+    
+    <!-- Windows Grid -->
+    <g>
+      <!-- Floor 1 -->
+      <rect x="20" y="20" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="60" y="20" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="100" y="20" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="140" y="20" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      
+      <!-- Floor 2 -->
+      <rect x="20" y="55" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="60" y="55" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="100" y="55" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="140" y="55" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      
+      <!-- Floor 3 -->
+      <rect x="20" y="90" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="60" y="90" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="100" y="90" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="140" y="90" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      
+      <!-- Floor 4 -->
+      <rect x="20" y="125" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="60" y="125" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="100" y="125" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="140" y="125" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      
+      <!-- Floor 5 -->
+      <rect x="20" y="160" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="60" y="160" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="100" y="160" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+      <rect x="140" y="160" width="30" height="25" fill="#60a5fa" stroke="#3b82f6" stroke-width="1"/>
+    </g>
+    
+    <!-- Entrance -->
+    <rect x="70" y="220" width="40" height="80" fill="#1f2937" stroke="#111827" stroke-width="2"/>
+    <rect x="80" y="230" width="20" height="30" fill="#60a5fa" opacity="0.5"/>
+    
+    <!-- Roof -->
+    <polygon points="-10,0 90,-40 190,0" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
+    
+    <!-- Sign -->
+    <rect x="60" y="-60" width="60" height="20" fill="#1f2937" stroke="#111827" stroke-width="1"/>
+    <text x="90" y="-45" text-anchor="middle" fill="#f97316" font-family="Arial, sans-serif" font-size="10" font-weight="bold">MNS BANK</text>
+  </g>
+  
+  <!-- Business People -->
+  <g transform="translate(200, 250)">
+    <!-- Person 1 -->
+    <g>
+      <circle cx="0" cy="0" r="15" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+      <rect x="-15" y="15" width="30" height="40" fill="#3b82f6" stroke="#2563eb" stroke-width="2"/>
+      <rect x="-15" y="55" width="12" height="30" fill="#1f2937"/>
+      <rect x="3" y="55" width="12" height="30" fill="#1f2937"/>
+      <!-- Briefcase -->
+      <rect x="5" y="25" width="20" height="15" fill="#92400e" stroke="#78350f" stroke-width="1"/>
+      <rect x="10" y="20" width="10" height="5" fill="#92400e"/>
+    </g>
+    
+    <!-- Person 2 -->
+    <g transform="translate(80, 20)">
+      <circle cx="0" cy="0" r="15" fill="#f87171" stroke="#dc2626" stroke-width="2"/>
+      <rect x="-15" y="15" width="30" height="40" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
+      <rect x="-15" y="55" width="12" height="30" fill="#1f2937"/>
+      <rect x="3" y="55" width="12" height="30" fill="#1f2937"/>
+      <!-- Documents -->
+      <rect x="10" y="20" width="15" height="20" fill="white" stroke="#d1d5db" stroke-width="1"/>
+      <rect x="12" y="22" width="11" height="2" fill="#d1d5db"/>
+      <rect x="12" y="26" width="9" height="2" fill="#d1d5db"/>
+    </g>
+    
+    <!-- Person 3 -->
+    <g transform="translate(-60, 30)">
+      <circle cx="0" cy="0" r="15" fill="#a78bfa" stroke="#7c3aed" stroke-width="2"/>
+      <rect x="-15" y="15" width="30" height="40" fill="#7c3aed" stroke="#6d28d9" stroke-width="2"/>
+      <rect x="-15" y="55" width="12" height="30" fill="#1f2937"/>
+      <rect x="3" y="55" width="12" height="30" fill="#1f2937"/>
+      <!-- Laptop -->
+      <rect x="-20" y="35" width="25" height="15" fill="#1f2937" stroke="#111827" stroke-width="1"/>
+      <rect x="-18" y="37" width="21" height="11" fill="#60a5fa"/>
+    </g>
+  </g>
+  
+  <!-- Growth Chart -->
+  <g transform="translate(150, 100)">
+    <rect x="0" y="0" width="100" height="80" fill="white" stroke="#d1d5db" stroke-width="2" rx="2"/>
+    
+    <!-- Chart Lines -->
+    <polyline points="10,70 25,50 40,55 55,30 70,35 85,15" fill="none" stroke="#16a34a" stroke-width="3"/>
+    
+    <!-- Data Points -->
+    <circle cx="10" cy="70" r="3" fill="#16a34a"/>
+    <circle cx="25" cy="50" r="3" fill="#16a34a"/>
+    <circle cx="40" cy="55" r="3" fill="#16a34a"/>
+    <circle cx="55" cy="30" r="3" fill="#16a34a"/>
+    <circle cx="70" cy="35" r="3" fill="#16a34a"/>
+    <circle cx="85" cy="15" r="3" fill="#16a34a"/>
+    
+    <!-- Grid -->
+    <line x1="10" y1="20" x2="90" y2="20" stroke="#e5e7eb" stroke-width="1"/>
+    <line x1="10" y1="40" x2="90" y2="40" stroke="#e5e7eb" stroke-width="1"/>
+    <line x1="10" y1="60" x2="90" y2="60" stroke="#e5e7eb" stroke-width="1"/>
+  </g>
+  
+  <!-- Money Stack -->
+  <g transform="translate(400, 350)">
+    <rect x="0" y="0" width="60" height="40" fill="#16a34a" stroke="#14532d" stroke-width="2"/>
+    <rect x="0" y="5" width="60" height="40" fill="#22c55e" stroke="#14532d" stroke-width="2"/>
+    <rect x="0" y="10" width="60" height="40" fill="#16a34a" stroke="#14532d" stroke-width="2"/>
+    <rect x="0" y="15" width="60" height="40" fill="#22c55e" stroke="#14532d" stroke-width="2"/>
+    <rect x="0" y="20" width="60" height="40" fill="#16a34a" stroke="#14532d" stroke-width="2"/>
+    
+    <!-- Dollar Sign -->
+    <text x="30" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="20" font-weight="bold">₹</text>
+  </g>
+  
+  <!-- Handshake -->
+  <g transform="translate(550, 200)">
+    <path d="M 0,20 Q 20,10 40,20" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="0" cy="20" r="8" fill="#fbbf24"/>
+    <circle cx="40" cy="20" r="8" fill="#fbbf24"/>
+    <text x="20" y="5" text-anchor="middle" fill="#f97316" font-family="Arial, sans-serif" font-size="12" font-weight="bold">PARTNERSHIP</text>
+  </g>
+  
+  <!-- Text Overlay -->
+  <text x="100" y="100" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" opacity="0.9">Business Banking</text>
+  <text x="100" y="140" font-family="Arial, sans-serif" font-size="20" fill="white" opacity="0.7">Power Your Business Growth</text>
+  
+  <!-- Floating Elements -->
+  <g opacity="0.3">
+    <circle cx="300" cy="80" r="2" fill="#f97316"/>
+    <circle cx="500" cy="120" r="3" fill="#f97316"/>
+    <circle cx="600" cy="90" r="2" fill="#f97316"/>
+    <circle cx="150" cy="480" r="3" fill="#f97316"/>
+    <circle cx="350" cy="520" r="2" fill="#f97316"/>
+  </g>
+</svg>
