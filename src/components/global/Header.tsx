@@ -32,18 +32,19 @@ const Header: React.FC<HeaderProps> = ({ locale }) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href={`/${locale}/`} className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-bank-blue-600 to-bank-blue-800 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-200">
-              <span className="text-white font-bold text-xl">MNS</span>
-            </div>
-            <div className="hidden sm:block">
-              <div className="flex flex-col">
-                <span className="text-lg font-bold text-gray-900 group-hover:text-bank-blue-600 transition-colors duration-200">
-                  {config.bankName}
-                </span>
-                <span className="text-xs text-gray-500">
-                  {locale === 'hi' ? 'विश्वास के लिए बैंकिंग' : 'Banking with Trust'}
-                </span>
-              </div>
+            <div className="w-20 h-16 bg-white rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-200 overflow-hidden border border-gray-200">
+              <img 
+                src="/Mbank-logo1.png" 
+                alt="MNS Bank Logo"
+                className="w-18 h-14 object-contain"
+                style={{ 
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  objectFit: 'contain'
+                }}
+                onError={(e) => console.log('Logo load error:', e)}
+                onLoad={() => console.log('Logo loaded successfully')}
+              />
             </div>
           </Link>
 
