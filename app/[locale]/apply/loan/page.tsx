@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import InquiryForm from '@/components/forms/InquiryForm';
 
 interface ApplyLoanPageProps {
@@ -12,6 +12,7 @@ interface ApplyLoanPageProps {
 
 export default function ApplyLoanPage({ params }: ApplyLoanPageProps) {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const loanType = searchParams.get('type') || 'personal-loan';
   const success = searchParams.get('success');
   const [locale, setLocale] = React.useState<'en' | 'hi'>('en');
