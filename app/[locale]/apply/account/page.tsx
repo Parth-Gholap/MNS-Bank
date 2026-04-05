@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Metadata } from 'next';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import InquiryForm from '@/components/forms/InquiryForm';
 
 interface ApplyAccountPageProps {
@@ -15,7 +15,7 @@ export default async function ApplyAccountPage({ params }: ApplyAccountPageProps
   const { locale } = await params;
   const localeTyped = locale as 'en' | 'hi';
   const searchParams = useSearchParams();
-  const success = searchParams.get('success');
+  const success = searchParams.get('success') || undefined;
   const router = useRouter();
 
   return <ApplyAccountPageClient locale={localeTyped} success={success} />;
