@@ -34,7 +34,7 @@ export default function BoardPage({ params }: BoardPageProps) {
       experienceHi: '25+ वर्ष',
       background: 'Banking & Finance',
       backgroundHi: 'बैंकिंग और वित्त',
-      image: '/images/board/chairman.jpg'
+      image: '/images/board/chairman.png'
     },
     {
       name: 'Shri [Vice Chairman Name]',
@@ -45,7 +45,7 @@ export default function BoardPage({ params }: BoardPageProps) {
       experienceHi: '20+ वर्ष',
       background: 'Business Administration',
       backgroundHi: 'व्यावसायिक प्रशासन',
-      image: '/images/board/vice-chairman.jpg'
+      image: '/images/board/vice-chairman.png'
     },
     {
       name: 'Shri [Managing Director Name]',
@@ -56,7 +56,7 @@ export default function BoardPage({ params }: BoardPageProps) {
       experienceHi: '22+ वर्ष',
       background: 'Banking Operations',
       backgroundHi: 'बैंकिंग संचालन',
-      image: '/images/board/managing-director.jpg'
+      image: '/images/board/managing-director.png'
     },
     {
       name: 'Shri [Director Name 1]',
@@ -67,7 +67,7 @@ export default function BoardPage({ params }: BoardPageProps) {
       experienceHi: '18+ वर्ष',
       background: 'Legal & Compliance',
       backgroundHi: 'कानूनी और अनुपालन',
-      image: '/images/board/director1.jpg'
+      image: '/images/board/director1.png'
     },
     {
       name: 'Shri [Director Name 2]',
@@ -78,7 +78,7 @@ export default function BoardPage({ params }: BoardPageProps) {
       experienceHi: '15+ वर्ष',
       background: 'Finance & Accounts',
       backgroundHi: 'वित्त और लेखा',
-      image: '/images/board/director2.jpg'
+      image: '/images/board/director2.png'
     },
     {
       name: 'Shri [Director Name 3]',
@@ -89,7 +89,7 @@ export default function BoardPage({ params }: BoardPageProps) {
       experienceHi: '16+ वर्ष',
       background: 'Risk Management',
       backgroundHi: 'जोखिम प्रबंधन',
-      image: '/images/board/director3.jpg'
+      image: '/images/board/director3.png'
     },
     {
       name: 'Shri [Director Name 4]',
@@ -100,7 +100,7 @@ export default function BoardPage({ params }: BoardPageProps) {
       experienceHi: '14+ वर्ष',
       background: 'Information Technology',
       backgroundHi: 'सूचना प्रौद्योगिकी',
-      image: '/images/board/director4.jpg'
+      image: '/images/board/director4.png'
     },
     {
       name: 'Shri [Director Name 5]',
@@ -111,7 +111,7 @@ export default function BoardPage({ params }: BoardPageProps) {
       experienceHi: '12+ वर्ष',
       background: 'Marketing & Business Development',
       backgroundHi: 'विपणन और व्यापार विकास',
-      image: '/images/board/director5.jpg'
+      image: '/images/board/director1.png'
     }
   ];
 

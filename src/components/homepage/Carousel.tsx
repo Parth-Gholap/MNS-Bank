@@ -70,7 +70,7 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
         titleHi: 'डिजिटल बैंकिंग क्रांति',
         description: 'Experience the future of banking with our cutting-edge digital platform',
         descriptionHi: 'हमारे अत्याधुरिक डिजिटल प्लेटफॉर्म के साथ बैंकिंग का भविष्य अनुभव करें',
-        image: '/images/carousel/digital-banking.jpg',
+        image: '/images/carousel/digital-banking.png',
         link: '/digital-banking',
         linkText: 'Learn More',
         linkTextHi: 'और जानें'
@@ -81,7 +81,7 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
         titleHi: '6.5% पर होम लोन',
         description: 'Get your dream home with our lowest interest rates',
         descriptionHi: 'हमारी सबसे कम ब्याज दरों पर अपना सपना घर लें',
-        image: '/images/carousel/home-loan.jpg',
+        image: '/images/carousel/home-loan.png',
         link: '/personal/loans/home-loan',
         linkText: 'Apply Now',
         linkTextHi: 'अभी आवेदन करें'
@@ -92,7 +92,7 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
         titleHi: 'जीरो शेष बचत खाता',
         description: 'Banking without minimum balance requirements',
         descriptionHi: 'न्यूनतम शेष आवश्यकता के बिना बैंकिंग',
-        image: '/images/carousel/savings-account.jpg',
+        image: '/images/carousel/savings-account.png',
         link: '/personal/savings-account',
         linkText: 'Open Account',
         linkTextHi: 'खाता खोलें'
@@ -103,7 +103,7 @@ const Carousel: React.FC<CarouselProps> = ({ locale, className = '' }) => {
         titleHi: 'व्यवसाय बैंकिंग समाधान',
         description: 'Comprehensive banking solutions for your business',
         descriptionHi: 'आपके व्यवसाय के लिए व्यापक बैंकिंग समाधान',
-        image: '/images/carousel/business-banking.jpg',
+        image: '/images/carousel/business-banking.png',
         link: '/business/current-account',
         linkText: 'Explore',
         linkTextHi: 'अन्वेषण करें'
